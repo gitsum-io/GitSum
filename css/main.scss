@@ -1,0 +1,10 @@
+---
+# Main SASS file
+---
+@charset "utf-8";
+
+// Import partials from `sass_dir` (defaults to `_sass`)
+@import
+	"utils",
+	"config",
+	"styles";

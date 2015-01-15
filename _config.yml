@@ -1,0 +1,9 @@
+# Site settings
+title: GitSum
+email: git-sum@gmail.com
+description: 
+url: "http://gitsum.io" # the base hostname & protocol for your site
+github_username:  git-sum
+
+# Build settings
+markdown: kramdown
