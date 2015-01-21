@@ -1,0 +1,29 @@
+# ----------------------------- General
+
+*~
+
+# ----------------------------- Logs and databases
+
+*.log
+
+# ----------------------------- OS generated files
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# ----------------------------- Project generated files
+
+_sites/
+node_modules/
+.sass-cache/
+public/stylesheets/*.css
+public/min/
+public/index.html
+vendor/*
+public/fonts
