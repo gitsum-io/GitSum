@@ -1,0 +1,27 @@
+{
+  "name": "GitSum",
+  "version": "0.0.1",
+  "homepage": "https://github.com/gitsum-io/GitSum",
+  "authors": [
+    "Nick Spiel <nick.spiel@digital360.com.au>"
+  ],
+  "description": "A clean dashboard displaying a summary of all of your git repositories.",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.10",
+    "mongoose": "~3.9.7",
+    "jade": "~1.9.1"
+  }
+}
