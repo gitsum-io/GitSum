@@ -1,2 +1,2 @@
 // Global application setup
-angular.module('gitSum', []);
+gitSum = angular.module('gitSum', []);
