@@ -26,3 +26,4 @@ public/scripts/app.min.js
 public/styles/global.css
 public/styles/global.css.map
 public/styles/global.min.css
+.sublime-grunt.cache
