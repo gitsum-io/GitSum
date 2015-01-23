@@ -21,4 +21,8 @@ node_modules/
 public/stylesheets/*.css
 public/min/
 vendor/*
-app/components
+public/vendor
+public/scripts/app.min.js
+public/styles/global.css
+public/styles/global.css.map
+public/styles/global.min.css
