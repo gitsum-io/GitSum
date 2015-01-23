@@ -42,7 +42,7 @@ module.exports = function(grunt) {
 		uglify: {
 			build: {
 				files: {
-					'<%= pkg.scriptsDirectory.public %>/app.min.js': ['<%= pkg.scriptsDirectory.app %>/*.js']
+					'<%= pkg.scriptsDirectory.public %>/app.min.js': ['<%= pkg.scriptsDirectory.app %>/**/*.js', '<%= pkg.scriptsDirectory.app %>/*.js']
 				}
 			}
 		},
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 				tasks: ['sass', 'cssmin']
 			},
 			js: {
-				files: ['public/src/js/**/*.js'],
+				files: ['<%= pkg.scriptsDirectory.app %>/**/*.js'],
 				tasks: ['jshint', 'uglify']
 			}
 		},
