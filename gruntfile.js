@@ -50,9 +50,17 @@ module.exports = function(grunt) {
 		// -------------------------------------------------- Operations 
 
 		// Watch node server for changes
+		// TODO: Place environments in external files
 		nodemon: {
 			dev: {
-				script: 'server.js'
+				script: 'server.js',
+				options: {
+					nodeArgs: ['--debug'],
+					env: {
+						PORT: '8080',
+						NODE_ENV : 'development'
+					}
+				}
 			}
 		},
 		
