@@ -20,12 +20,16 @@ app.use(express.static(__dirname + '/public'));
 
 // Setting the start file
 app.get('/', function(req, res) {
-	res.sendFile('index.html', { root: __dirname });
+	res.sendFile('index.html', { 
+		root: __dirname 
+	});
 });
 
 // Initial Login page
 app.get('/account', function(req, res) {
-	res.sendFile('account.html', { root: __dirname + '/public/account/' });
+	res.sendFile('account.html', { 
+		root: __dirname + '/public/account/'
+	});
 });
 
 // Try to authenticate via passport
