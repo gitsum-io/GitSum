@@ -1,15 +1,131 @@
 <!doctype html>
 <html ng-app="gitSum">
 	<head>
+		<meta charset="utf-8">
+		<title>GitSum</title>
+		<meta name="description" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="/styles/global.min.css">
-		<script src="/vendor/angular/angular.min.js"></script>
-		<script src="/scripts/app.min.js"></script>
 	</head>
 	<body>
-		<header>Header</header>
-		<h1>Hello. {{ "Angular" + " here." }}</h1>
-		<a href="#/account">Account</a>
-		<footer>Footer</footer>
-		<div ng-view></div>
+		<header>
+			<nav class="main-navigation">
+				<a class="item" href="#/account">Account</a>
+				<a class="item" href="#/logout">Logout</a>
+				<a class="item" href="#/settings">Settings</a>
+				<a class="item" href="#/about">About</a>
+				<a class="item" href="#/support">Support</a>
+			</nav>
+		</header>
+		<main class="main">
+			<ol class="repository-list">
+				<li class="repository">
+					<select class="branch">
+						<option value="master" selected>Master (HEAD)</option>
+						<option value="development">Development</option>
+						<option value="3.1">3.1</option>
+					</select>
+					<ol class="commits">
+						<li class="commit">
+							<div class="user">
+								<img class="avatar" src="images/avatar" />
+								<h3 class="name">John Smith</h3>
+							</div>
+							<div class="details">
+								<div class="hash">#123456789asdfghjklzxcvbnm</div>
+								<div class="date">12/03/2015</div>
+								<p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, nobis ea minima fuga repellat.</p>
+							</div>
+						</li>
+						<li class="commit expanded">
+							<div class="user">
+								<img class="avatar" src="images/avatar" />
+								<h3 class="name">John Smith</h3>
+							</div>
+							<div class="details">
+								<div class="hash">#123456789asdfghjklzxcvbnm</div>
+								<div class="date">12/03/2015</div>
+								<p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, nobis ea minima fuga repellat.</p>
+							</div>
+						</li>
+						<li class="commit">
+							<div class="user">
+								<img class="avatar" src="images/avatar" />
+								<h3 class="name">John Smith</h3>
+							</div>
+							<div class="details">
+								<div class="hash">#123456789asdfghjklzxcvbnm</div>
+								<div class="date">12/03/2015</div>
+								<p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, nobis ea minima fuga repellat.</p>
+							</div>
+						</li>
+					</ol>
+				</li>
+				<li class="repository">
+					<select class="branch">
+						<option value="master" selected>Master (HEAD)</option>
+						<option value="development">Development</option>
+						<option value="3.1">3.1</option>
+					</select>
+					<ol class="commits">
+						<li class="commit">
+							<div class="user">
+								<img class="avatar" src="images/avatar" />
+								<h3 class="name">John Smith</h3>
+							</div>
+							<div class="details">
+								<div class="hash">#123456789asdfghjklzxcvbnm</div>
+								<div class="date">12/03/2015</div>
+								<p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, nobis ea minima fuga repellat.</p>
+							</div>
+						</li>
+					</ol>
+				</li>
+				<li class="repository">
+					<select class="branch">
+						<option value="master" selected>Master (HEAD)</option>
+						<option value="development">Development</option>
+						<option value="3.1">3.1</option>
+					</select>
+					<ol class="commits">
+						<li class="commit">
+							<div class="user">
+								<img class="avatar" src="images/avatar" />
+								<h3 class="name">John Smith</h3>
+							</div>
+							<div class="details">
+								<div class="hash">#123456789asdfghjklzxcvbnm</div>
+								<div class="date">12/03/2015</div>
+								<p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, nobis ea minima fuga repellat.</p>
+							</div>
+						</li>
+					</ol>
+				</li>
+				<li class="repository">
+					<select class="branch">
+						<option value="master" selected>Master (HEAD)</option>
+						<option value="development">Development</option>
+						<option value="3.1">3.1</option>
+					</select>
+					<ol class="commits">
+						<li class="commit">
+							<div class="user">
+								<img class="avatar" src="images/avatar" />
+								<h3 class="name">John Smith</h3>
+							</div>
+							<div class="details">
+								<div class="hash">#123456789asdfghjklzxcvbnm</div>
+								<div class="date">12/03/2015</div>
+								<p class="message">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis, nobis ea minima fuga repellat.</p>
+							</div>
+						</li>
+					</ol>
+				</li>
+			</ol>
+		</main>
+		<!--<div ng-view></div>-->
+		<script src="/vendor/angular/angular.min.js"></script>
+		<script src="/scripts/app.min.js"></script>
 	</body>
 </html>
