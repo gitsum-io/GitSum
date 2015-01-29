@@ -1,0 +1,115 @@
+// ================================================== Global
+
+html {
+	height: 100%;
+}
+
+body {
+	$breakpoint-1: 50rem;
+	height: 100%;
+	@include breakpoint($breakpoint-1) {
+		@include display(flex); // for flexing header and .main elements
+		@include flex-direction(row-reverse); // so header is on the right
+	}
+}
+
+// ================================================== Header
+
+header {
+	$breakpoint-1: 50rem;
+	background-color: color(grey);
+	padding: $global-spacing $global-spacing * 1.5;
+	@include breakpoint($breakpoint-1) {
+		width: $global-spacing * 4;
+		overflow: hidden;
+		@include flex-grow(0);
+		@include flex-shrink(0);
+	}
+	.main-navigation {
+		> .item {
+
+		}
+	}
+}
+
+// ================================================== Main
+
+.main {
+	height: 100%;
+	@include flex-grow(1);
+}
+
+// ================================================== Dashboard
+
+// -------------------------------------------------- Repository list
+
+.repository-list {
+	$breakpoint-1: 25rem;
+	white-space: nowrap;
+	overflow-x: scroll;
+	padding: $global-spacing;
+	height: 100%;
+	@include remove-whitespace;
+	.repository {
+		max-width: 100%;
+		width: 25rem;
+		white-space: normal;
+		margin: $global-spacing / 4;
+		@include breakpoint($breakpoint-1) {
+			display: inline-block;
+			vertical-align: top;
+		}
+		> * {
+			width: 100%;
+		}
+		select.branch {
+
+		}
+		.commits {
+			.commit {
+				margin-bottom: $global-spacing / 2;
+				padding: $global-spacing / 2;
+				background-color: color(grey, light);
+				@include display(flex); // for flexing .user and .detail elements
+				@include flex-direction(row);
+				.user {
+					width: 100px;
+					text-align: center;
+					padding: $global-spacing / 2;
+					@include flex-shrink(0);
+					.name {
+						display: none;
+					}
+				}
+				.details {
+					.hash,
+					.message {
+						display: none;
+					}
+					.hash {
+						font-size: 12px;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+				}
+
+// ------------------------- Expanded view
+
+				&.expanded {
+					background-color: color(grey);
+					.user {
+						.name {
+							display: block;
+						}
+					}
+					.details {
+						.hash,
+						.message {
+							display: block;
+						}
+					}
+				}
+			}
+		}
+	}
+}

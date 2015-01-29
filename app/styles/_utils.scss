@@ -34,18 +34,10 @@ $all-headings: h1, h2, h3, h4, h5, h6;
 // ------------------------- Breakpoints
 
 @mixin breakpoint($width) {
-	@if $fix-mqs {
-		@if $fix-mqs >= map-get($breakpoints, $width) {
-			@content;
-		}
-	}
-	@else {
-		@media screen and (min-width: map-get($breakpoints, $width)) {
-			@content;
-		}
+	@media screen and (min-width: $width) {
+		@content;
 	}
 }
-
 // ------------------------- Global horizontal container
 
 @mixin container {
