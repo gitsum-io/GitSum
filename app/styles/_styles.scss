@@ -36,9 +36,12 @@ header {
 
 .main {
 	height: 100%;
+	@include flex-grow(1);
 }
 
-// ================================================== Repository list
+// ================================================== Dashboard
+
+// -------------------------------------------------- Repository list
 
 .repository-list {
 	$breakpoint-1: 25rem;
