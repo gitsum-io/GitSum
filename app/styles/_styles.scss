@@ -27,9 +27,59 @@ header {
 	}
 	.main-navigation {
 		> .item {
-
+			display: none;
 		}
 	}
+}
+
+// ================================================== Forms
+
+// -------------------------------------------------- Custom select
+
+.custom-select {
+	position: relative;
+	display: block;
+	margin-top: 0.5rem;
+	overflow: hidden;
+	width: 100%;
+	max-width: 100%;
+	border: solid 1px color(grey);
+	select {
+		width: 110%;
+		max-width: 110%;
+		min-width: 110%;
+		appearance: none;
+		-webkit-appearance: none;
+		-moz-appearance: window;
+		text-indent: 0.01px;
+		text-overflow: "";
+		font-size: 1rem;
+		background: white;
+		outline: none;
+		border-radius: 0;
+		border: none;
+		padding: $global-spacing / 2;
+		&::-ms-expand {
+			display: none; // Hide native dropdown arrow in IE
+		}
+		&:-moz-focusring {
+			color: transparent;
+			text-shadow: 0 0 0 #000;
+		}
+	}
+	&:after {
+		position: absolute;
+		top: 1.2em;
+		right: 1em;
+		bottom: 0.3em;
+		padding: 0;
+		background: none;
+		content: "\25BC";
+		font-size: 0.7em;
+		z-index: 1;
+		pointer-events: none;
+		border: solid 1px color(grey);
+	} 
 }
 
 // ================================================== Main
@@ -55,6 +105,7 @@ header {
 		width: 25rem;
 		white-space: normal;
 		margin: $global-spacing / 4;
+		text-align: center;
 		@include breakpoint($breakpoint-1) {
 			display: inline-block;
 			vertical-align: top;
