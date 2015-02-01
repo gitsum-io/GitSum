@@ -1,5 +1,3 @@
-// TODO: need to discuss wether rolling each page into a module
-
 gitSum.config(['$routeProvider',
 	function($routeProvider) {
 		$routeProvider

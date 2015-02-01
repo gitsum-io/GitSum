@@ -47,6 +47,40 @@ module.exports = function(grunt) {
 			}
 		},
 
+		// ------------------------- Image tasks
+
+		svgstore: {
+			options: {
+				formatting: {
+					indent_size: 4
+				}
+			},
+			default: {
+				files: {
+					'<%= pkg.imagesDirectory.public %>/icons.svg': ['<%= pkg.imagesDirectory.app %>/*.svg'],
+				}
+			}
+		},
+
+		// ------------------------- General tasks
+
+		todo: {
+			options: {
+				marks: [
+					{
+						name: "TODO",
+						pattern: /TODO/,
+						color: "yellow"
+					}
+				],
+				file: "tasks.todo",
+			},
+			src: [
+				'public/*',
+				'app/**/*'
+			]
+		},
+
 		// -------------------------------------------------- Operations 
 
 		// Watch node server for changes
@@ -75,6 +109,10 @@ module.exports = function(grunt) {
 			js: {
 				files: ['<%= pkg.scriptsDirectory.app %>/**/*.js'],
 				tasks: ['jshint', 'uglify']
+			},
+			svg: {
+				files: ['<%= pkg.imagesDirectory.app %>/*.svg'],
+				tasks: ['svgstore']
 			}
 		},
 		
@@ -95,7 +133,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-nodemon');
+	grunt.loadNpmTasks('grunt-svgstore');
+	grunt.loadNpmTasks('grunt-todo');
 
 	// Register the nodemon task when we run grunt
-	grunt.registerTask('default', ['sass', 'cssmin', 'jshint', 'uglify', 'concurrent']);  
+	grunt.registerTask('default', ['sass', 'cssmin', 'jshint', 'uglify', 'concurrent', 'svgstore', 'todo']);  
 };

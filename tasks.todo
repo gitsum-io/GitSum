@@ -1,0 +1,14 @@
+# Grunt TODO
+
+
+## public/index.html
+
+-  **TODO** `(line 12)` : Add browser warning -->
+
+## app/scripts/controllers.js
+
+-  **TODO** `(line 2)` : robbo sucks
+
+## app/scripts/routes.js
+
+-  **TODO** `(line 1)` : need to discuss wether rolling each page into a module
