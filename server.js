@@ -1,8 +1,8 @@
-var express = require('express'),
-	http = require('http'),
-	session = require('express-session'),
-	passport = require('passport'),
-	passportLocal = require('passport-local'),
+var express        = require('express'),
+	http           = require('http'),
+	session        = require('express-session'),
+	passport       = require('passport'),
+	passportLocal  = require('passport-local'),
 	passportGoogle = require('passport-google');
 
 // Define node app
