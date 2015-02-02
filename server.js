@@ -3,6 +3,7 @@ var express        = require('express'),
 	session        = require('express-session'),
 	passport       = require('passport'),
 	passportLocal  = require('passport-local'),
+	mongoose       = require('mongoose'),
 	passportGoogle = require('passport-google');
 
 // Define node app
@@ -14,6 +15,42 @@ app.use(passport.session());
 
 // Setting the root directory
 app.use(express.static(__dirname + '/public'));
+
+// --------------------------------------- Database
+
+// TODO: this should go in a models file, cannot for the life of me work out how to do that
+
+// Database connection
+mongoose.connect('mongodb://localhost/gitsum', function(err) { if (err) console.log(err); });
+
+// Mongoose global schema object
+var Schema = mongoose.Schema;
+
+// Person schema
+var personSchema = new Schema({
+	email: String,
+	name:  String
+});
+
+// Person model
+var Person = mongoose.model('Person', personSchema);
+
+// New person
+var nick = new Person({
+	email: "email@nicksdassadsadpiel.me",
+	name: "balls",
+});
+
+// Save person to the DB
+nick.save(function(err, nick) {
+  if (err) throw err;
+});
+
+// Find the person and log them to the console
+Person.find(function (err, people) {
+  if (err) return console.error(err);
+  console.log(people)
+});
 
 // --------------------------------------- Routes
 // TODO: Put routes in routes file
