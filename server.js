@@ -42,19 +42,16 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // -------------------- Database
 
 var database = require('./app/database');
-mongoose.connect('mongodb://localhost/gitsum'); 
+mongoose.connect('mongodb://localhost/gitsum', function(err) { 
+	if(err){
+		console.log(err);
+	}
+});
 
-// ---------------------------------------- Expose app
+// ---------------------------------------- Environments
 
-exports = module.exports = app; 
+// TODO: Sort this out... Does it need to be in its own file or does it belong here? I don't know...
 
-// ==============================================================================
-
-
-
-// --------------------------------------- Environments
-// Set up dev environment handling
-// TODO: Create environments file
 var env = process.env.NODE_ENV;
 
 if (env == null) {
@@ -68,8 +65,8 @@ if (env == null) {
 		process.exit(1);
 	}
 
+	// Start the app
 	app.listen(port);
-	console.log('Magic happens on port ' + port);
 
 	if (env == 'development') {
 		// Error handling
@@ -78,43 +75,11 @@ if (env == null) {
 			console.error(err.stack);
 			res.status(500).send('Server Error');
 		});
-
-		// Also see https://github.com/trentm/node-bunyan
 	}
 }
 
-// // --------------------------------------- Database
 
-// // TODO: this should go in a models file, cannot for the life of me work out how to do that
 
-// // Database connection
-// mongoose.connect('mongodb://localhost/gitsum', function(err) { if (err) console.log(err); });
+// ---------------------------------------- Expose app
 
-// // Mongoose global schema object
-// var Schema = mongoose.Schema;
-
-// // Person schema
-// var personSchema = new Schema({
-// 	email: String,
-// 	name:  String
-// });
-
-// // Person model
-// var Person = mongoose.model('Person', personSchema);
-
-// // New person
-// var nick = new Person({
-// 	email: "email@nicksdassadsadpiel.me",
-// 	name: "balls",
-// });
-
-// // Save person to the DB
-// nick.save(function(err, nick) {
-//   if (err) throw err;
-// });
-
-// // Find the person and log them to the console
-// Person.find(function (err, people) {
-//   if (err) return console.error(err);
-//   console.log(people)
-// });
+exports = module.exports = app;
