@@ -36,9 +36,10 @@ module.exports = function(grunt) {
 		// Check all js files for errors
 		jshint: {
 			all: [
-				'<%= pkg.scriptsDirectory %>/app.js', 
-				'<%= pkg.scriptsDirectory %>/contollers.js',
-				'<%= pkg.scriptsDirectory %>/app-routes.js'
+				'<%= pkg.scriptsDirectory %>/controllers/*.js',
+				'<%= pkg.scriptsDirectory %>/services/*.js',
+				'<%= pkg.scriptsDirectory %>/app-routes.js',
+				'<%= pkg.scriptsDirectory %>/app.js'
 			]
 		},
 
@@ -47,9 +48,10 @@ module.exports = function(grunt) {
 			build: {
 				files: {
 					'<%= pkg.scriptsDirectory %>/app.min.js': [
-						'<%= pkg.scriptsDirectory %>/app.js', 
-						'<%= pkg.scriptsDirectory %>/contollers.js',
-						'<%= pkg.scriptsDirectory %>/app-routes.js'
+						'<%= pkg.scriptsDirectory %>/controllers/*.js',
+						'<%= pkg.scriptsDirectory %>/services/*.js',
+						'<%= pkg.scriptsDirectory %>/app-routes.js',
+						'<%= pkg.scriptsDirectory %>/app.js'
 					]
 				}
 			}
@@ -116,9 +118,10 @@ module.exports = function(grunt) {
 			},
 			js: {
 				files: [
-					'<%= pkg.scriptsDirectory %>/app.js', 
-					'<%= pkg.scriptsDirectory %>/contollers.js',
-					'<%= pkg.scriptsDirectory %>/app-routes.js'
+					'<%= pkg.scriptsDirectory %>/controllers/*.js',
+					'<%= pkg.scriptsDirectory %>/services/*.js',
+					'<%= pkg.scriptsDirectory %>/app-routes.js',
+					'<%= pkg.scriptsDirectory %>/app.js'
 				],
 				tasks: ['jshint', 'uglify']
 			},
