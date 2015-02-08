@@ -1,3 +1,10 @@
 // ------------------------- Global application setup
-
-gitSum = angular.module('gitSum', ['ngRoute', 'gitSumControllers']);
+angular.module('gitSum', 
+	[
+		'ngRoute',
+		'AppRoutes',
+		'MainController',
+		'UserController',
+		'UserService'
+	]
+);
