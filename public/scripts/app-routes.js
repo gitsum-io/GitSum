@@ -1,4 +1,5 @@
-angular.module('AppRoutes', ['ngRoute']).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('AppRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
     $routeProvider
         .when('/', {
             templateUrl: 'views/dashboard.html',
@@ -9,6 +10,4 @@ angular.module('AppRoutes', ['ngRoute']).config(['$routeProvider', '$locationPro
             controller: 'UserController'
      	}
      );
-
-    $locationProvider.html5Mode(true);
 }]);
