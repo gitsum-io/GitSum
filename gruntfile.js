@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 					style: 'expanded'
 				},
 				files: {
-					'<%= pkg.stylesDirectory.public %>/global.css': '<%= pkg.stylesDirectory.app %>/global.scss'
+					'<%= pkg.stylesDirectory %>/global.css': '<%= pkg.stylesDirectory %>/global.scss'
 				}
 			}
 		},
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 		cssmin: {
 			build: {
 				files: {
-					'<%= pkg.stylesDirectory.public %>/global.min.css': '<%= pkg.stylesDirectory.public %>/global.css'
+					'<%= pkg.stylesDirectory %>/global.min.css': '<%= pkg.stylesDirectory %>/global.css'
 				}
 			}
 		},
@@ -35,14 +35,24 @@ module.exports = function(grunt) {
 
 		// Check all js files for errors
 		jshint: {
-			all: ['<%= pkg.scriptsDirectory.app %>/*.js']
+			all: [
+				'<%= pkg.scriptsDirectory %>/controllers/*.js',
+				'<%= pkg.scriptsDirectory %>/services/*.js',
+				'<%= pkg.scriptsDirectory %>/app-routes.js',
+				'<%= pkg.scriptsDirectory %>/app.js'
+			]
 		},
 
 		// Minify all js files into app.min.js
 		uglify: {
 			build: {
 				files: {
-					'<%= pkg.scriptsDirectory.public %>/app.min.js': ['<%= pkg.scriptsDirectory.app %>/**/*.js', '<%= pkg.scriptsDirectory.app %>/*.js']
+					'<%= pkg.scriptsDirectory %>/app.min.js': [
+						'<%= pkg.scriptsDirectory %>/controllers/*.js',
+						'<%= pkg.scriptsDirectory %>/services/*.js',
+						'<%= pkg.scriptsDirectory %>/app-routes.js',
+						'<%= pkg.scriptsDirectory %>/app.js'
+					]
 				}
 			}
 		},
@@ -57,7 +67,7 @@ module.exports = function(grunt) {
 			},
 			default: {
 				files: {
-					'<%= pkg.imagesDirectory.public %>/icons.svg': ['<%= pkg.imagesDirectory.app %>/*.svg'],
+					'<%= pkg.imagesDirectory %>/icons.svg': ['<%= pkg.imagesDirectory %>/*.svg'],
 				}
 			}
 		},
@@ -102,16 +112,21 @@ module.exports = function(grunt) {
 		watch: {
 			css: {
 				files: [
-					'<%= pkg.stylesDirectory.app %>/*.scss'
+					'<%= pkg.stylesDirectory %>/*.scss'
 				],
 				tasks: ['sass', 'cssmin']
 			},
 			js: {
-				files: ['<%= pkg.scriptsDirectory.app %>/**/*.js'],
+				files: [
+					'<%= pkg.scriptsDirectory %>/controllers/*.js',
+					'<%= pkg.scriptsDirectory %>/services/*.js',
+					'<%= pkg.scriptsDirectory %>/app-routes.js',
+					'<%= pkg.scriptsDirectory %>/app.js'
+				],
 				tasks: ['jshint', 'uglify']
 			},
 			svg: {
-				files: ['<%= pkg.imagesDirectory.app %>/*.svg'],
+				files: ['<%= pkg.imagesDirectory %>/*.svg'],
 				tasks: ['svgstore']
 			}
 		},
