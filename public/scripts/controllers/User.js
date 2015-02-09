@@ -1,3 +1,3 @@
-angular.module('UserController', []).controller('User', function($scope) {
+angular.module('UserController', []).controller('UserController', function($scope) {
     $scope.message = 'Nothing beats a pocket protector!';
 });
