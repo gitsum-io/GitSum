@@ -47,7 +47,7 @@ module.exports = function(app, router) {
 		console.log('Attempting to create user.');
 		var user   = new User();
 		user.name  = req.body.name;
-		user.email = req.body.eamil; // TODO: email is not saving
+		user.email = req.body.email;
 		user.save(function(err) {
 			if (err) res.send(err);
 			res.json({ message: 'User created!' });
