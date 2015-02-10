@@ -12,7 +12,9 @@ var publicPath = path.join(__dirname, '../public/');
 
 module.exports = function(app, router) {
 
-	// Body Parser Setup
+// -------------------- Router setup
+
+	// Formatting responses as JSON
 	app.use(bodyParser.json());
 	app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
 	app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,36 +33,56 @@ module.exports = function(app, router) {
 		res.json({ message: 'Welcome to the GitSum Api!' });   
 	});
 
-// -------------------- Users
+// -------------------- Users routes
 
 	router.route('/users')
 	.get(function(req, res) {
-			console.log('Attempting to get all users.');
-			User.find(function(err, users) {
-				if (err) res.send(err);
-				res.json(users);
-			});
-		}
-	)
+		console.log('Attempting to get all users.');
+		User.find(function(err, users) {
+			if (err) res.send(err);
+			res.json(users);
+		});
+	})
 	.post(function(req, res) {
-			console.log('Attempting to create user.');
-			var user   = new User();
-			user.name  = req.body.name;
-			user.email = req.body.eamil; // TODO: email is not saving
-			user.save(function(err) {
-				if (err) res.send(err);
-				res.json({ message: 'User created!' });
-			});
-		}
-	);
+		console.log('Attempting to create user.');
+		var user   = new User();
+		user.name  = req.body.name;
+		user.email = req.body.eamil; // TODO: email is not saving
+		user.save(function(err) {
+			if (err) res.send(err);
+			res.json({ message: 'User created!' });
+		});
+	});
+
+	// TODO: Add in PUT and DELETE routes
 
 	router.route('/users/:user_id')
 	.get(function(req, res) {
 		console.log('Attempting to get a user.');
 		User.findById(req.params.user_id, function(err, user) {
-				if (err) res.send(err);
-				res.json(user);
+		if (err) res.send(err);
+			res.json(user);
+		});
+	})
+	.put(function(req, res) {
+		console.log('Attempting to update a user.');
+		User.findById(req.params.user_id, function(err, user) {
+			if (err) res.send(err);
+			user.name = req.body.name;
+			user.save(function(err) {
+			   if (err) res.send(err);
+			   res.json({ message: 'User updated!' });
 			});
-		}
-	);
+
+		});
+	})
+	.delete(function(req, res) {
+		console.log('Attempting to delete a user.');
+        User.remove({
+            _id: req.params.user_id
+        }, function(err, bear) {
+            if (err) res.send(err);
+            res.json({ message: 'Deleted user.' });
+        });
+    });
 }
