@@ -34,7 +34,7 @@ module.exports = function(app, router) {
 	});
 
 // -------------------- Users routes
-
+	
 	router.route('/users')
 	.get(function(req, res) {
 		console.log('Attempting to get all users.');
@@ -53,8 +53,6 @@ module.exports = function(app, router) {
 			res.json({ message: 'User created!' });
 		});
 	});
-
-	// TODO: Add in PUT and DELETE routes
 
 	router.route('/users/:user_id')
 	.get(function(req, res) {
