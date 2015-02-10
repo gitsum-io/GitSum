@@ -2,7 +2,7 @@
 
 var express        = require('express'),
 	app            = express(),
-	bodyParser     = require('body-parser'),
+	router         = express.Router(),
 	methodOverride = require('method-override'),
 	session        = require('express-session'),
 	http           = require('http'),
@@ -17,7 +17,7 @@ var express        = require('express'),
 // -------------------- Global
    
 app.use(express.static(__dirname + '/public'));
-require('./app/routes')(app);
+require('./app/routes')(app, router);
 
 // -------------------- Passport
 
@@ -28,12 +28,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-// -------------------- Body Parser
-
-app.use(bodyParser.json());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); 
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // -------------------- Method overrides
 
