@@ -2,8 +2,8 @@
 
 angular.module('gitSum', [
 	'ngRoute',
+	'ngResource',
 	'AppRoutes',
 	'MainController',
-	'UserController',
-	'UserService'
+	'UserFactory'
 ]);
