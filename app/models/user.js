@@ -16,26 +16,29 @@ var UserSchema = new Schema({
 		type: String,
 		required: true
 	},
-	repositories: [
-		{
-			name: String,
-			branches: [
-				{
-					name: String,
-					head: Boolean,
-					commits: [
-						{
-							hash: String,
-							date: Date,
-							message: String,
-							contributer: String,
-							avatar: String
-						}
-					]
-				}
-			]
-		}
-	]
+	repositories: [RepoSchema]
+});
+
+// Repo schema
+var RepoSchema = new Schema({
+	name: String,
+	branches: [BranchSchema]
+});
+
+// Branch schema
+var BranchSchema = new Schema({
+	name: String,
+	head: Boolean,
+	commits: [CommitSchema]
+});
+
+// Commit schema
+var CommitSchema = new Schema({
+	hash: String,
+	date: Date,
+	message: String,
+	contributer: String,
+	avatar: String
 });
 
 // User model
