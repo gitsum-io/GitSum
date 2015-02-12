@@ -78,7 +78,6 @@ header {
 		font-size: 0.7em;
 		z-index: 1;
 		pointer-events: none;
-		border: solid 1px color(grey);
 	} 
 }
 
@@ -131,6 +130,9 @@ header {
 					.name {
 						display: none;
 					}
+					.avatar {
+						width: 3rem;
+					}
 				}
 				.details {
 					.hash,
@@ -151,6 +153,9 @@ header {
 					.user {
 						.name {
 							display: block;
+						}
+						.avatar {
+							width: auto;
 						}
 					}
 					.details {

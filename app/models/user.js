@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 // --------------------------------------- Model
 
-var Schema   = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 // User schema
 var UserSchema = new Schema({
@@ -16,6 +16,26 @@ var UserSchema = new Schema({
 		type: String,
 		required: true
 	},
+	repositories: [
+		{
+			name: String,
+			branches: [
+				{
+					name: String,
+					head: Boolean,
+					commits: [
+						{
+							hash: String,
+							date: Date,
+							message: String,
+							contributer: String,
+							avatar: String
+						}
+					]
+				}
+			]
+		}
+	]
 });
 
 // User model
