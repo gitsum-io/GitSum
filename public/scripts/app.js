@@ -2,7 +2,6 @@
 
 angular.module('gitSum', [
 	'ngRoute',
-	'ngResource',
 	'AppRoutes',
 	'MainController'
 ]);
