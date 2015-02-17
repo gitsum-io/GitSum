@@ -59,6 +59,7 @@ module.exports = function(grunt) {
 
 		// ------------------------- Image tasks
 
+		// SVG build system
 		svgstore: {
 			options: {
 				formatting: {
@@ -74,6 +75,7 @@ module.exports = function(grunt) {
 
 		// ------------------------- General tasks
 
+		// Compile a list of all TODOs in project
 		todo: {
 			options: {
 				marks: [
@@ -86,6 +88,7 @@ module.exports = function(grunt) {
 				file: "tasks.todo",
 			},
 			src: [
+				'server.js',
 				'public/*',
 				'app/**/*'
 			]
@@ -94,7 +97,6 @@ module.exports = function(grunt) {
 		// -------------------------------------------------- Operations 
 
 		// Watch node server for changes
-		// TODO: Place environments in external files
 		nodemon: {
 			dev: {
 				script: 'server.js',
