@@ -37,6 +37,7 @@ module.exports = function(app, router) {
 	
 	router.route('/users')
 	.get(function(req, res) {
+		// Get all users
 		console.log('Attempting to get all users.');
 		User.find(function(err, users) {
 			if (err) res.send(err);
@@ -44,6 +45,7 @@ module.exports = function(app, router) {
 		});
 	})
 	.post(function(req, res) {
+		// Create a user
 		console.log('Attempting to create user.');
 		var user   = new User();
 		user.name  = req.body.name;
@@ -56,6 +58,7 @@ module.exports = function(app, router) {
 
 	router.route('/users/:user_id')
 	.get(function(req, res) {
+		// Create a single user
 		console.log('Attempting to get a user.');
 		User.findById(req.params.user_id, function(err, user) {
 		if (err) res.send(err);
@@ -63,6 +66,7 @@ module.exports = function(app, router) {
 		});
 	})
 	.put(function(req, res) {
+		// Update a user
 		console.log('Attempting to update a user.');
 		User.findById(req.params.user_id, function(err, user) {
 			if (err) res.send(err);
@@ -75,6 +79,7 @@ module.exports = function(app, router) {
 		});
 	})
 	.delete(function(req, res) {
+		// Delete a user
 		console.log('Attempting to delete a user.');
         User.remove({
             _id: req.params.user_id
