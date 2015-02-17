@@ -2,7 +2,8 @@
 
 var User       = require('./models/user'),
 	bodyParser = require('body-parser'),
-	path       = require('path');
+	path       = require('path'),
+	https      = require('https');
 
 // --------------------------------------- Global variables
 
@@ -87,5 +88,43 @@ module.exports = function(app, router) {
             if (err) res.send(err);
             res.json({ message: 'Deleted user.' });
         });
+    });
+
+    router.route('/github')
+    .get(function(req, res) {
+		var options = {
+			host : 'api.github.com',
+			port : 443,
+			path : '/repos/nickspiel/nickspiel/commits',
+			method : 'GET',
+			headers: {
+				'User-Agent': 'GitSum'
+			}
+		};
+
+		// Fetch the list of repos for a given organization
+		var request = https.get(options, function (res) {
+			data = "";
+
+			// We watch the response data we receive
+			res.on('data', function (chunk) {
+				// We store them
+				data += chunk;
+			});
+
+			// When the response from the Github server ends
+			res.on('end', function () {
+				// We can parse the complete response into a JS object
+				var repos = JSON.parse(data);
+
+				// And call a callback which basically will fetch the PR for those repositories
+				console.log(repos);
+			});
+		});
+
+		// We can listen on `error` event to know if something goes wrong
+		request.on('error', function (error) {
+			console.log('Problem with request: '+ error);
+		});
     });
 }
