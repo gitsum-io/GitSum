@@ -1,14 +1,10 @@
 # Grunt TODO
 
 
+## server.js
+
+-  **TODO** `(line 47)`  Sort this out... Does it need to be in its own file or does it belong here? I don't know...
+
 ## public/index.html
 
--  **TODO** `(line 12)` : Add browser warning -->
-
-## app/scripts/controllers.js
-
--  **TODO** `(line 2)` : robbo sucks
-
-## app/scripts/routes.js
-
--  **TODO** `(line 1)` : need to discuss wether rolling each page into a module
+-  **TODO** `(line 13)`  Add browser warning -->

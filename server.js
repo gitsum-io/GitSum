@@ -44,7 +44,7 @@ mongoose.connect('mongodb://localhost/gitsum', function(err) {
 
 // ---------------------------------------- Environments
 
-// TODO: Sort this out... Does it need to be in its own file or does it belong here? I don't know...
+// TODO Sort this out... Does it need to be in its own file or does it belong here? I don't know...
 
 var env = process.env.NODE_ENV;
 
