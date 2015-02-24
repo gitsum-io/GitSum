@@ -22,7 +22,8 @@ var UserSchema = new Schema({
 // Repo schema
 var RepoSchema = new Schema({
 	name: String,
-	branches: [BranchSchema]
+	branches: [BranchSchema],
+	repoType: Number
 });
 
 // Branch schema

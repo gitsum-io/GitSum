@@ -1,9 +1,10 @@
 // --------------------------------------- Modules
 
-var User       = require('./models/user'),
-	bodyParser = require('body-parser'),
-	path       = require('path'),
-	https      = require('https');
+var User         = require('./models/user'),
+	RepoProvider = require('./models/repoProvider'),
+	bodyParser   = require('body-parser'),
+	path         = require('path'),
+	https        = require('https');
 
 // --------------------------------------- Global variables
 
@@ -82,16 +83,22 @@ module.exports = function(app, router) {
 	.delete(function(req, res) {
 		// Delete a user
 		console.log('Attempting to delete a user.');
-        User.remove({
-            _id: req.params.user_id
-        }, function(err, bear) {
-            if (err) res.send(err);
-            res.json({ message: 'Deleted user.' });
-        });
-    });
+		User.remove({
+			_id: req.params.user_id
+		}, function(err, bear) {
+			if (err) res.send(err);
+			res.json({ message: 'Deleted user.' });
+		});
+	});
 
-    router.route('/github')
-    .get(function(req, res) {
+	router.route('/github')
+	.get(function(req, res) {
+
+		User.find(function(err, users) {
+			if (err) res.send(err);
+			res.json(users);
+		});
+
 		var options = {
 			host : 'api.github.com',
 			port : 443,
@@ -126,5 +133,5 @@ module.exports = function(app, router) {
 		request.on('error', function (error) {
 			console.log('Problem with request: '+ error);
 		});
-    });
+	});
 }
