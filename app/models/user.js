@@ -1,10 +1,11 @@
-// --------------------------------------- Modules
+// --------------------------------------- Modules 
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+	Schema   = mongoose.Schema,
+	ObjectId = Schema.Types.ObjectId;
 
 // --------------------------------------- Model
-
-var Schema = mongoose.Schema;
+//var repoProvider = mongoose.model('repoProvider', RepoProviderSchema);
 
 // User schema
 var UserSchema = new Schema({
@@ -23,7 +24,11 @@ var UserSchema = new Schema({
 var RepoSchema = new Schema({
 	name: String,
 	branches: [BranchSchema],
-	repoType: Number
+	repoType: { 
+		type: ObjectId, 
+		ref: 'repoProvider',
+		required: true
+	}
 });
 
 // Branch schema
@@ -95,7 +100,8 @@ testUser.repositories = [
 							}
 						],
 					}
-				]
+				],
+				"repoType": '54ebe100d674d355ceb0ba98'
 			},
 			{
 				"name": "Myskin"
@@ -107,8 +113,11 @@ testUser.repositories = [
 User.find({ name: 'John Doe' }).find(function(err, user) {
 	if (!user.length) {
 		testUser.save();
+		//console.log(user);
 		console.log('Temp User saved!');
 	} else {
+		// TODO: remove this user to add new one!
+		console.log(testUser);
 		console.log('Temp User found!');
 	}
 })
