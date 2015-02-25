@@ -91,23 +91,36 @@ module.exports = function(app, router) {
 		});
 	});
 
-	router.route('/github')
+	router.route('/github/:userId')
 	.get(function(req, res) {
 
-		User.find(function(err, users) {
-			if (err) res.send(err);
-			res.json(users);
+		var userQuery  = User.where({ _id: req.params.userId });
+		userQuery.findOne(function (err, user) {
+			if (err) return 'error'; // TODO imporve error handling
+			if (user) {
+				console.log(user);
+
+				for (var repo = 0; repo < user.repositories.length; repo++) {
+					
+					// TODO need to build out this loop
+					
+					getRepositoryCommits();
+
+					var options = {
+						host: 'api.github.com',
+						port: 443,
+						path: '/repos/' + req.params.userId + '/' + req.params.repoName + '/commits',
+						method: 'GET',
+						headers: {
+							'User-Agent': 'GitSum'
+						}
+					};
+				};
+
+			}
 		});
 
-		var options = {
-			host : 'api.github.com',
-			port : 443,
-			path : '/repos/nickspiel/nickspiel/commits',
-			method : 'GET',
-			headers: {
-				'User-Agent': 'GitSum'
-			}
-		};
+		// currentUser = User.find({ _id: req.params.userId });
 
 		// Fetch the list of repos for a given organization
 		var request = https.get(options, function (res) {

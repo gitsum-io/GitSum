@@ -2,9 +2,11 @@ angular.module('MainController', [])
 	.controller('MainController', ['$scope', '$http', function($scope, $http) {
 
 		// Get all users
-		$http.get('/api/github').then(function(response) {
+		$http.get('/api/github/:user').then(function(response) {
 			// TODO: Enable this when done testing
-			$scope.repositories = response.data;
+			$scope.repositories = response.data.repositories;
+                  console.log(response.data[0]);
+                  console.log(response.data[0].repositories);
       	});
       	// TODO: remove this dummy data
 		// Dummy data

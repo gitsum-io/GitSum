@@ -17,13 +17,14 @@ var UserSchema = new Schema({
 		required: true
 	},
 	repositories: [RepoSchema]
+	// TODO add in a repo credentials Schema to hold usernames and keys
 });
 
 // Repo schema
 var RepoSchema = new Schema({
 	name: String,
 	branches: [BranchSchema],
-	repoType: Number
+	repoType: 
 });
 
 // Branch schema
