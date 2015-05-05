@@ -15,7 +15,7 @@ var RepoProviderSchema = new Schema({
 });
 
 // User model
-var RepoProvider = mongoose.model('RepoProvider', RepoProviderSchema);
+var RepoProvider = mongoose.model('RepoProviders', RepoProviderSchema);
 
 // Expose user model
 module.exports = RepoProvider;
@@ -30,6 +30,6 @@ RepoProvider.find({ name: "GitHub" }).find(function(err, repoProvider) {
 		seedRepoProviders.save();
 		console.log('Repo Provider saved!');
 	} else {
-		console.log('Repo Provider found!');
+		console.log('Repo Provider found!' + repoProvider);
 	}
-})
+});

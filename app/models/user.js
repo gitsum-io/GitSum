@@ -1,11 +1,37 @@
 // --------------------------------------- Modules 
 
 var mongoose = require('mongoose'),
-	Schema   = mongoose.Schema,
-	ObjectId = Schema.Types.ObjectId;
+	Schema   = mongoose.Schema;
+	// ObjectId = Schema.Types.ObjectId;
 
 // --------------------------------------- Model
 //var repoProvider = mongoose.model('repoProvider', RepoProviderSchema);
+
+// Commit schema
+var CommitSchema = new Schema({
+	hash: String,
+	date: Date,
+	message: String,
+	contributer: String,
+	avatar: String
+});
+
+// Branch schema
+var BranchSchema = new Schema({
+	name: String,
+	head: Boolean,
+	commits: [CommitSchema]
+});
+
+// Repo schema
+var RepoSchema = new Schema({
+	name: String,
+	branches: [BranchSchema],
+	repoType: { 
+		type: Schema.Types.ObjectId, 
+		ref: 'RepoProviders'
+	}
+});
 
 // User schema
 var UserSchema = new Schema({
@@ -20,104 +46,78 @@ var UserSchema = new Schema({
 	repositories: [RepoSchema]
 });
 
-// Repo schema
-var RepoSchema = new Schema({
-	name: String,
-	branches: [BranchSchema],
-	repoType: { 
-		type: ObjectId, 
-		ref: 'repoProvider',
-		required: true
-	}
-});
-
-// Branch schema
-var BranchSchema = new Schema({
-	name: String,
-	head: Boolean,
-	commits: [CommitSchema]
-});
-
-// Commit schema
-var CommitSchema = new Schema({
-	hash: String,
-	date: Date,
-	message: String,
-	contributer: String,
-	avatar: String
-});
-
 // User model
 var User = mongoose.model('User', UserSchema);
 
 // Expose user model
 module.exports = User;
 
+
+// TODO: TESTING BELOW THIS LINE, NEED TO REMOVE
+
 var testUser = new User;
 testUser.name = "John Doe";
 testUser.email = "me@example.com";
 testUser.repositories = [
+	{
+		"name": "Alcoil",
+		"branches": [
 			{
-				"name": "Alcoil",
-				"branches": [
+				"name": "master",
+				"head": true,
+				"commits": [
 					{
-						"name": "master",
-						"head": true,
-						"commits": [
-							{
-								"hash": "ayugwerljkdahjksd",
-								"date": "1/2/2015",
-								"message": "Latest commit message!",
-								"contributer": "Nick Spiel",
-								"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/nickspiel/128.jpg"
-							},
-							{
-								"hash": "hdfshjdfshjkdfskhj",
-								"date": "29/1/2015",
-								"message": "Why am I commiting code?!",
-								"contributer": "Ash Brock",
-								"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/gerrenlamson/128.jpg"
-							}
-						]
+						"hash": "ayugwerljkdahjksd",
+						"date": new Date('01.02.2012'),
+						"message": "Latest commit message!",
+						"contributer": "Nick Spiel",
+						"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/nickspiel/128.jpg"
 					},
 					{
-						"name": "dev",
-						"head": true,
-						"commits": [
-							{
-								"hash": "ayugwerljkdahjksd",
-								"date": "1/2/2016",
-								"message": "First commit message!",
-								"contributer": "Robert Petreski",
-								"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/soffes/128.jpg"
-							},
-							{
-								"hash": "ayugwerljkdahjksd",
-								"date": "1/2/2016",
-								"message": "First commit message!",
-								"contributer": "Robert Petreski",
-								"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/soffes/128.jpg"
-							}
-						],
+						"hash": "hdfshjdfshjkdfskhj",
+						"date": new Date('01.02.2012'),
+						"message": "Why am I commiting code?!",
+						"contributer": "Ash Brock",
+						"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/gerrenlamson/128.jpg"
 					}
-				],
-				"repoType": '54ebe100d674d355ceb0ba98'
+				]
 			},
 			{
-				"name": "Myskin"
+				"name": "dev",
+				"head": true,
+				"commits": [
+					{
+						"hash": "ayugwerljkdahjksd",
+						"date": new Date('01.02.2012'),
+						"message": "First commit message!",
+						"contributer": "Robert Petreski",
+						"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/soffes/128.jpg"
+					},
+					{
+						"hash": "ayugwerljkdahjksd",
+						"date": new Date('01.02.2012'),
+						"message": "First commit message!",
+						"contributer": "Robert Petreski",
+						"avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/soffes/128.jpg"
+					}
+				],
 			}
-		];
+		],
+		"repoType": "55482c578d709b8dee1a0f73"
+	}
+];
+
+
 
 // Check if temp user already exists
 // in DB otherwise save it
-User.find({ name: 'John Doe' }).find(function(err, user) {
-	if (!user.length) {
-		testUser.save();
-		//console.log(user);
-		console.log('Temp User saved!');
-	} else {
-		// TODO: remove this user to add new one!
-		console.log(testUser);
-		console.log('Temp User found!');
-	}
-})
+
+// User.remove({}, function(err, user) {
+// 	console.log('removed users');
+// });
+// testUser.save();
+
+User.findOne({ name: "John Doe"}).populate({ path: 'repositories.repoType' }).exec(function (err, user) {
+  if (err) return handleError(err);
+  console.log(user);
+});
