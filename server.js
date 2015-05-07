@@ -16,10 +16,28 @@ var express        = require('express'),
 
 // -------------------- Global
    
+app.use(methodOverride('X-HTTP-Method-Override')); 
+
 app.use(express.static(__dirname + '/public'));
+
+// -------------------- Database connection
+
+var database = require('./app/database');
+mongoose.connect('mongodb://localhost/gitsum', function(err) { 
+	if(err){
+		console.log(err);
+	}
+});
+
+// -------------------- Routing
+
 require('./app/routes')(app, router);
 
-// -------------------- Passport
+app.use(function(req, res) {
+  res.sendFile(__dirname + '/public/index.html');
+});
+
+// -------------------- Passport // TODO this is not doing anything at the moment
 
 app.use(session({
 	secret: 'supernova', 
@@ -29,18 +47,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// -------------------- Method overrides
 
-app.use(methodOverride('X-HTTP-Method-Override')); 
-
-// -------------------- Database
-
-var database = require('./app/database');
-mongoose.connect('mongodb://localhost/gitsum', function(err) { 
-	if(err){
-		console.log(err);
-	}
-});
 
 // ---------------------------------------- Environments
 
