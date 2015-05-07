@@ -35,15 +35,34 @@ module.exports = function(app, router) {
 		res.json({ message: 'Welcome to the GitSum Api!' });   
 	});
 
+// -------------------- User registration route
+
+	router.route('/account')
+	.post(function(req, res) {
+
+		// Create a user
+		var user = new User({ 
+			name: req.body.name, 
+			email: req.body.email 
+		});
+
+		user.save(function(err) {
+			if (err) res.send(err);
+			res.json({ message: 'User created!' });
+		});
+	});
+
 // -------------------- Users routes
 	
 	router.route('/users')
 	.get(function(req, res) {
 		// Get all users
 		console.log('Attempting to get all users.');
-		User.find(function(err, users) {
-			if (err) res.send(err);
-			res.json(users);
+		User.find()
+			.populate({ path: 'repositories.repoType' })
+			.exec(function(err, users) {
+				if (err) res.send(err);
+				res.json(users);
 		});
 	})
 	.post(function(req, res) {
@@ -94,6 +113,16 @@ module.exports = function(app, router) {
 	router.route('/github/:userId')
 	.get(function(req, res) {
 
+		var options = {
+			host: 'api.github.com',
+			port: 443,
+			path: '/repos/' + req.params.userId + '/' + req.params.repoName + '/commits',
+			method: 'GET',
+			headers: {
+				'User-Agent': 'GitSum'
+			}
+		};
+
 		var userQuery  = User.where({ _id: req.params.userId });
 		userQuery.findOne(function (err, user) {
 			if (err) return 'error'; // TODO imporve error handling
@@ -106,15 +135,6 @@ module.exports = function(app, router) {
 					
 					getRepositoryCommits();
 
-					var options = {
-						host: 'api.github.com',
-						port: 443,
-						path: '/repos/' + req.params.userId + '/' + req.params.repoName + '/commits',
-						method: 'GET',
-						headers: {
-							'User-Agent': 'GitSum'
-						}
-					};
 				};
 
 			}

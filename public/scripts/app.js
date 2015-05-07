@@ -3,5 +3,6 @@
 angular.module('gitSum', [
 	'ngRoute',
 	'AppRoutes',
-	'MainController'
+	'MainController',
+	'AccountController'
 ]);
