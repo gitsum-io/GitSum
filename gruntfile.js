@@ -112,6 +112,9 @@ module.exports = function(grunt) {
 		
 		// Watch files for changes
 		watch: {
+			options: {
+				livereload: true
+			},
 			css: {
 				files: [
 					'<%= pkg.stylesDirectory %>/*.scss'
