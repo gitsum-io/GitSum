@@ -2,10 +2,8 @@
 
 var mongoose = require('mongoose'),
 	Schema   = mongoose.Schema;
-	// ObjectId = Schema.Types.ObjectId;
 
 // --------------------------------------- Model
-//var repoProvider = mongoose.model('repoProvider', RepoProviderSchema);
 
 // Commit schema
 var CommitSchema = new Schema({
@@ -117,7 +115,7 @@ testUser.repositories = [
 // });
 // testUser.save();
 
-User.findOne({ name: "John Doe"}).populate({ path: 'repositories.repoType' }).exec(function (err, user) {
-  if (err) return handleError(err);
-  console.log(user);
-});
+// User.findOne({ name: "John Doe"}).populate({ path: 'repositories.repoType' }).exec(function (err, user) {
+//   if (err) return handleError(err);
+//   console.log(user);
+// });
