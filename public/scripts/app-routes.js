@@ -8,5 +8,9 @@ angular.module('AppRoutes', []).config(['$routeProvider', '$locationProvider', f
 		.when('/account', {
 			templateUrl: 'views/account.html',
 			controller: 'AccountController'
+		})
+		.when('/register', {
+			templateUrl: 'views/register.html',
+			controller: 'AccountController'
 		});
 }]);

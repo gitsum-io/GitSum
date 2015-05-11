@@ -12,7 +12,7 @@ var publicPath = path.join(__dirname, '../public/');
 
 // --------------------------------------- Router
 
-module.exports = function(app, router) {
+module.exports = function(app, router, passport) {
 
 // -------------------- Router setup
 
@@ -48,9 +48,24 @@ module.exports = function(app, router) {
 
 		user.save(function(err) {
 			if (err) res.send(err);
-			res.json({ message: 'User created!' });
 		});
 	});
+
+ 	// process the signup form
+    app.post('/register', passport.authenticate('local-register', {
+        successRedirect : '/dashboard', // redirect to the secure profile section
+        failureRedirect : '/account', // redirect back to the signup page if there is an error
+        failureFlash : true // allow flash messages
+    }));
+
+	// router.route('/login').post(function(req, res, next) { 
+	// 	console.log("attempting to pass vars to passport");
+	// 	passport.authenticate('local-signup', {
+ //            successRedirect : '/profile', // redirect to the secure profile section
+ //            failureRedirect : '/signup', // redirect back to the signup page if there is an error
+ //            failureFlash : true // allow flash messages
+ //        });
+	// });
 
 // -------------------- Users routes
 	
@@ -167,4 +182,15 @@ module.exports = function(app, router) {
 			console.log('Problem with request: '+ error);
 		});
 	});
+}
+
+// Route middleware to make sure a user is logged in
+function isLoggedIn(req, res, next) {
+
+    // If user is authenticated in the session
+    if (req.isAuthenticated())
+        return next();
+
+    // If they aren't redirect them to the home page
+    res.redirect('/');
 }

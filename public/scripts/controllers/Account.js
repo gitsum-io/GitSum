@@ -3,32 +3,51 @@ angular.module('AccountController', [])
 
 // ---------------------------------------- Create User
         
-        $scope.createUser = function() {
+        $scope.registerUser = function() {
 
-    		// Create the new user object
-    		var userData = {
-    			name: $scope.name,
-    			email: $scope.email
-    		};
+    		 // Create the new user object
+            var userData = {
+                name: $scope.registerName,
+                email: $scope.registerEmail,
+                password: $scope.registerPassword
+            };
 
-    		// Attempt to send data to register route
-    		var res = $http.post('/api/register', userData);
+            // process the signup form
+            var res = $http.post('/register/', userData);
 
-    		// Success
-    		res.success(function(data, status, headers, config) {
-    			// Redirect to dashboard
-				$location.path('/');
-    		});
+            // Success
+            res.success(function(data, status, headers, config) {
+                // Redirect to dashboard
+                $location.path('/');
+            });
 
-    		// Error
-			res.error(function(data, status, headers, config) {
-				alert( "failure message: " + JSON.stringify({data: data}));
-			});
+            // Error
+            res.error(function(data, status, headers, config) {
+            });
 		};
 
 // ---------------------------------------- Login User
 
         $scope.loginUser = function() {
-            // TODO: log user in on
+
+            // Create the new user object
+            var userData = {
+                name: $scope.registerName,
+                email: $scope.registerEmail,
+                password: $scope.registerPassword
+            };
+
+            // process the signup form
+            var res = $http.post('/login/', userData);
+
+            // Success
+            res.success(function(data, status, headers, config) {
+                // Redirect to dashboard
+                $location.path('/');
+            });
+
+            // Error
+            res.error(function(data, status, headers, config) {
+            });
         };
 }]);

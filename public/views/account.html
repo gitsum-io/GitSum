@@ -1,16 +1,29 @@
-<div >
 <h2>Register</h2>
 <form ng-submit="createUser()">
 	<div>
 		<label>Name:</label>
-		<input type="text" name="name" ng-model="name"/>
+		<input type="text" name="name" ng-model="registerName"/>
 	</div>
 	<div>
 		<label>Email:</label>
-		<input type="text" name="name" ng-model="email"/>
+		<input type="text" name="name" ng-model="registerEmail"/>
 	</div>
 	<button>Register</button>
 </form>
-<pre>
-	{{ location }}
-</pre>
+
+<h2>Login</h2>
+<form ng-submit="loginUser()">
+	<div>
+		<label>Name:</label>
+		<input type="text" name="name" ng-model="loginName"/>
+	</div>
+	<div>
+		<label>Email:</label>
+		<input type="text" name="email" ng-model="loginEmail"/>
+	</div>
+	<div>
+		<label>Password:</label>
+		<input type="password" name="password" ng-model="loginPassword"/>
+	</div>
+	<button>Log in</button>
+</form>
