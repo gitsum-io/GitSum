@@ -39,11 +39,15 @@ module.exports = function(passport) {
                     newUser.email    = email;
                     newUser.password = newUser.generateHash(password);
 
+                    console.log('user created' + newUser);
+
                     // Save the user
                     newUser.save(function(err) {
                         if (err) throw err;
                         return done(null, newUser);
                     });
+
+                    return done({'message': 'That was successful.'});
                 }
             });    
         });

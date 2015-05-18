@@ -37,19 +37,19 @@ module.exports = function(app, router, passport) {
 
 // -------------------- User registration route
 
-	router.route('/account')
-	.post(function(req, res) {
+	// router.route('/account')
+	// .post(function(req, res) {
 
-		// Create a user
-		var user = new User({ 
-			name: req.body.name, 
-			email: req.body.email 
-		});
+	// 	// Create a user
+	// 	var user = new User({ 
+	// 		name: req.body.name, 
+	// 		email: req.body.email 
+	// 	});
 
-		user.save(function(err) {
-			if (err) res.send(err);
-		});
-	});
+	// 	user.save(function(err) {
+	// 		if (err) res.send(err);
+	// 	});
+	// });
 
  // 	app.post('/register', function(req, res, next) {
  // 		passport.authenticate('local-register', function(err, user, info) {
@@ -60,16 +60,16 @@ module.exports = function(app, router, passport) {
  //        })(req, res, next);
 	// }));
 
-	app.post('/api/register', function(req, res, next) {
-	  passport.authenticate('local-register', function(err, user, info) {
+	app.post('/api/register',
+	  passport.authenticate('local-register', function(req, user, info) {
 	  	console.log('=======' . info);
 	    // if (err) { return next(err); }
 	    // req.logIn(user, function(err) {
 	    //   if (err) { return next(err); }
 	    //   return res.redirect('/users/' + user.username);
 	    // });
-	  })(req, res, next);
-	});
+	  })
+	);
 
 // -------------------- Users routes
 	

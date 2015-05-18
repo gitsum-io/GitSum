@@ -15,6 +15,7 @@ angular.module('AccountController', [])
 
             // process the signup form
             res = $http.post('/api/register', userData);
+            res.success(function);
 		};
 
 // ---------------------------------------- Login User
