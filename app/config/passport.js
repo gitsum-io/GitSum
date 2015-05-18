@@ -23,25 +23,21 @@ module.exports = function(passport) {
     passport.use('local-register', new LocalStrategy({
         usernameField: 'email',
         passwordField: 'password',
-        passReqToCallback : true
+        passReqToCallback: true
     }, function(req, email, password, done) {
-
-        console.log(email);
         process.nextTick(function() {
-            // Find the user
+            // Check if the user already exists
             User.findOne({'email': email}, function(err, user) {
                 if (err) return done(err);
-
-                // Check if theres already a user with the email provided
                 if (user) {
-                    return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                    return done({'message': 'That email is already taken.'});
                 } else {
-                    console.log("Creating user " + newUser.email);
+
                     // Create the user
-                    var newUser = new User();
-                    
-                    newUser.local.email    = email;
-                    newUser.local.password = newUser.generateHash(password);
+                    var newUser      = new User();
+                    newUser.name     = req.body.name;
+                    newUser.email    = email;
+                    newUser.password = newUser.generateHash(password);
 
                     // Save the user
                     newUser.save(function(err) {

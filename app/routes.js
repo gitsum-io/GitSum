@@ -51,21 +51,25 @@ module.exports = function(app, router, passport) {
 		});
 	});
 
- 	// process the signup form
-    app.post('/register', passport.authenticate('local-register', {
-        successRedirect : '/dashboard', // redirect to the secure profile section
-        failureRedirect : '/account', // redirect back to the signup page if there is an error
-        failureFlash : true // allow flash messages
-    }));
+ // 	app.post('/register', function(req, res, next) {
+ // 		passport.authenticate('local-register', function(err, user, info) {
+ //        	successRedirect: '/profile', // redirect to the secure profile section
+ //        	failureRedirect: '/register2', // redirect back to the signup page if there is an error
+ //        	failureFlash: 'Failed yo!', // allow flash messages
+ //        	successFlash: 'Welcome!'
+ //        })(req, res, next);
+	// }));
 
-	// router.route('/login').post(function(req, res, next) { 
-	// 	console.log("attempting to pass vars to passport");
-	// 	passport.authenticate('local-signup', {
- //            successRedirect : '/profile', // redirect to the secure profile section
- //            failureRedirect : '/signup', // redirect back to the signup page if there is an error
- //            failureFlash : true // allow flash messages
- //        });
-	// });
+	app.post('/api/register', function(req, res, next) {
+	  passport.authenticate('local-register', function(err, user, info) {
+	  	console.log('=======' . info);
+	    // if (err) { return next(err); }
+	    // req.logIn(user, function(err) {
+	    //   if (err) { return next(err); }
+	    //   return res.redirect('/users/' + user.username);
+	    // });
+	  })(req, res, next);
+	});
 
 // -------------------- Users routes
 	
