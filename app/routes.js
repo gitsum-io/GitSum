@@ -14,6 +14,30 @@ var publicPath = path.join(__dirname, '../public/');
 
 module.exports = function(app, router, passport) {
 
+	// --------------------------------------- Authentication
+
+	var auth = function(req, res, next){ 
+		if (!req.isAuthenticated()) {
+			res.send(401); 
+		} else {
+			next(); 
+		}
+	};
+
+	// route to test if the user is logged in or not 
+	app.get('/loggedin', function(req, res) { res.send(req.isAuthenticated() ? req.user : '0'); });
+
+	// route to log in
+	app.post('/login', passport.authenticate('local'), function(req, res) { 
+		res.send(req.user);
+	});
+
+	// route to log out
+	app.post('/logout', function(req, res){ 
+		req.logOut();
+		res.send(200); 
+	});
+
 // -------------------- Router setup
 
 	// Formatting responses as JSON
@@ -61,8 +85,8 @@ module.exports = function(app, router, passport) {
 	// }));
 
 	app.post('/api/register',
-	  passport.authenticate('local-register', function(req, user, info) {
-	  	console.log('=======' . info);
+	  passport.authenticate('local-register', function(req, user) {
+	  	console.log('=======' . req);
 	    // if (err) { return next(err); }
 	    // req.logIn(user, function(err) {
 	    //   if (err) { return next(err); }

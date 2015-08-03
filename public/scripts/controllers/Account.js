@@ -1,7 +1,9 @@
 angular.module('AccountController', [])
 	.controller('AccountController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 
+        // TODO Remove - testing only
 		$scope.message = 'blank';
+
 // ---------------------------------------- Create User
         
         $scope.registerUser = function() {
@@ -15,7 +17,9 @@ angular.module('AccountController', [])
 
             // process the signup form
             res = $http.post('/api/register', userData);
-            res.success(function);
+            res.success(function() {
+                console.log(res);
+            });
 		};
 
 // ---------------------------------------- Login User

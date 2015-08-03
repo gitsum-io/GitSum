@@ -44,10 +44,10 @@ app.use(session({
 
 // Passport auth setup
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(passport.session()); // Persistent login sessions
+app.use(flash()); // Connect-flash for flash messages stored in session
 
-// require('./app/config/passport')(passport); // pass passport for configuration
+require('./app/config/passport')(passport); // pass passport for configuration
 
 // -------------------- Routing
 
