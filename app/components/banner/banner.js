@@ -7,7 +7,7 @@ const BannerComponent = React.createClass({
     return (
       <header className={styles.header}>
         <h1 className={styles.heading}>
-          <Link to="/">{this.props.name}</Link>
+          <Link className={styles.link} to="/">{this.props.name}</Link>
         </h1>
       </header>
     )

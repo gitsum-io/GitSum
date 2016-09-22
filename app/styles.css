@@ -14,3 +14,7 @@
 :global p {
   margin: 0;
 }
+
+:global * {
+  box-sizing: border-box;
+}

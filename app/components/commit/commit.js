@@ -6,6 +6,7 @@ const Commit = React.createClass({
     const { commit } = this.props
     return (
       <div className={styles.commit}>
+        <img className={styles.avatar} src={commit.author.avatar_url} />
         <p>{commit.commit.message}</p>
       </div>
     )

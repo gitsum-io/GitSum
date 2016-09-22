@@ -5,6 +5,7 @@ import Commit from '../commit/commit.js'
 const Repository = React.createClass({
   render() {
     const { repository } = this.props
+    console.log('REPOSITORY', repository)
     return (
       <div className={styles.repository}>
         <h2 className={styles.header}>{repository.name}</h2>

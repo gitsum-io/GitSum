@@ -1,8 +1,6 @@
 // Action types
 export const SET_NAME = 'SET_NAME'
 export const ADD_REPOSITORY = 'ADD_REPOSITORY'
-export const SET_ADD_REPO_DATA = 'SET_ADD_REPO_DATA'
-export const SET_ADD_REPO_DATA = 'SET_ADD_REPO_DATA'
 
 // Set the name of the application
 export function setName(name) {
