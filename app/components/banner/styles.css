@@ -6,6 +6,7 @@
 .heading {
   font-size: 16px;
   text-transform: uppercase;
+  margin: 0
 }
 .link {
   color: inherit;

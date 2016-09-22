@@ -3,10 +3,22 @@
   display: inline-flex;
   background-color: white;
   padding: 0.5rem;
-  margin: 1rem 0.5rem;
+  margin: 1rem 0 0;
 }
 .avatar {
   width: 3rem;
   height: 3rem;
   border-radius: 1.5rem;
+  flex-shrink: 0;
+}
+.details {
+  padding-left: 1rem;
+}
+.message {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+.author {
+  font-weight: bold;
+  font-size: 0.8rem;
 }
