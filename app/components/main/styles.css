@@ -1,0 +1,9 @@
+@import '../../assets/styles/configuration.css';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-family: 'Source Sans';
+  overflow: hidden;
+}

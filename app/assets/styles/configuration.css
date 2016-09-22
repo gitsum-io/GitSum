@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'Source Sans';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../../assets/fonts/source-sans/source-sans-regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Source Sans';
+  font-weight: bold;
+  font-style: normal;
+  src: url('../../assets/fonts/source-sans/source-sans-bold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Source Sans';
+  font-weight: normal;
+  font-style: italic;
+  src: url('../../assets/fonts/source-sans/source-sans-italic.woff') format('woff');
+}
