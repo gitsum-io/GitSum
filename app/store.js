@@ -4,17 +4,20 @@ import { createStore, compse, applyMiddleware } from 'redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 
+// App combined reducer
 import appReducer from './reducers/app'
 
+// Log actions
 const loggerMiddleware = createLogger()
 
+// Set state defaults
 const defaultState = {
   global: {
     name: 'GitSum'
-  },
-  repositories: []
+  }
 }
 
+// Store creation
 const store = createStore(
   appReducer,
   defaultState,
@@ -25,6 +28,7 @@ const store = createStore(
   window.devToolsExtension && window.devToolsExtension()
 )
 
+// React router and redux connection
 export const history = syncHistoryWithStore(browserHistory, store)
 
 export default store

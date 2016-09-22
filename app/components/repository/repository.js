@@ -3,8 +3,7 @@ import styles from './styles.css'
 import Commit from '../commit/commit.js'
 
 const Repository = React.createClass({
-  render () {
-    console.log('THIS.PROPS', this.props)
+  render() {
     const { repository } = this.props
     return (
       <div className={styles.repository}>

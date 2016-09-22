@@ -1,4 +1,4 @@
-// React
+// React dependencies
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
@@ -10,7 +10,6 @@ import appReducer from './reducers/app'
 // Components
 import App from './components/app'
 import RepositoryList from './components/repository-list/repository-list'
-import Repository from './components/repository/repository'
 
 // Store
 import store, { history } from './store'
@@ -24,7 +23,6 @@ const router = (
       <Router history={history}>
         <Route path="/" component={App}>
           <IndexRoute component={RepositoryList}></IndexRoute>
-          <Route path="/view/:repositoryId" component={Repository}></Route>
         </Route>
       </Router>
   </Provider>

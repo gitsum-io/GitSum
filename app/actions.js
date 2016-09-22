@@ -2,8 +2,9 @@
 export const SET_NAME = 'SET_NAME'
 export const ADD_REPOSITORY = 'ADD_REPOSITORY'
 export const SET_ADD_REPO_DATA = 'SET_ADD_REPO_DATA'
+export const SET_ADD_REPO_DATA = 'SET_ADD_REPO_DATA'
 
-// Action creators
+// Set the name of the application
 export function setName(name) {
   return {
     type: SET_NAME,
@@ -11,6 +12,7 @@ export function setName(name) {
   }
 }
 
+// Add a repository to the list
 export function addRepository(name, commits) {
   return {
     type: ADD_REPOSITORY,
@@ -19,13 +21,7 @@ export function addRepository(name, commits) {
   }
 }
 
-export function setAddRepoData(data) {
-  return {
-    type: SET_ADD_REPO_DATA,
-    data
-  }
-}
-
+// Fetch repository from github
 export function fetchRepository(repository) {
   return dispatch => {
     return fetch(`https://api.github.com/repos/${repository}/commits`)
