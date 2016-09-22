@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import styles from './styles.css'
 
 const BannerComponent = React.createClass({
-  render: function() {
+  render() {
     return (
       <header className={styles.header}>
         <h1 className={styles.heading}>

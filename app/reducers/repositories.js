@@ -1,22 +1,14 @@
-import repositoriesData from '../data/repositories'
+import 'whatwg-fetch'
 
 export default function repositories(state = [], action) {
-  console.log(state, action)
+  console.log('reducer', action)
   switch (action.type) {
-  case 'SET_NAME':
-  console.log('SET_NAME')
-  console.log('STATE', state)
-  console.log('NEW_STATE', Object.assign({}, state, { name: action.name }))
-    return Object.assign({}, state, {
-      name: action.name
-    })
-  case 'ANOTHER_ACTION':
+  case 'ADD_REPOSITORY':
+    return [...state, {
+      name: action.name,
+      commits: action.commits
+    }]
+  default:
     return state
   }
-  return state
-}
-
-export function global(state = [], action) {
-  console.log(state, action)
-  return state
 }

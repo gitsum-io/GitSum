@@ -3,10 +3,10 @@ import Banner from '../banner/banner.js'
 import styles from './styles.css'
 
 const MainComponent = React.createClass({
-  render: function() {
+  render() {
     return (
       <div className={styles.main}>
-        <Banner name="GitSum" />
+        <Banner name={this.props.global.name} />
         {React.cloneElement(this.props.children, this.props)}
       </div>
     )

@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    path.join(__dirname, 'app/main.js')
+    path.join(__dirname, 'app/gitsum.js')
   ],
   output: {
     path: path.join(__dirname, '/dist/'),
@@ -42,6 +42,9 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
+    },{
+      test: /\.woff$/,
+      loader: "file-loader"
     }]
   }
 };
