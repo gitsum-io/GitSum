@@ -3,5 +3,5 @@
   flex-grow: 1;
   display: flex;
   width: 100%;
-  overflow: scroll;
+  overflow: hidden;
 }

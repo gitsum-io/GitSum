@@ -1,9 +1,24 @@
+.commit-range {
+  margin: 1rem 0 0;
+  position: relative;
+}
+.commit-range:before {
+  content: '';
+  left: calc(-1.25rem - 1  px);
+  top: 0.25rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 0.5rem;
+  border: solid 2px #bbbbbb;
+  position: absolute;
+  
+  background-color: #f3f3f6;
+}
 .commit {
   width: 100%;
   display: inline-flex;
   background-color: white;
-  padding: 0.5rem;
-  margin: 1rem 0 0;
+  padding: 1rem;
 }
 .avatar {
   width: 3rem;
@@ -13,6 +28,7 @@
 }
 .details {
   padding-left: 1rem;
+  overflow: hidden;
 }
 .message {
   font-size: 0.9rem;
@@ -21,4 +37,9 @@
 .author {
   font-weight: bold;
   font-size: 0.8rem;
+}
+.date {
+  display: block;
+  color: #bbbbbb;
+  margin-bottom: 0.5rem;
 }

@@ -5,11 +5,12 @@ import Commit from '../commit/commit.js'
 const Repository = React.createClass({
   render() {
     const { repository } = this.props
-    console.log('REPOSITORY', repository)
     return (
       <div className={styles.repository}>
         <h2 className={styles.header}>{repository.name}</h2>
-        {repository.commits.map((commit, i) => <Commit {...repository} key={i} i={i} commit={commit} />)}
+        <div className={styles.commits}>
+          {repository.commits.map((commit, i) => <Commit {...repository} key={i} i={i} commit={commit} />)}
+        </div>
       </div>
     )
   }

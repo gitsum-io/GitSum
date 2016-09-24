@@ -2,6 +2,7 @@
   background-color: white;
   color: #009ff2;
   padding: 2rem;
+  flex-shrink: 0;
 }
 .heading {
   font-size: 16px;
