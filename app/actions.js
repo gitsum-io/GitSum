@@ -1,6 +1,7 @@
 // Action types
 export const SET_NAME = 'SET_NAME'
 export const ADD_REPOSITORY = 'ADD_REPOSITORY'
+export const REMOVE_REPOSITORY = 'REMOVE_REPOSITORY'
 
 // Set the name of the application
 export function setName(name) {
@@ -16,6 +17,14 @@ export function addRepository(name, commits) {
     type: ADD_REPOSITORY,
     name,
     commits
+  }
+}
+
+// Remove a repository from the list
+export function removeRepository(key) {
+  return {
+    type: REMOVE_REPOSITORY,
+    key
   }
 }
 
