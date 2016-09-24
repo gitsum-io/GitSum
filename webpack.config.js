@@ -41,10 +41,15 @@ module.exports = {
       loader: 'json'
     }, {
       test: /\.css$/,
-      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
+      loader: 'style!css?modules&localIdentName=[name]-[local]-[hash:base64:5]!postcss-loader'
     },{
       test: /\.woff$/,
       loader: "file-loader"
     }]
+  },
+  postcss: function () {
+      return [
+        cssnext
+      ];
   }
 };
