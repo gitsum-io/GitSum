@@ -7,7 +7,7 @@ import repositories from './repositories'
 
 // Combined application reducer
 export default combineReducers({
-    global,
-    repositories,
-    routing: routerReducer
+  global,
+  repositories,
+  routing: routerReducer
 })

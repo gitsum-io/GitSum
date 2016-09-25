@@ -1,9 +1,9 @@
 'use strict'
 
-var path = require('path')
-var webpack = require('webpack')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var cssnext = require('postcss-cssnext')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const cssnext = require('postcss-cssnext')
 
 module.exports = {
   devtool: 'eval-source-map',
@@ -43,12 +43,12 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss-loader'
-    },{
+    }, {
       test: /\.woff$/,
       loader: 'file-loader'
     }]
   },
-  postcss: function () {
+  postcss: () => {
     return [
       cssnext
     ]

@@ -2,10 +2,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-
-// Redux
-import appReducer from './reducers/app'
+import { Router, Route, IndexRoute } from 'react-router'
 
 // Components
 import App from './components/app'
@@ -22,7 +19,7 @@ const router = (
   <Provider store={store}>
       <Router history={history}>
         <Route path="/" component={App}>
-          <IndexRoute component={RepositoryList}></IndexRoute>
+          <IndexRoute component={RepositoryList} />
         </Route>
       </Router>
   </Provider>

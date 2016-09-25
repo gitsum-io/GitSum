@@ -1,6 +1,6 @@
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
-import { createStore, compse, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 

@@ -36,9 +36,9 @@ export function fetchRepository(repository) {
       .then(commits => {
         dispatch(addRepository(repository, commits))
       })
-      .catch(function(error) {
+      .catch(error => {
         // TODO Dispatch error
         console.log(`Error fetching repository: ${error.message}`);
-      });
+      })
   }
 }
