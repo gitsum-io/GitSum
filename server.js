@@ -1,47 +1,36 @@
-/* eslint no-console: 0 */
+var restify = require('restify'),
+    repository = require('./repository'),
+    port = process.env.PORT || 3000;
 
-const path                 = require('path');
-const express              = require('express');
-const webpack              = require('webpack');
-const webpackMiddleware    = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const config               = require('./webpack.config.js');
+var server = restify.createServer({
+  name: 'GitSum API V1'
+});
 
-const isDeveloping = process.env.NODE_ENV !== 'production';
-const port         = isDeveloping ? 3000 : process.env.PORT;
-const app          = express();
+// Compress the response object if requested
+server.use(restify.gzipResponse());
 
-if (isDeveloping) {
-  const compiler = webpack(config);
-  const middleware = webpackMiddleware(compiler, {
-    publicPath: config.output.publicPath,
-    contentBase: 'src',
-    stats: {
-      colors: true,
-      hash: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false
-    }
-  });
+// Parse the query string - making it available in req.query
+server.use(restify.queryParser());
 
-  app.use(middleware);
-  app.use(webpackHotMiddleware(compiler));
-  app.get('*', function response(req, res) {
-    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
-    res.end();
-  });
-} else {
-  app.use(express.static(__dirname + '/dist'));
-  app.get('*', function response(req, res) {
-    res.sendFile(path.join(__dirname, 'dist/index.html'));
-  });
-}
+server.use(restify.fullResponse());
+server.use(restify.bodyParser());
 
-app.listen(port, '0.0.0.0', function onStart(err) {
-  if (err) {
-    console.log(err);
-  }
-  console.info('==> 🌎 Listening on port %s. Open up http://0.0.0.0:%s/ in your browser.', port, port);
+// Get a list of all repos
+server.get('/api/v1/repository', repository.get);
+
+// Update existing repo
+server.put('/api/v1/repository/:id', repository.put);
+
+// Add a new repo
+server.post('/api/v1/repository', repository.post);
+
+// Get a specific repo
+server.get('/api/v1/repository/:id', repository.getById);
+
+// Get a specific repo
+server.del('/api/v1/repository/:id', repository.del);
+
+// Set up the server for listening
+server.listen(port, function() {
+  console.log('api running at ' + port);
 });
