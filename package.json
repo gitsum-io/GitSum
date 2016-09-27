@@ -33,7 +33,8 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
     "whatwg-fetch": "^1.0.0",
-    "restify": "4.0.*"
+    "restify": "4.0.*",
+    "mongoose": "4.6.*"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.3",
