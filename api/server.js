@@ -1,12 +1,8 @@
 var restify = require('restify'),
-    mongoose = require('mongoose/'),
-    environment = require('./environment.json'),
     repository = require('./repository'),
     port = process.env.PORT || 3000;
 
-// Connect Database
-var db = mongoose.connect(environment.credentials.mongodb.uri),
-    Schema = mongoose.Schema;
+var repositoryModel = require('./models/repository');
 
 var server = restify.createServer({
   name: 'GitSum API V1'
