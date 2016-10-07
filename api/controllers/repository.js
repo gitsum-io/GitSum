@@ -1,12 +1,16 @@
+
 function RepositoryController() {
     var repo = this;
+
+    // Get the models required
+    var repository = require('../models/repository');
 
     // Set up an empty array to store some test data
     repo.store = [];
 
     // Find a repo by ID
     var findRepositoryById = function(req) {
-        var found = repo.store.filter(function(p) {
+        var found = repository.model.filter(function(p) {
             return p.id === parseInt(req.params.id);
         });
 
@@ -39,14 +43,16 @@ function RepositoryController() {
     // Add method
     // Added test validation
     repo.post = function(req, res, next) {
-        if (!req.body.hasOwnProperty('id') || !req.body.hasOwnProperty('name')) {
+        if (!req.body.hasOwnProperty('name')) {
             res.send(500);
             return next();
         } else {
-            repo.store.push({
-                id: parseInt(req.body.id),
-                name: req.body.name
-            });
+            console.log(repository);
+            repository.model.name = parseInt(req.body.name);
+            // repository.model.push({
+            //     id: parseInt(req.body.id),
+            //     name: req.body.name
+            // });
             res.send(201);
         }
 
