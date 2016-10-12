@@ -3,15 +3,15 @@ function RepositoryModel() {
 
     var model = this;
 
-    model.schema = new db.schema({
+    var schema = new db.schema({
         name: String,
         uri: String,
         uri_type: String,
         type: String
     });
 
-    db.mongoose.model('Repository', model.schema);
-    model.db = db.mongoose.model('Repository');
+    // Initialise model and expose
+    model.data = db.connection.model('Repository', schema);
 };
 
 module.exports = new RepositoryModel();
