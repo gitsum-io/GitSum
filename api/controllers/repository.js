@@ -47,13 +47,13 @@ function RepositoryController() {
             res.send(500);
             return next();
         } else {
-            console.log(repository);
-            repository.model.name = parseInt(req.body.name);
-            // repository.model.push({
-            //     id: parseInt(req.body.id),
-            //     name: req.body.name
-            // });
-            res.send(201);
+            var record = new repository.data();
+            record.name = req.body.name;
+
+            record.save(function() {
+                console.log('saved');
+                res.send(201);
+            });
         }
 
         return next();
