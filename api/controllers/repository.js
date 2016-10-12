@@ -42,20 +42,20 @@ function RepositoryController() {
     // Add method
     // Added test validation
     repo.post = function(req, res, next) {
-        if (!req.body.hasOwnProperty('name')) {
-            res.send(500);
-            return next();
-        } else {
-            var record = new repository.data();
-            record.name = req.body.name;
+        var record = new repository.data();
 
-            record.save(function(err) {
-                if (err) {
-                    res.send(400, err.errors);
-                }
-                res.send(201);
-            });
-        }
+        // Capture information from request and try to save it
+        record.name = req.body.name;
+        record.uri = req.body.uri;
+        record.uri_type = req.body.uri_type;
+        record.type = req.body.type;
+
+        record.save(function(err) {
+            if (err) {
+                res.send(400, JSON.stringify(err));
+            }
+            res.send(201);
+        });
 
         return next();
     };
