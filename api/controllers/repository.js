@@ -1,4 +1,3 @@
-
 function RepositoryController() {
     var repo = this;
 
