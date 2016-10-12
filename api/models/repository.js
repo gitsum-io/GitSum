@@ -7,20 +7,23 @@ function RepositoryModel() {
     var schema = new db.schema({
         name: {
             type: String,
-            required: '{PATH} is required!'
+            required: 'You must specify the Repo name.'
         },
         uri: {
             type: String,
-            required: '{PATH} is required!'
+            required: 'You must specify the Repo URI.'
         },
         uri_type: {
             type: String,
-            required: '{PATH} is required!'
+            required: 'URI type is required!'
         },
         type: {
             type: String,
-            required: '{PATH} is required!'
-        },
+            required: 'Repo type is required!'
+        }
+    },
+    {
+        timestamps: true
     });
 
     // Initialise model and expose
