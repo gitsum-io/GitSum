@@ -1,18 +1,19 @@
 import React from 'react'
 import styles from './styles.css'
 import Commit from '../commit/commit.js'
+import ClickMask from '../click-mask/click-mask.js'
 
 const Repository = React.createClass({
   propTypes: {
-    repositories: React.PropTypes.array,
+    repositories: React.PropTypes.arrayOf({
+      commits: React.PropTypes.array.isRequired
+    }),
     index: React.PropTypes.number,
+    menuOpen: React.PropTypes.bool,
     removeRepository: React.PropTypes.func,
-    repository: React.PropTypes.object
-  },
-  getInitialState() {
-    return {
-      menuOpen: false
-    }
+    toggleRepositoryMenu: React.PropTypes.func,
+    repository: React.PropTypes.object,
+    globals: React.PropTypes.object
   },
   componentDidMount() {
     // Add repo to localstorage
@@ -21,6 +22,7 @@ const Repository = React.createClass({
   componentWillUnmount() {
     const storedRepositories = localStorage.getItem('managedRepositories')
 
+    // Remove repo from localstorage
     if (storedRepositories) {
       const oldList = JSON.parse(storedRepositories)
       const newList = [
@@ -30,9 +32,6 @@ const Repository = React.createClass({
       localStorage.setItem('managedRepositories', JSON.stringify(newList))
     }
   },
-  toggleMenu() {
-    this.setState({menuOpen: !this.state.menuOpen})
-  },
   render() {
     const { repository } = this.props
     return (
@@ -40,8 +39,9 @@ const Repository = React.createClass({
         <header className={styles.header}>
           <h2 className={styles.heading}>{repository.name}</h2>
           <div className={styles.menu}>
-            <button className={styles.menuButton} onClick={this.toggleMenu}>Menu</button>
-            <ul className={this.state.menuOpen ? styles.optionsOpen : styles.options}>
+            <ClickMask active={repository.menuOpen} handleClick={() => this.props.toggleRepositoryMenu(this.props.index)}/>
+            <button className={styles.menuButton} onClick={() => this.props.toggleRepositoryMenu(this.props.index)}>Menu</button>
+            <ul className={repository.menuOpen ? styles.optionsOpen : styles.options}>
               <li className={styles.option}>
                 <button className={styles.button} onClick={() => this.props.removeRepository(this.props.index)}>Remove</button>
               </li>

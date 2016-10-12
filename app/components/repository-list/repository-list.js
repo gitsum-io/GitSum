@@ -7,6 +7,10 @@ import styles from './styles.css'
 // TODO Deal with rate limits
 
 const RepositoryList = React.createClass({
+  propTypes: {
+    repositories: React.PropTypes.array.isRequired,
+    fetchRepository: React.PropTypes.func
+  },
   componentDidMount() {
     // Fetch any existing repositories from local storage
     const existingRepositories = localStorage.getItem('managedRepositories')
@@ -17,9 +21,13 @@ const RepositoryList = React.createClass({
     }
   },
   render() {
+    let repositoriesComponent
+    if (this.props.repositories.length) {
+      repositoriesComponent = this.props.repositories.map((repository, index) => <Repository {...this.props} key={index} index={index} repository={repository} />)
+    }
     return (
-      <main className={styles.main}>
-        {this.props.repositories.map((repository, index) => <Repository {...this.props} key={index} index={index} repository={repository} />)}
+      <main className={this.props.repositories.length ? styles.main : styles.mainEmpty}>
+        {repositoriesComponent}
         <AddForm {...this.props}/>
       </main>
     )

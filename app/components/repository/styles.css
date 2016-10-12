@@ -73,6 +73,7 @@
 .optionsOpen {
   composes: options;
   display: block;
+  z-index: 20;
 }
 
 .option {

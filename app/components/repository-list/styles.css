@@ -5,3 +5,14 @@
   width: 100%;
   overflow: hidden;
 }
+
+.mainEmpty {
+  composes: main;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.addNew {
+  margin-bottom: 2rem;
+}
