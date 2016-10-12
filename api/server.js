@@ -2,13 +2,6 @@ var restify = require('restify'),
     repository = require('./controllers/repository'),
     port = process.env.PORT || 3000;
 
-var repositoryModel = require('./models/repository');
-repositoryModel.db.name = "test123";
-console.log(repositoryModel);
-repositoryModel.schema.save(function() {
-    console.log('saved');
-});
-
 var server = restify.createServer({
   name: 'GitSum API V1'
 });
