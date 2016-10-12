@@ -54,7 +54,7 @@ function RepositoryController() {
             if (err) {
                 res.send(400, JSON.stringify(err));
             }
-            res.send(201);
+            res.send(201, '{"message": "Repository successfully added."');
         });
 
         return next();
