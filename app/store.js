@@ -13,8 +13,10 @@ const loggerMiddleware = createLogger()
 // Set state defaults
 const defaultState = {
   globals: {
+    addFormActive: false,
     name: 'GitSum'
-  }
+  },
+  repositories: []
 }
 
 // Store creation

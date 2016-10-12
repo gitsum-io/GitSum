@@ -54,23 +54,28 @@ export function deactivateAddForm() {
 }
 
 // Fetch repository from github
-export function fetchRepository(repository) {
+export function fetchRepository(name, url) {
+  const cleanGithubRegex = /https:\/\/github.com\/(.*).git/i
+  const cleanURL = cleanGithubRegex.exec(url)
   return dispatch => {
-    return fetch(`https://api.github.com/repos/${repository}/commits`)
-      .then(response => response.json())
-      .then(commits => {
-        if (Array.isArray(commits)) {
-          console.log('is an array')
-          dispatch(addRepository(repository, commits))
-        } else {
-          console.log('is not an array')
-          const message = {message: 'Invalid repository name'}
-          throw message
-        }
-      })
-      .catch(error => {
-        // TODO Dispatch errors
-        console.log(`Error fetching repository: ${error.message}`);
-      })
+    if (cleanURL) {
+      return fetch(`https://api.github.com/repos/${cleanURL[1]}/commits`)
+        .then(response => {
+          if (!response.ok) throw Error(response.statusText)
+          return response.json()
+        })
+        .then(commits => {
+          if (Array.isArray(commits)) {
+            dispatch(addRepository(name, commits))
+          } else {
+            const message = {message: 'Invalid repository name'}
+            throw message
+          }
+        })
+        .catch(error => {
+          // TODO Dispatch errors
+          console.log(`Error fetching repository: ${error.message}`);
+        })
+    }
   }
 }
