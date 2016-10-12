@@ -51,7 +51,7 @@ function RepositoryController() {
 
             record.save(function(err) {
                 if (err) {
-                    res.send(403, err.errors);
+                    res.send(400, err.errors);
                 }
                 res.send(201);
             });
