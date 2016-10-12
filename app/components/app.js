@@ -6,7 +6,7 @@ import Main from './main/main'
 // Map state to props
 function mapStateToProps(state) {
   return {
-    global: state.global,
+    globals: state.globals,
     repositories: state.repositories
   }
 }

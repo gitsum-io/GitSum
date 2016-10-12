@@ -12,7 +12,7 @@ const loggerMiddleware = createLogger()
 
 // Set state defaults
 const defaultState = {
-  global: {
+  globals: {
     name: 'GitSum'
   }
 }
