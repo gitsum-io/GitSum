@@ -50,8 +50,10 @@ function RepositoryController() {
             var record = new repository.data();
             record.name = req.body.name;
 
-            record.save(function() {
-                console.log('saved');
+            record.save(function(err) {
+                if (err) {
+                    res.send(403, err.errors);
+                }
                 res.send(201);
             });
         }
