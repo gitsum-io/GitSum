@@ -8,7 +8,7 @@ var StatsPlugin = require('stats-webpack-plugin');
 
 module.exports = {
   entry: [
-    path.join(__dirname, 'app/main.js')
+    path.join(__dirname, 'app/gitsum.js')
   ],
   output: {
     path: path.join(__dirname, '/dist/'),
@@ -51,6 +51,9 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
+    }, {
+      test: /\.woff$/,
+      loader: 'file-loader'
     }]
   },
   postcss: [
