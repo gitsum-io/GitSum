@@ -4,9 +4,6 @@ function RepositoryController() {
     // Get the models required
     var repository = require('../models/repository');
 
-    // Set up an empty array to store some test data
-    repo.store = [];
-
     // Find a repo by ID
     var findRepositoryById = function(req) {
         var found = repository.model.filter(function(p) {
@@ -20,9 +17,15 @@ function RepositoryController() {
         return null;
     };
 
-    // Get method
+    // Return a list of all repositories
     repo.get = function(req, res, next) {
-        res.send(200, repo.store);
+        repository.data.find(function (err, repositories) {
+            if (err) {
+                res.send(400, JSON.stringify(err));
+            }
+            res.send(200, repositories);
+        });
+
         return next();
     };
 
@@ -54,7 +57,7 @@ function RepositoryController() {
             if (err) {
                 res.send(400, JSON.stringify(err));
             }
-            res.send(201, '{"message": "Repository successfully added."');
+            res.send(201, '{"message": "Repository successfully added."}');
         });
 
         return next();
