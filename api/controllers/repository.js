@@ -31,7 +31,6 @@ function RepositoryController() {
     };
 
     // Add method
-    // Added test validation
     repo.post = function(req, res, next) {
         var record = new repository.data();
 
@@ -53,19 +52,27 @@ function RepositoryController() {
 
     // Method for updating a repository
     repo.put = function(req, res, next) {
-        if (!req.body.hasOwnProperty('name')) {
-            res.send(500);
-            return next();
-        }
+        var updateObj = {};
 
-        var found = findRepositoryById(req);
+        if (req.body.hasOwnProperty('name')) updateObj.name =  req.body.name;
+        if (req.body.hasOwnProperty('uri')) updateObj.uri =  req.body.uri;
+        if (req.body.hasOwnProperty('uri_type')) updateObj.uri_type =  req.body.uri_type;
+        if (req.body.hasOwnProperty('type')) updateObj.type =  req.body.type;
 
-        if (found) {
-            found.name = req.body.name;
-            res.send(200, found);
-        } else {
-            res.send(404, 'Repository not found!');
-        }
+        repository.data.findOneAndUpdate({_id: req.params.id },
+            {
+                $set: updateObj
+            },
+            {
+                new: true
+            },
+            function(err, data) {
+                if (err) {
+                    res.send(500, JSON.stringify(err));
+                }
+                res.send(200, data);
+            }
+        );
 
         return next();
     };
