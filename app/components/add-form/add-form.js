@@ -3,7 +3,6 @@ import Modal from '../modal/modal'
 import ClickMask from '../click-mask/click-mask'
 import Button from '../button/button'
 import styles from './styles.css'
-import Icon from '../../assets/images/icon.svg'
 
 const AddForm = React.createClass({
   propTypes: {
@@ -37,7 +36,6 @@ const AddForm = React.createClass({
   render() {
     return (
       <div className={styles.addForm}>
-        <Icon />
         <Button text="Add Repository" handleClick={this.showForm} />
         <Modal modalClassName={this.props.globals.addFormActive ? styles.modalOpen : styles.modal}>
           <ClickMask active={this.props.globals.addFormActive} handleClick={() => this.props.deactivateAddForm()}/>
