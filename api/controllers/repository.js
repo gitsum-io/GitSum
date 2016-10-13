@@ -4,19 +4,6 @@ function RepositoryController() {
     // Get the models required
     var repository = require('../models/repository');
 
-    // Find a repo by ID
-    var findRepositoryById = function(req) {
-        var found = repository.model.filter(function(p) {
-            return p.id === parseInt(req.params.id);
-        });
-
-        if (found && found.length > 0) {
-            return found[0];
-        }
-
-        return null;
-    };
-
     // Return a list of all repositories
     repo.get = function(req, res, next) {
         repository.data.find(function (err, repositories) {
@@ -31,13 +18,14 @@ function RepositoryController() {
 
     // Method for getting the repo by ID
     repo.getById = function(req, res, next) {
-        var found = findRepositoryById(req);
+        var query = repository.data.find({_id: req.params.id });
 
-        if (found) {
-            res.send(200, found);
-        } else {
-            res.send(404, 'Repository not found!')
-        }
+        query.exec(function(err, repositories) {
+            if (err) {
+                res.send(400, JSON.stringify(err));
+            }
+            res.send(200, repositories);
+       });
 
         return next();
     };
