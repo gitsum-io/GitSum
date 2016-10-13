@@ -46,6 +46,9 @@ module.exports = {
     }, {
       test: /\.woff$/,
       loader: 'file-loader'
+    }, {
+      test: /\.svg$/,
+      loader: 'babel?presets[]=es2015,presets[]=react!svg-react'
     }]
   },
   postcss: () => {

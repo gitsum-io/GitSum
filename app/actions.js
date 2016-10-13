@@ -58,7 +58,9 @@ export function fetchRepository(name, url) {
   const cleanGithubRegex = /https:\/\/github.com\/(.*).git/i
   const cleanURL = cleanGithubRegex.exec(url)
   return dispatch => {
-    if (cleanURL) {
+    if (!Array.isArray(cleanURL)) {
+      console.log(`Error fetching repository: That is not a valid repository`)
+    } else {
       return fetch(`https://api.github.com/repos/${cleanURL[1]}/commits`)
         .then(response => {
           if (!response.ok) throw Error(response.statusText)
@@ -74,7 +76,7 @@ export function fetchRepository(name, url) {
         })
         .catch(error => {
           // TODO Dispatch errors
-          console.log(`Error fetching repository: ${error.message}`);
+          console.log(`Error fetching repository: ${error.message}`)
         })
     }
   }

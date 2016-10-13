@@ -23,6 +23,7 @@
   left: 50%;
   background-color: white;
   transform: translate(-50%, -50%);
+  width: 25rem;
 }
 .formTop {
   padding: 2rem;
