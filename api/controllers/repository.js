@@ -79,11 +79,14 @@ function RepositoryController() {
 
     // Delete method for repository
     repo.del = function(req, res, next) {
-        repo.store = repo.store.filter(function(p){
-            return p.id !== parseInt(req.params.id);
-        });
+        var query = repository.data.find({_id: req.params.id });
 
-        res.send(200);
+        query.remove().exec(function(err, data) {
+            if (err) {
+                res.send(500, JSON.stringify(err));
+            }
+            res.send(200, '{"message": "Repository successfully deleted."}');
+       });
 
         return next();
     };
