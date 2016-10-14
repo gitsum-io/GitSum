@@ -27,3 +27,4 @@ public/styles/global.css
 public/styles/global.css.map
 public/styles/global.min.css
 .sublime-grunt.cache
+api/secrets.json
