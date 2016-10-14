@@ -1,12 +1,12 @@
 function UserController() {
-    var repo = this;
+    var user = this;
 
     // Get the models required
-    var user = require('../models/user');
+    var userModel = require('../models/user');
 
     // Return a list of all users
-    repo.get = function(req, res, next) {
-        user.data.find(function (err, users) {
+    user.get = function(req, res, next) {
+        userModel.data.find(function (err, users) {
             if (err) {
                 res.send(400, JSON.stringify(err));
             }
@@ -17,8 +17,8 @@ function UserController() {
     };
 
     // Method for getting the repo by ID
-    repo.getById = function(req, res, next) {
-        var query = user.data.find({_id: req.params.id });
+    user.getById = function(req, res, next) {
+        var query = userModel.data.find({_id: req.params.id });
 
         query.exec(function(err, users) {
             if (err) {
@@ -31,8 +31,8 @@ function UserController() {
     };
 
     // Add method
-    repo.post = function(req, res, next) {
-        var record = new user.data();
+    user.post = function(req, res, next) {
+        var record = new userModel.data();
 
         // Capture information from request and try to save it
         record.first_name = req.body.first_name;
@@ -52,7 +52,7 @@ function UserController() {
     };
 
     // Method for updating a user
-    repo.put = function(req, res, next) {
+    user.put = function(req, res, next) {
         var updateObj = {};
 
         if (req.body.hasOwnProperty('first_name')) updateObj.first_name =  req.body.first_name;
@@ -61,7 +61,7 @@ function UserController() {
         if (req.body.hasOwnProperty('password')) updateObj.password =  req.body.password;
         if (req.body.hasOwnProperty('avatar')) updateObj.avatar =  req.body.avatar;
 
-        user.data.findOneAndUpdate({_id: req.params.id },
+        userModel.data.findOneAndUpdate({_id: req.params.id },
             {
                 $set: updateObj
             },
@@ -80,8 +80,8 @@ function UserController() {
     };
 
     // Delete method for user
-    repo.del = function(req, res, next) {
-        var query = user.data.find({_id: req.params.id });
+    user.del = function(req, res, next) {
+        var query = userModel.data.find({_id: req.params.id });
 
         query.remove().exec(function(err, data) {
             if (err) {
