@@ -9,17 +9,12 @@ function RepositoryModel() {
             type: String,
             required: 'You must specify the Repo name.'
         },
-        uri: {
+        owner: {
             type: String,
-            required: 'You must specify the Repo URI.'
+            required: 'You must specify the owner of the Repo.'
         },
-        uri_type: {
-            type: String,
-            required: 'URI type is required!'
-        },
-        type: {
-            type: String,
-            required: 'Repo type is required!'
+        branch: {
+            type: String
         }
     },
     {

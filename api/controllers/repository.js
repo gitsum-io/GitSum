@@ -36,9 +36,8 @@ function RepositoryController() {
 
         // Capture information from request and try to save it
         record.name = req.body.name;
-        record.uri = req.body.uri;
-        record.uri_type = req.body.uri_type;
-        record.type = req.body.type;
+        record.owner = req.body.owner;
+        record.branch = req.body.branch;
 
         record.save(function(err) {
             if (err) {
@@ -55,9 +54,8 @@ function RepositoryController() {
         var updateObj = {};
 
         if (req.body.hasOwnProperty('name')) updateObj.name =  req.body.name;
-        if (req.body.hasOwnProperty('uri')) updateObj.uri =  req.body.uri;
-        if (req.body.hasOwnProperty('uri_type')) updateObj.uri_type =  req.body.uri_type;
-        if (req.body.hasOwnProperty('type')) updateObj.type =  req.body.type;
+        if (req.body.hasOwnProperty('owner')) updateObj.owner =  req.body.owner;
+        if (req.body.hasOwnProperty('branch')) updateObj.branch =  req.body.branch;
 
         repository.data.findOneAndUpdate({_id: req.params.id },
             {
