@@ -1,10 +1,12 @@
 var restify = require('restify'),
     repository = require('./controllers/repository'),
     user = require('./controllers/user'),
+    github = require('./controllers/github'),
+    appName = 'GitSum API V1',
     port = process.env.PORT || 3000;
 
 var server = restify.createServer({
-  name: 'GitSum API V1'
+    name: appName
 });
 
 // Compress the response object if requested
@@ -44,6 +46,11 @@ server.post('/api/v1/user', user.post);
 server.get('/api/v1/user/:id', user.getById);
 // Delete a specific user
 server.del('/api/v1/user/:id', user.del);
+
+// GitHub
+server.get('/api/v1/github/auth/info', github.authinfo);
+server.post('/api/v1/github/auth/code/:userid', github.code);
+server.get('/api/v1/github/repository/:repoid', github.getRepository);
 
 // Set up the server for listening
 server.listen(port, function() {
