@@ -27,6 +27,9 @@ function UserModel() {
         },
         avatar: {
             type: String
+        },
+        github_access_token: {
+            type: String
         }
     },
     {
