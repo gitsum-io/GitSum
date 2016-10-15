@@ -28,13 +28,13 @@ TODO: Prefix version and other defaults
 // Get a list of all repos
 server.get('/api/v1/:userId/repositories', repository.get);
 // Update existing repo
-server.put('/api/v1/:userId/repository/:id', repository.put);
+server.put('/api/v1/:userId/repository/:repoId', repository.put);
 // Add a new repo
 server.post('/api/v1/:userId/repository', repository.post);
 // Get a specific repo
-server.get('/api/v1/:userId/repository/:id', repository.getById);
+server.get('/api/v1/:userId/repository/:repoId', repository.getById);
 // Delete a specific repo
-server.del('/api/v1/:userId/repository/:id', repository.del);
+server.del('/api/v1/:userId/repository/:repoId', repository.del);
 
 // Users
 // Get a list of all users

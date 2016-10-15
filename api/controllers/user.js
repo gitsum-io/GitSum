@@ -18,7 +18,7 @@ function UserController() {
 
     // Method for getting the repo by ID
     user.getById = function(req, res, next) {
-        var query = userModel.data.find({_id: req.params.id });
+        var query = userModel.data.find({_id: req.params.userId });
 
         query.exec(function(err, users) {
             if (err) {
@@ -61,7 +61,7 @@ function UserController() {
         if (req.body.hasOwnProperty('password')) updateObj.password =  req.body.password;
         if (req.body.hasOwnProperty('avatar')) updateObj.avatar =  req.body.avatar;
 
-        userModel.data.findOneAndUpdate({_id: req.params.id },
+        userModel.data.findOneAndUpdate({_id: req.params.userId },
             {
                 $set: updateObj
             },
@@ -81,7 +81,7 @@ function UserController() {
 
     // Delete method for user
     user.del = function(req, res, next) {
-        var query = userModel.data.find({_id: req.params.id });
+        var query = userModel.data.find({_id: req.params.userId });
 
         query.remove().exec(function(err, data) {
             if (err) {

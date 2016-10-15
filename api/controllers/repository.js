@@ -18,7 +18,7 @@ function RepositoryController() {
 
     // Method for getting the repo by ID
     repo.getById = function(req, res, next) {
-        var query = repository.data.find({_id: req.params.id });
+        var query = repository.data.find({_id: req.params.repoId });
 
         query.exec(function(err, repositories) {
             if (err) {
@@ -57,7 +57,7 @@ function RepositoryController() {
         if (req.body.hasOwnProperty('owner')) updateObj.owner =  req.body.owner;
         if (req.body.hasOwnProperty('branch')) updateObj.branch =  req.body.branch;
 
-        repository.data.findOneAndUpdate({_id: req.params.id },
+        repository.data.findOneAndUpdate({_id: req.params.repoId },
             {
                 $set: updateObj
             },
@@ -77,7 +77,7 @@ function RepositoryController() {
 
     // Delete method for repository
     repo.del = function(req, res, next) {
-        var query = repository.data.find({_id: req.params.id });
+        var query = repository.data.find({_id: req.params.repoId });
 
         query.remove().exec(function(err, data) {
             if (err) {
