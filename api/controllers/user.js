@@ -25,7 +25,7 @@ function UserController() {
                 res.send(400, JSON.stringify(err));
             }
             res.send(200, users);
-       });
+        });
 
         return next();
     };
