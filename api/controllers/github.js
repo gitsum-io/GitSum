@@ -9,6 +9,11 @@ function GitHubController() {
 
     // Return a list of all repositories
     github.authinfo = function(req, res, next) {
+        if (!req.params.userid) {
+            res.send(400);
+            return next();
+        }
+
         var json = {
             "client_id": secrets.github.client_id,
             "scopes": "repos",
@@ -34,16 +39,21 @@ function GitHubController() {
 
     // Grab access token from GitHub via code provided
     github.authorize = function(req, res, next) {
+        if (!req.params.userid || !req.params.code || !req.params.client_id || !req.params.scopes || !req.params.state) {
+            res.send(400);
+            return next();
+        }
+
         // URL params
         var userId = req.params.userid;
 
         // Json body params
         var code = req.params.code;
         var clientId = req.params.client_id;
-        var clientSecret = secrets.github.client_secret;
         var scopes = req.params.scopes;
         var state = req.params.state;
 
+        var clientSecret = secrets.github.client_secret;
         var accessToken = '';
 
         // Get current access token from user
@@ -107,6 +117,11 @@ function GitHubController() {
 
     // Method for updating a repository
     github.getRepository = function(req, res, next) {
+        if (!req.params.repoid || !req.params.userid || !req.params.branch) {
+            res.send(400);
+            return next();
+        }
+
         // URL params
         var repoId = req.params.repoid;
         var userId = req.params.userid;
@@ -161,6 +176,11 @@ function GitHubController() {
     };
 
     github.getBranches = function(req, res, next) {
+        if (!req.params.repoid || !req.params.userid) {
+            res.send(400);
+            return next();
+        }
+
         // URL params
         var repoId = req.params.repoid;
         var userId = req.params.userid;
