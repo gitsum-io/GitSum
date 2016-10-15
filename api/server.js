@@ -26,33 +26,33 @@ TODO: Prefix version and other defaults
 
 // Repositories
 // Get a list of all repos
-server.get('/api/v1/:userId/repositories', repository.get);
+server.get('/api/v1/:userid/repositories', repository.get);
 // Update existing repo
-server.put('/api/v1/:userId/repository/:repoId', repository.put);
+server.put('/api/v1/:userid/repository/:repoid', repository.put);
 // Add a new repo
-server.post('/api/v1/:userId/repository', repository.post);
+server.post('/api/v1/:userid/repository', repository.post);
 // Get a specific repo
-server.get('/api/v1/:userId/repository/:repoId', repository.getById);
+server.get('/api/v1/:userid/repository/:repoid', repository.getById);
 // Delete a specific repo
-server.del('/api/v1/:userId/repository/:repoId', repository.del);
+server.del('/api/v1/:userid/repository/:repoid', repository.del);
 
 // Users
 // Get a list of all users
-server.get('/api/v1/:userId/users', user.get);
+server.get('/api/v1/:userid/users', user.get);
 // Update existing user
-server.put('/api/v1/:userId/user', user.put);
+server.put('/api/v1/:userid/user', user.put);
 // Add a new user
-server.post('/api/v1/:userId/user', user.post);
+server.post('/api/v1/:userid/user', user.post);
 // Get a specific user
-server.get('/api/v1/:userId/user', user.getById);
+server.get('/api/v1/:userid/user', user.getById);
 // Delete a specific user
-server.del('/api/v1/:userId/user', user.del);
+server.del('/api/v1/:userid/user', user.del);
 
 // GitHub
-server.get('/api/v1/:userId/github/auth/info', github.authinfo);
-server.post('/api/v1/:userId/github/auth/authorize', github.authorize);
-server.get('/api/v1/:userId/github/repository/:repoId/branches', github.getBranches);
-server.get('/api/v1/:userId/github/repository/:repoid/branch/:branchName', github.getRepository);
+server.get('/api/v1/:userid/github/auth/info', github.authinfo);
+server.post('/api/v1/:userid/github/auth/authorize', github.authorize);
+server.get('/api/v1/:userid/github/repository/:repoid/branches', github.getBranches);
+server.get('/api/v1/:userid/github/repository/:repoid/branch/:branchName', github.getRepository);
 
 // Set up the server for listening
 server.listen(port, function() {
