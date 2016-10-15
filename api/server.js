@@ -52,7 +52,7 @@ server.del('/api/v1/:userId/user', user.del);
 server.get('/api/v1/:userId/github/auth/info', github.authinfo);
 server.post('/api/v1/:userId/github/auth/authorize', github.authorize);
 server.get('/api/v1/:userId/github/repository/:repoId/branches', github.getBranches);
-server.get('/api/v1/:userId/github/repository/:repoid/branch/:branch', github.getRepository);
+server.get('/api/v1/:userId/github/repository/:repoid/branch/:branchName', github.getRepository);
 
 // Set up the server for listening
 server.listen(port, function() {
