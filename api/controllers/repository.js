@@ -25,7 +25,7 @@ function RepositoryController() {
                 res.send(400, JSON.stringify(err));
             }
             res.send(200, repositories);
-       });
+        });
 
         return next();
     };
