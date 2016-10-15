@@ -33,7 +33,7 @@ function GitHubController() {
     }
 
     // Grab access token from GitHub via code provided
-    github.code = function(req, res, next) {
+    github.authorize = function(req, res, next) {
         var code = req.params.code;
         var userId = req.params.userid;
         var clientId = req.params.client_id;
@@ -114,6 +114,9 @@ function GitHubController() {
 
             var repoOwner = repository.owner;
             var repoName = repository.name;
+
+            // Get current access token from user
+            var query = user.data.findOne({_id: userId });
 
             // Get the access token
             query.exec(function(err, user) {
