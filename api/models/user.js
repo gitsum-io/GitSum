@@ -8,6 +8,10 @@ function UserModel() {
 
     // Create schema
     var schema = new db.schema({
+        type: {
+            type: String,
+            required: true
+        },
         first_name: {
             type: String,
             required: 'At least give us your first name!'
