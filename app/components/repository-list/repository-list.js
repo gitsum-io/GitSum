@@ -9,7 +9,7 @@ import Icon from '../../assets/images/icon.svg'
 
 const RepositoryList = React.createClass({
   propTypes: {
-    repositories: React.PropTypes.array.isRequired,
+    repositories: React.PropTypes.array,
     fetchRepository: React.PropTypes.func
   },
   componentDidMount() {
@@ -17,7 +17,7 @@ const RepositoryList = React.createClass({
     const existingRepositories = localStorage.getItem('managedRepositories')
     if (existingRepositories) {
       JSON.parse(existingRepositories).forEach((repository) => {
-        this.props.fetchRepository(repository.name)
+        this.props.fetchRepository(repository.name, repository.url)
       })
     }
   },
@@ -27,7 +27,7 @@ const RepositoryList = React.createClass({
     if (this.props.repositories.length) {
       repositoriesComponent = this.props.repositories.map((repository, index) => <Repository {...this.props} key={index} index={index} repository={repository} />)
     } else {
-      instructionsComponent = <div><p>Add a repository</p><Icon /></div>
+      instructionsComponent = <div className={styles.instructions}><p>Add a repository</p><Icon /></div>
     }
     return (
       <main className={this.props.repositories.length ? styles.main : styles.mainEmpty}>

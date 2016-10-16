@@ -1,0 +1,33 @@
+.item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.typeIcon {
+  fill: #8bc34a;
+  width: 2.5rem;
+  margin-right: 1rem;
+}
+
+.removeIcon {
+  fill: #dddddd;
+  width: 1rem;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem;
+}
+
+.icon {
+  font-size: 0;
+}
+
+.name {
+  flex-grow: 1;
+}

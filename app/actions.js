@@ -5,6 +5,8 @@ export const REMOVE_REPOSITORY = 'REMOVE_REPOSITORY'
 export const TOGGLE_REPOSITORY_MENU = 'TOGGLE_REPOSITORY_MENU'
 export const ACTIVATE_ADD_FORM = 'ACTIVATE_ADD_FORM'
 export const DEACTIVATE_ADD_FORM = 'DEACTIVATE_ADD_FORM'
+export const ADD_MESSAGE = 'ADD_MESSAGE'
+export const REMOVE_MESSAGE = 'REMOVE_MESSAGE'
 
 // Set the name of the application
 export function setName(name) {
@@ -15,11 +17,12 @@ export function setName(name) {
 }
 
 // Add a repository to the list
-export function addRepository(name, commits) {
+export function addRepository(name, commits, url) {
   return {
     type: ADD_REPOSITORY,
     name,
-    commits
+    commits,
+    url
   }
 }
 
@@ -53,31 +56,46 @@ export function deactivateAddForm() {
   }
 }
 
+// Add message
+export function addMessage(status, message) {
+  return {
+    type: ADD_MESSAGE,
+    status,
+    message
+  }
+}
+
+// Remove message
+export function removeMessage() {
+  return {
+    type: REMOVE_MESSAGE
+  }
+}
+
 // Fetch repository from github
 export function fetchRepository(name, url) {
-  const cleanGithubRegex = /https:\/\/github.com\/(.*).git/i
-  const cleanURL = cleanGithubRegex.exec(url)
+  let cleanUrl = url
+  if (url.indexOf('http') !== -1) {
+    const cleanGithubRegex = /https:\/\/github.com\/(.*)[\.git]?/i
+    const cleanUrlParts = cleanGithubRegex.exec(url)
+    cleanUrl = cleanUrlParts[1].replace('.git', '')
+  }
   return dispatch => {
-    if (!Array.isArray(cleanURL)) {
-      console.log(`Error fetching repository: That is not a valid repository`)
-    } else {
-      return fetch(`https://api.github.com/repos/${cleanURL[1]}/commits`)
-        .then(response => {
-          if (!response.ok) throw Error(response.statusText)
-          return response.json()
-        })
-        .then(commits => {
-          if (Array.isArray(commits)) {
-            dispatch(addRepository(name, commits))
-          } else {
-            const message = {message: 'Invalid repository name'}
-            throw message
-          }
-        })
-        .catch(error => {
-          // TODO Dispatch errors
-          console.log(`Error fetching repository: ${error.message}`)
-        })
-    }
+    return fetch(`https://api.github.com/repos/${cleanUrl}/commits`)
+      .then(response => {
+        if (!response.ok) throw Error(response.statusText)
+        return response.json()
+      })
+      .then(commits => {
+        if (Array.isArray(commits)) {
+          dispatch(addRepository(name, commits, url))
+        } else {
+          const message = {message: 'Invalid repository name'}
+          throw message
+        }
+      })
+      .catch(error => {
+        dispatch(addMessage('error', `Error fetching repository: ${error.message}`))
+      })
   }
 }

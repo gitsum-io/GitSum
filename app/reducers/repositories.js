@@ -5,7 +5,8 @@ export default function repositories(state = [], action) {
   case 'ADD_REPOSITORY':
     return [{
       name: action.name,
-      commits: action.commits
+      commits: action.commits,
+      url: action.url
     }, ...state]
   case 'REMOVE_REPOSITORY':
     return [

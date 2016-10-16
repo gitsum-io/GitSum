@@ -3,6 +3,9 @@ import Modal from '../modal/modal'
 import ClickMask from '../click-mask/click-mask'
 import Button from '../button/button'
 import styles from './styles.css'
+import EditRepositoryList from '../edit-repository-list'
+import AddIcon from '../../assets/images/add-icon.svg'
+import CrossIcon from '../../assets/images/cross.svg'
 
 const AddForm = React.createClass({
   propTypes: {
@@ -34,24 +37,26 @@ const AddForm = React.createClass({
     this.props.activateAddForm()
   },
   render() {
+    const addIcon = <AddIcon className={styles.addIcon} />
+    const crossIcon = <CrossIcon className={styles.crossIcon} />
     return (
       <div className={styles.addForm}>
-        <Button text="Add Repository" handleClick={this.showForm} />
+        <Button icon={addIcon} additionalClassName={styles.addFormButton} text="Add Repository" handleClick={this.showForm} />
         <Modal modalClassName={this.props.globals.addFormActive ? styles.modalOpen : styles.modal}>
           <ClickMask active={this.props.globals.addFormActive} handleClick={() => this.props.deactivateAddForm()}/>
           <form className={styles.form} onSubmit={this.handleSubmit}>
+            <Button type="button" icon={crossIcon} additionalClassName={styles.crossButton} handleClick={() => this.props.deactivateAddForm()} />
             <div className={styles.formTop}>
               <h3 className={styles.heading}>Add a new repository</h3>
               <input name="name" type="text" placeholder="Name" required onChange={this.setName}/>
               <input name="url" type="text" placeholder="Url" required onChange={this.setUrl}/>
             </div>
             <div className={styles.formBottom}>
-              <p>{this.props.repositories.length}</p>
-              <ul className={styles.repositoryList}>
-                {this.props.repositories.map((repository) => <li>{repository.name}</li>)}
-              </ul>
-              <Button className={styles.button} text="Add" />
-              <button onClick={() => this.props.deactivateAddForm()}>Close</button>
+              <EditRepositoryList {...this.props} />
+              <div className={styles.actions}>
+                <Button additionalClassName={styles.addButton} text="Add" />
+                <Button additionalClassName={styles.closeButton} type="button" text="Close" handleClick={() => this.props.deactivateAddForm()} />
+              </div>
             </div>
           </form>
         </Modal>

@@ -4,7 +4,7 @@
 }
 .commit-range:after {
   content: '';
-  left: calc(-1.5rem);
+  left: -1.5rem;
   top: 0.25rem;
   width: 0.4rem;
   height: 0.4rem;
@@ -17,7 +17,7 @@
 .commit-range:before {
   content: '';
   left: calc(-1.5rem - 3px);
-  top: calc(0.5rem);
+  top: 0.5rem;
   height: 2px;
   width: 1rem;
   position: absolute;

@@ -20,3 +20,15 @@
   box-sizing: border-box;
   box-sizing: inherit;
 }
+
+:global a {
+  color: #4179bf;
+}
+
+:global button {
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    outline: 0;
+  }
+}

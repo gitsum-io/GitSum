@@ -48,7 +48,7 @@ module.exports = {
       loader: 'file-loader'
     }, {
       test: /\.svg$/,
-      loader: 'babel?presets[]=es2015,presets[]=react!svg-react'
+      loader: 'babel?presets[]=es2015,presets[]=react!svg-react!svgo-loader',
     }]
   },
   postcss: () => {
