@@ -1,8 +1,8 @@
 import React from 'react'
-import Repository from '../repository/repository.js'
-import AddForm from '../add-form/add-form.js'
 import styles from './styles.css'
-import Icon from '../../assets/images/icon.svg'
+import Repository from 'components/repository'
+import AddForm from 'components/add-form'
+import Instructions from 'components/instructions'
 
 // TODO Rearrange repos with most recently update on the left
 // TODO Deal with rate limits
@@ -27,7 +27,7 @@ const RepositoryList = React.createClass({
     if (this.props.repositories.length) {
       repositoriesComponent = this.props.repositories.map((repository, index) => <Repository {...this.props} key={index} index={index} repository={repository} />)
     } else {
-      instructionsComponent = <div className={styles.instructions}><p>Add a repository</p><Icon /></div>
+      instructionsComponent = <Instructions />
     }
     return (
       <main className={this.props.repositories.length ? styles.main : styles.mainEmpty}>

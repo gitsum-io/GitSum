@@ -6,14 +6,7 @@
   box-shadow: -2px 0 10px 0 rgba(0, 0, 0, 0.25);
   position: relative;
 }
-.heading {
-  font-size: 16px;
-  text-transform: uppercase;
-  margin: 0
-}
-.link {
-  color: inherit;
-  text-decoration: none;
-  font-weight: normal;
-  letter-spacing: 2px;
+.logo {
+  width: auto;
+  height: 2.5rem;
 }

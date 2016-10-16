@@ -1,3 +1,5 @@
+@import './assets/styles/configuration.css';
+
 :global html {
   height: 100%;
   box-sizing: border-box;
@@ -6,6 +8,7 @@
 :global body {
   margin: 0;
   height: 100%;
+  font-family: 'Source Sans';
 }
 
 :global #root {

@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './styles.css'
-import EditRepositoryItem from '../edit-repository-item'
+import EditRepositoryItem from 'components/edit-repository-item'
 
 const EditRepositoryList = React.createClass({
   propTypes: {

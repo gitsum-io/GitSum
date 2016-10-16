@@ -7,13 +7,13 @@ const Button = React.createClass({
     handleClick: React.PropTypes.func,
     type: React.PropTypes.string,
     children: React.PropTypes.object,
-    additionalClassName: React.PropTypes.string,
+    className: React.PropTypes.string,
     icon: React.PropTypes.func
   },
   render() {
-    console.log(this.props.additionalClassName)
+    const className = this.props.className || styles.button
     return (
-      <button type={this.props.type} onClick={this.props.handleClick} className={`${styles.button} ${this.props.additionalClassName}`}>{this.props.icon}{this.props.text}</button>
+      <button type={this.props.type} onClick={this.props.handleClick} className={`${className}`}>{this.props.icon}{this.props.text}</button>
     )
   }
 })

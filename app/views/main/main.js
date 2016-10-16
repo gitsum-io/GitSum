@@ -1,7 +1,7 @@
 import React from 'react'
-import Banner from '../banner/banner'
 import styles from './styles.css'
-import RepositoryList from '../repository-list/repository-list'
+import Banner from 'components/banner'
+import RepositoryList from 'components/repository-list'
 
 const MainComponent = React.createClass({
   propTypes: {

@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './styles.css'
-import Commit from '../commit/commit.js'
-import ClickMask from '../click-mask/click-mask.js'
-import OcotoCatIcon from '../../assets/images/octocat.svg'
-import HorizontalDotsIcon from '../../assets/images/horizontal-dots.svg'
+import Commit from 'components/commit'
+import ClickMask from 'components/click-mask'
+import OcotoCatIcon from 'assets/images/octocat.svg'
+import HorizontalDotsIcon from 'assets/images/horizontal-dots.svg'
 
 const Repository = React.createClass({
   propTypes: {

@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions'
-import Main from './main/main'
+import ViewWrapper from 'components/view-wrapper'
 
 // Map state to props
 function mapStateToProps(state) {
@@ -17,6 +17,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 // Connect new props to Main element
-const App = connect(mapStateToProps, mapDispatchToProps)(Main)
+const App = connect(mapStateToProps, mapDispatchToProps)(ViewWrapper)
 
 export default App

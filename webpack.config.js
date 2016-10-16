@@ -16,6 +16,13 @@ module.exports = {
     filename: '[name].js',
     publicPath: '/'
   },
+  resolve: {
+    alias: {
+      'views': path.resolve(__dirname, './app/views'),
+      'components': path.resolve(__dirname, './app/components'),
+      'assets': path.resolve(__dirname, './app/assets')
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'app/index.tpl.html',
@@ -49,6 +56,9 @@ module.exports = {
     }, {
       test: /\.svg$/,
       loader: 'babel?presets[]=es2015,presets[]=react!svg-react!svgo-loader',
+    }, {
+      test: /\.(jpg|png)$/,
+      loader: 'url?limit=10000'
     }]
   },
   postcss: () => {

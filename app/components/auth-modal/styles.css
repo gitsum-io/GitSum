@@ -1,0 +1,14 @@
+.authModal {
+  background-color: white;
+  max-width: 30rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 2rem;
+  border-radius: 0.25rem;
+}
+.slothIcon {
+  margin-top: -4rem;
+  width: 8rem;
+  height: 8rem;
+}

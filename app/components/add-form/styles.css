@@ -22,9 +22,6 @@
   width: 300px;
   flex-shrink: 0;
 }
-.crossButton {
-  background-color: transparent;
-}
 .crossIcon {
   width: 1rem;
   height: 1rem;
@@ -36,9 +33,11 @@
   margin-right: 0.5rem;
 }
 .crossButton {
+  composes: button from "../button/styles.css";
   position: absolute;
   right: -1rem;
   top: -1rem;
+  background-color: transparent;
   display: inline-block;
   width: auto;
   padding: 0;
@@ -60,6 +59,7 @@
   box-shadow: 0 0 3rem 0 rgba(0, 0, 0, 0.75);
 }
 .addButton {
+  composes: button from "../button/styles.css";
   width: 50%;
 }
 .formTop {
@@ -76,6 +76,7 @@
   justify-content: space-between;
 }
 .closeButton {
+  composes: button from "../button/styles.css";
   background-color: transparent;
   color: #4179bf;
   text-transform: none;

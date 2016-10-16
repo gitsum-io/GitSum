@@ -1,14 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router'
 import styles from './styles.css'
+import GitSumLogo from 'assets/images/gitsum-logo.svg'
 
 const BannerComponent = React.createClass({
   render() {
     return (
       <header className={styles.header}>
-        <h1 className={styles.heading}>
-          <Link className={styles.link} to="/">{this.props.name}</Link>
-        </h1>
+        <Link className={styles.link} to="/"><GitSumLogo className={styles.logo} /></Link>
       </header>
     )
   }

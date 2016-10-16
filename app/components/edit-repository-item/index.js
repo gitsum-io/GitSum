@@ -1,7 +1,7 @@
 import React from 'react'
-import OcotoCatIcon from '../../assets/images/octocat.svg'
-import RemoveIcon from '../../assets/images/remove.svg'
 import styles from './styles.css'
+import OcotoCatIcon from 'assets/images/octocat.svg'
+import RemoveIcon from 'assets/images/remove.svg'
 
 const EditRepositoryItem = React.createClass({
   propTypes: {

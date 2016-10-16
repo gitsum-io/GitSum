@@ -38,6 +38,7 @@
     "redux-thunk": "^2.1.0",
     "svg-react-loader": "^0.3.7",
     "svgo-loader": "^1.1.1",
+    "url-loader": "^0.5.7",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
