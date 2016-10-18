@@ -117,7 +117,7 @@ function GitHubController() {
 
     // Method for updating a repository
     github.getRepository = function(req, res, next) {
-        if (!req.params.repoid || !req.params.userid || !req.params.branch) {
+        if (!req.params.repoid || !req.params.userid) {
             res.send(400);
             return next();
         }
@@ -125,7 +125,6 @@ function GitHubController() {
         // URL params
         var repoId = req.params.repoid;
         var userId = req.params.userid;
-        var branch = req.params.branch;
 
         var query = repositories.data.findOne({_id: repoId });
 
@@ -151,10 +150,11 @@ function GitHubController() {
 
                 // Build the request URL for github access token
                 var requestURL = 'https://api.github.com/repos'
-                    + '/' + repoOwner + '/'
+                    + '/' + repoOwner
                     + '/' + repoName + '/'
-                    + 'branches' +
-                    + '/' + branch + '/';
+                    + 'commits';
+
+                console.log(requestURL);
 
                 request({
                     url: requestURL,
@@ -162,11 +162,11 @@ function GitHubController() {
                         'bearer': accessToken
                     },
                     headers: {
-                        'User-Agent': appName
+                        'User-Agent': 'GitSum API V1'
                     }
                 }, function(err, requestedRepo) {
                     if (requestedRepo.statusCode == 200) {
-                        res.send(200, querystring.parse(requestedRepo.body));
+                        res.send(200, requestedRepo.body);
                     }
                 });
             });
