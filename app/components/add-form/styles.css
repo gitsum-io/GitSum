@@ -1,13 +1,93 @@
-.repository {
-  flex-grow: 1;
-  flex-shrink: 0;
-  min-width: 200px;
+.modal {
+  display: none;
+  background-color: rgba(0, 0, 15, 0.75);
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translate(-50% -50%);
+  z-index: 30;
+  font-size: 1.3rem;
 }
-.header {
-  margin: 0;
-  color: white;
+.modalOpen {
+  composes: modal;
+  display: flex;
+}
+.addForm {
+  padding: 2rem;
+  width: 300px;
+  flex-shrink: 0;
+}
+.crossIcon {
+  width: 1rem;
+  height: 1rem;
+}
+.addIcon {
+  width: 1rem;
+  height: 1rem;
+  fill: white;
+  margin-right: 0.5rem;
+}
+.crossButton {
+  composes: button from "../button/styles.css";
+  position: absolute;
+  right: -1rem;
+  top: -1rem;
+  background-color: transparent;
+  display: inline-block;
+  width: auto;
+  padding: 0;
+  opacity: 0.5;
+}
+.crossIcon {
+  fill: white;
+  width: 0.75rem;
+  height: 0.75rem;
+}
+.form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  transform: translate(-50%, -50%);
+  width: 25rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 3rem 0 rgba(0, 0, 0, 0.75);
+}
+.addButton {
+  composes: button from "../button/styles.css";
+  width: 50%;
+}
+.formTop {
+  padding: 2rem;
+}
+.formBottom {
+  padding: 2rem;
+  background-color: #f5f5f7;
+  border-top: solid 1px #e5e5e5;
+  border-radius: 0 0 0.25rem 0.25rem;
+}
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+.closeButton {
+  composes: button from "../button/styles.css";
+  background-color: transparent;
+  color: #4179bf;
+  text-transform: none;
+  display: inline-block;
+  width: auto;
+  padding: 0;
+}
+input {
+  display: block;
   padding: 1rem;
-  font-size: 1.2rem;
-  font-weight: normal;
-  background-color: #03a9f4;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
 }

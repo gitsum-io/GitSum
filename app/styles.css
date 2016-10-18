@@ -1,10 +1,14 @@
+@import './assets/styles/configuration.css';
+
 :global html {
   height: 100%;
+  box-sizing: border-box;
 }
 
 :global body {
   margin: 0;
   height: 100%;
+  font-family: 'Source Sans';
 }
 
 :global #root {
@@ -13,4 +17,21 @@
 
 :global p {
   margin: 0;
+}
+
+:global * {
+  box-sizing: border-box;
+  box-sizing: inherit;
+}
+
+:global a {
+  color: #4179bf;
+}
+
+:global button {
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    outline: 0;
+  }
 }

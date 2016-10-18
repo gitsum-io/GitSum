@@ -1,5 +1,56 @@
+.commit-range {
+  margin: 1rem 0 0;
+  position: relative;
+}
+.commit-range:after {
+  content: '';
+  left: -1.5rem;
+  top: 0.25rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 0.4rem;
+  border: solid 2px #bbbbbb;
+  position: absolute;
+  background-color: #f3f3f6;
+  box-sizing: content-box;
+}
+.commit-range:before {
+  content: '';
+  left: calc(-1.5rem - 3px);
+  top: 0.5rem;
+  height: 2px;
+  width: 1rem;
+  position: absolute;
+  background-color: #bbbbbb;
+  box-shadow: 0 0 0 10px #f3f3f6;
+}
 .commit {
+  width: 100%;
+  display: inline-flex;
   background-color: white;
-  padding: 0.5rem;
-  margin: 1rem 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 3px 10px -3px rgba(0, 0, 0, 0.175);
+}
+.avatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1.5rem;
+  flex-shrink: 0;
+}
+.details {
+  padding-left: 1rem;
+  overflow: hidden;
+}
+.message {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+.author {
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+.date {
+  display: block;
+  color: #bbbbbb;
+  margin-bottom: 0.5rem;
 }

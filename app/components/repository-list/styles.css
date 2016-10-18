@@ -1,7 +1,16 @@
 .main {
-  background-color: #dddddd;
+  background-color: #f3f3f6;
   flex-grow: 1;
   display: flex;
   width: 100%;
-  overflow: scroll;
+  overflow: hidden;
+}
+.mainEmpty {
+  composes: main;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.addNew {
+  margin-bottom: 2rem;
 }

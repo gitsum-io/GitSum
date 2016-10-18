@@ -1,13 +1,101 @@
 .repository {
-  flex-grow: 1;
+  width: 360px;
+  border-right: solid 1px #dadada;
   flex-shrink: 0;
-  min-width: 200px;
 }
+
 .header {
   margin: 0;
-  color: white;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
+  font-weight: normal;
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.heading {
+  flex-grow: 1;
   font-size: 1.2rem;
   font-weight: normal;
-  background-color: #03a9f4;
+}
+
+.heading a {
+  text-decoration: none;
+}
+
+.typeIcon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.menuIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: #bababa;
+}
+
+.menu {
+  flex-shrink: 0;
+  position: relative;
+  margin-left: 1rem;
+}
+
+.commits {
+  padding: 0 1.5rem 0 3.25rem;
+  overflow: scroll;
+  height: 100%;
+  position: relative;
+}
+
+.commits:before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 2rem;
+  top: 1.5rem;
+  height: 100%;
+  width: 2px;
+  background-color: #bbbbbb;
+}
+
+.menuButton {
+  border: 0;
+  background-color: transparent;
+  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+  color: white;
+}
+
+.options {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #1f2532;
+  border-radius: 0.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.optionsOpen {
+  composes: options;
+  display: block;
+  z-index: 20;
+}
+
+.option {
+  margin: 0;
+}
+
+.button {
+  min-width: 12rem;
+  border: 0;
+  background-color: transparent;
+  padding: 1rem 1.5rem;
+  text-transform: uppercase;
+  color: white;
+  text-align: left;
+  font-size: 0.9rem;
+  text-transform: none;
 }
