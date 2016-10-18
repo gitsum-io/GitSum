@@ -8,6 +8,7 @@ const LoginForm = React.createClass({
   },
   handleSubmit(event) {
     event.preventDefault()
+    console.log(event)
   },
   render() {
     return (
@@ -16,7 +17,7 @@ const LoginForm = React.createClass({
         <form className={styles.form} onSubmit={this.handleSubmit}>
           <input name="username" type="text" placeholder="Username" required onChange={this.setName}/>
           <input name="password" type="password" placeholder="Password" required onChange={this.setUrl}/>
-          <Button className={styles.loginButton} text="Log in" handleClick={() => this.props.deactivateAddForm()} />
+          <Button className={styles.loginButton} text="Log in" handleClick={() => this.handleSubmit()} />
         </form>
       </div>
     )
