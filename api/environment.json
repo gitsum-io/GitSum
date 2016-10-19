@@ -1,0 +1,8 @@
+{
+    "credentials": {
+        "mongodb": {
+            "uri": "mongodb://localhost/gitsum",
+            "port": 27017
+        }
+    }
+}
