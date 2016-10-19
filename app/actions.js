@@ -1,3 +1,5 @@
+import { browserHistory } from 'react-router'
+
 // Action types
 export const SET_NAME = 'SET_NAME'
 export const ADD_REPOSITORY = 'ADD_REPOSITORY'
@@ -96,6 +98,33 @@ export function fetchRepository(name, url) {
       })
       .catch(error => {
         dispatch(addMessage('error', `Error fetching repository: ${error.message}`))
+      })
+  }
+}
+
+// Authenticate user
+export function authenticateUser(username, password) {
+  return dispatch => {
+    // TODO This url needs to be updated
+    const payload = {
+      method: 'POST',
+      body: {
+        username,
+        password
+      }
+    }
+    if (username === 'nick') browserHistory.push('/') // TODO Remove this debugging line
+    return fetch(`http://nickspiel.me`, payload)
+      .then(response => {
+        if (!response.ok) throw Error(response.statusText)
+        return response.json()
+      })
+      .then(data => {
+        console.log(data)
+        browserHistory.push('/')
+      })
+      .catch(error => {
+        dispatch(addMessage('error', `There was an error logging you in: ${error.message}`))
       })
   }
 }

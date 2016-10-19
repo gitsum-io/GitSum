@@ -11,7 +11,7 @@ const AuthModal = React.createClass({
     event.preventDefault()
   },
   render() {
-    const form = <LoginForm heading="Log in to your GitSum account" /> || <div>Sign Up</div>
+    const form = <LoginForm {...this.props} heading="Log in to your GitSum account" /> || <div>Sign Up</div>
     return (
       <div className={styles.authModal}>
         <SlothIcon className={styles.slothIcon} />
