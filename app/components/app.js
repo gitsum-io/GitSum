@@ -13,7 +13,9 @@ function mapStateToProps(state) {
 
 // Map actions to props
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actionCreators, dispatch)
+  return bindActionCreators({
+    ...actionCreators
+  }, dispatch)
 }
 
 // Connect new props to Main element

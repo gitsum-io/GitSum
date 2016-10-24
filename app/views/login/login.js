@@ -13,7 +13,7 @@ const Login = React.createClass({
     }
     return (
       <div className={styles.main} style={backgroundStyle}>
-        <AuthModal />
+        <AuthModal {...this.props} />
       </div>
     )
   }

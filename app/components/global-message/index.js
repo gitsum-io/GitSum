@@ -11,6 +11,10 @@ const GlobalMessage = React.createClass({
     }),
     removeMessage: React.PropTypes.func
   },
+  componentDidMount() {
+    // Remove message after a certain amount of time
+    setTimeout(() => this.props.removeMessage(), 5000)
+  },
   render() {
     return (
       <div className={`${this.props.globals.message.status} ${styles.message}`} onClick={() => this.props.removeMessage()}>{this.props.globals.message.text}</div>
