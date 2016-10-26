@@ -2,6 +2,7 @@ var restify = require('restify'),
     repository = require('./controllers/repository'),
     user = require('./controllers/user'),
     github = require('./controllers/github'),
+    auth = require('./controllers/auth'),
     appName = 'GitSum API V1',
     port = process.env.PORT || 3000;
 
@@ -53,6 +54,9 @@ server.get('/api/v1/:userid/github/auth/info', github.authinfo);
 server.post('/api/v1/:userid/github/auth/authorize', github.authorize);
 server.get('/api/v1/:userid/github/repository/:repoid/branches', github.getBranches);
 server.get('/api/v1/:userid/github/repository/:repoid/branch/:branchName', github.getRepository);
+
+// Authentication
+server.post('/api/v1/authenticate', auth.authenticate);
 
 // Set up the server for listening
 server.listen(port, function() {
