@@ -39,7 +39,7 @@ function GitHubController() {
 
         var json = {
             "client_id": secrets.github.client_id,
-            "scopes": "repos",
+            "scope": ["repo", "user"],
             "state": bcrypt.genSaltSync(10)
         }
         res.send(200, json);
