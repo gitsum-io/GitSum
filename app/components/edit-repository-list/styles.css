@@ -1,13 +1,17 @@
-.repositoryList {
+.repositoryListWrapper {
   background-color: white;
   border: solid 1px #dddddd;
-  text-align: left;
-  list-style: none;
   padding: 1rem;
   height: 10rem;
-  overflow: scroll;
+  margin: 1rem 0;
 }
-
+.repositoryList {
+  text-align: left;
+  list-style: none;
+  padding: 0;
+  overflow: scroll;
+  margin: 0;
+}
 .amountText {
   text-align: left;
   font-size: 0.9rem;

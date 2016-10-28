@@ -13,14 +13,20 @@ const Repository = React.createClass({
     removeRepository: React.PropTypes.func,
     toggleRepositoryMenu: React.PropTypes.func,
     repository: React.PropTypes.object,
-    globals: React.PropTypes.object
+    globals: React.PropTypes.object,
+    fetchRepository: React.PropTypes.func
   },
   componentDidMount() {
     // Add repo to localstorage
     localStorage.setItem('managedRepositories', JSON.stringify(this.props.repositories, ['url', 'name']))
+
+    // Refresh every minute
+    const refresh = setInterval(() => {this.props.fetchRepository(this.props.repository.name, this.props.repository.url, this.props.index)}, 60000)
+    this.setState({refresh: refresh})
   },
   componentWillUnmount() {
     const storedRepositories = localStorage.getItem('managedRepositories')
+    clearInterval(this.state.refresh)
 
     // Remove repo from localstorage
     if (storedRepositories) {

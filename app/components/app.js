@@ -7,7 +7,8 @@ import ViewWrapper from 'components/view-wrapper'
 function mapStateToProps(state) {
   return {
     globals: state.globals,
-    repositories: state.repositories
+    repositories: state.repositories,
+    user: state.user
   }
 }
 

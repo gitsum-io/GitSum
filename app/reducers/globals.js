@@ -1,25 +1,35 @@
+import { SET_NAME, ACTIVATE_ADD_FORM, DEACTIVATE_ADD_FORM, ADD_MESSAGE, REMOVE_MESSAGE, TOGGLE_PROFILE_MENU, TOGGLE_REPOSITORY_LOADING } from '../actions'
+
 export default function global(state = {}, action) {
   switch (action.type) {
-  case 'SET_NAME':
+  case SET_NAME:
     return Object.assign({}, state, {
       name: action.names
     })
-  case 'ACTIVATE_ADD_FORM':
+  case TOGGLE_PROFILE_MENU:
+    return Object.assign({}, state, {
+      profileMenuOpen: !state.profileMenuOpen
+    })
+  case TOGGLE_REPOSITORY_LOADING:
+    return Object.assign({}, state, {
+      repositoryLoading: !state.repositoryLoading
+    })
+  case ACTIVATE_ADD_FORM:
     return Object.assign({}, state, {
       addFormActive: true
     })
-  case 'DEACTIVATE_ADD_FORM':
+  case DEACTIVATE_ADD_FORM:
     return Object.assign({}, state, {
       addFormActive: false
     })
-  case 'ADD_MESSAGE':
+  case ADD_MESSAGE:
     return Object.assign({}, state, {
       message: {
         text: action.message,
         status: action.status
       }
     })
-  case 'REMOVE_MESSAGE':
+  case REMOVE_MESSAGE:
     const newState = Object.assign({}, state)
     delete newState.message
     return newState

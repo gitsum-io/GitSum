@@ -16,10 +16,13 @@ const defaultState = {
     addFormActive: false,
     name: 'GitSum'
   },
-  repositories: []
+  repositories: [],
+  user: {
+    name: 'Ash Brock',
+    email: 'hello@ashbrock.com',
+    avatar: 'http://digital360.com.au/assets/Uploads/team/ash-brock.jpg',
+  }
 }
-
-// Store creation
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -32,8 +35,6 @@ const store = createStore(
       loggerMiddleware
     )
   )
-  // window.devToolsExtension && window.devToolsExtension(),
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 // React router and redux connection

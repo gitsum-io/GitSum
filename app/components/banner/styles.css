@@ -1,12 +1,41 @@
 .header {
   background-color: white;
-  color: #009ff2;
-  padding: 1rem;
   flex-shrink: 0;
   box-shadow: -2px 0 10px 0 rgba(0, 0, 0, 0.25);
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 .logo {
   width: auto;
   height: 2.5rem;
+  margin: 0.5rem 1rem;
+}
+.actions {
+  display: flex;
+}
+.addButton {
+  background-color: transparent;
+  border: none;
+  border-left: solid 1px #e3e3e3;
+  padding: 0.5rem 2rem;
+  text-transform: uppercase;
+  color: #8bc34a;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+.addButtonText {
+  display: none;
+  @media (min-width: 700px) {
+    display: block;
+  }
+}
+.addIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #8bc34a;
+  @media (min-width: 700px) {
+    margin-right: 0.5rem;
+  }
 }

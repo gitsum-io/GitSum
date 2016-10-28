@@ -5,4 +5,5 @@
   align-items: center;
   height: 100%;
   overflow: auto;
+  background-size: cover;
 }

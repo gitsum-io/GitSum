@@ -1,0 +1,86 @@
+.dropdown {
+  border-left: solid 1px #e3e3e3;
+}
+.button {
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1rem;
+  @media (min-width: 700px) {
+    margin-right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+  }
+}
+.avatarLarge {
+  composes: avatar;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 2rem;
+}
+.name {
+  font-size: 1rem;
+  display: none;
+  @media (min-width: 700px) {
+    display: inline-block;
+  }
+}
+.indicator {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 1rem;
+  fill: #bbbbbb;
+}
+.dropdownClickMask {
+  z-index: 10;
+}
+.dropdownPanel {
+  display: none;
+  position: absolute;
+  right: 1rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+  z-index: 20;
+}
+.dropdownPanelOpen {
+  composes: dropdownPanel;
+  display: block;
+}
+.dropdownPanelUserDetails {
+  display: flex;
+  align-items: center;
+}
+.dropdownPanelLinks {
+  border-top: solid 1px #dedede;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+.dropdownPanelLink {
+  display: block;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  color: initial;
+}
+.dropdownPanelLink:hover {
+  color: #009ff2;
+}
+.dropdownPanelLink:focus {
+  color: #009ff2;
+}
+.dropdownPanelLink:last-child {
+  margin-bottom: 0;
+}
+.email {
+  color: #888888;
+}

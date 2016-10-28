@@ -1,8 +1,8 @@
 .instructions {
   max-width: 30rem;
   text-align: center;
+  padding: 2rem 2rem 0 2rem;
 }
-
 .heading {
   font-size: 1.75rem;
 }
