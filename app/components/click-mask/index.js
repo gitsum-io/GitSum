@@ -4,11 +4,13 @@ import styles from './styles.css'
 const ClickMask = React.createClass({
   propTypes: {
     active: React.PropTypes.bool,
-    handleClick: React.PropTypes.func
+    handleClick: React.PropTypes.func,
+    className: React.PropTypes.string
   },
   render() {
+    const className = `${(this.props.active ? styles.maskActive : styles.mask)} ${(this.props.className) || this.props.className}`
     return (
-      <div className={this.props.active ? styles.maskActive : styles.mask} onClick={() => this.props.handleClick()}></div>
+      <div className={className} onClick={() => this.props.handleClick()}></div>
     )
   }
 })

@@ -8,6 +8,15 @@ export default function repositories(state = [], action) {
       commits: action.commits,
       url: action.url
     }, ...state]
+  case 'REFRESH_REPOSITORY':
+    const newRepositoryState = Object.assign({}, state[action.key], {
+      commits: action.commits,
+    })
+    return [
+      ...state.slice(0, action.key),
+      newRepositoryState,
+      ...state.slice(action.key + 1)
+    ]
   case 'REMOVE_REPOSITORY':
     return [
       ...state.slice(0, action.key),
@@ -15,12 +24,12 @@ export default function repositories(state = [], action) {
     ]
   case 'TOGGLE_REPOSITORY_MENU':
     const currentMenuState = state[action.key].menuOpen
-    const newRepositoryState = Object.assign({}, state[action.key], {
+    const newMenuState = Object.assign({}, state[action.key], {
       menuOpen: !currentMenuState
     })
     return [
       ...state.slice(0, action.key),
-      newRepositoryState,
+      newMenuState,
       ...state.slice(action.key + 1)
     ]
   default:

@@ -3,18 +3,36 @@ import { browserHistory } from 'react-router'
 // Action types
 export const SET_NAME = 'SET_NAME'
 export const ADD_REPOSITORY = 'ADD_REPOSITORY'
+export const REFRESH_REPOSITORY = 'REFRESH_REPOSITORY'
 export const REMOVE_REPOSITORY = 'REMOVE_REPOSITORY'
 export const TOGGLE_REPOSITORY_MENU = 'TOGGLE_REPOSITORY_MENU'
 export const ACTIVATE_ADD_FORM = 'ACTIVATE_ADD_FORM'
 export const DEACTIVATE_ADD_FORM = 'DEACTIVATE_ADD_FORM'
 export const ADD_MESSAGE = 'ADD_MESSAGE'
 export const REMOVE_MESSAGE = 'REMOVE_MESSAGE'
+export const SET_USER_TOKEN = 'SET_USER_TOKEN'
+export const TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU'
+export const TOGGLE_REPOSITORY_LOADING = 'TOGGLE_REPOSITORY_LOADING'
 
 // Set the name of the application
 export function setName(name) {
   return {
     type: SET_NAME,
     name
+  }
+}
+
+// Toggle the profile menu
+export function toggleProfileMenu() {
+  return {
+    type: TOGGLE_PROFILE_MENU
+  }
+}
+
+// Toggle the repository loading
+export function toggleRepositoryLoading() {
+  return {
+    type: TOGGLE_REPOSITORY_LOADING
   }
 }
 
@@ -25,6 +43,15 @@ export function addRepository(name, commits, url) {
     name,
     commits,
     url
+  }
+}
+
+// Refresh a repository
+export function refreshRepository(commits, key) {
+  return {
+    type: REFRESH_REPOSITORY,
+    commits,
+    key
   }
 }
 
@@ -74,8 +101,16 @@ export function removeMessage() {
   }
 }
 
+// Set user token
+export function setUserToken(token) {
+  return {
+    type: SET_USER_TOKEN,
+    token
+  }
+}
+
 // Fetch repository from github
-export function fetchRepository(name, url) {
+export function fetchRepository(name, url, key) {
   let cleanUrl = url
   if (url.indexOf('http') !== -1) {
     const cleanGithubRegex = /https:\/\/github.com\/(.*)[\.git]?/i
@@ -83,14 +118,20 @@ export function fetchRepository(name, url) {
     cleanUrl = cleanUrlParts[1].replace('.git', '')
   }
   return dispatch => {
-    return fetch(`https://api.github.com/repos/${cleanUrl}/commits`)
+    dispatch(toggleRepositoryLoading())
+    return fetch(`https://api.github.com/repos/${cleanUrl}/commits?client_secret=ddf82d89d9fd6e16704fa39100671da23a045045&client_id=183eb9754ab178e57b49`)
       .then(response => {
+        dispatch(toggleRepositoryLoading())
         if (!response.ok) throw Error(response.statusText)
         return response.json()
       })
       .then(commits => {
         if (Array.isArray(commits)) {
-          dispatch(addRepository(name, commits, url))
+          if (key !== undefined) {
+            dispatch(refreshRepository(commits, key))
+          } else {
+            dispatch(addRepository(name, commits, url))
+          }
         } else {
           const message = {message: 'Invalid repository name'}
           throw message
@@ -113,14 +154,17 @@ export function authenticateUser(username, password) {
         password
       }
     }
-    if (username === 'nick') browserHistory.push('/') // TODO Remove this debugging line
+    if (username === 'nick') { // TODO Remove this debugging line
+      dispatch(setUserToken('68879UITCXD3465RTFCR455YUT34Y'))
+      browserHistory.push('/')
+    }
     return fetch(`http://nickspiel.me`, payload)
       .then(response => {
         if (!response.ok) throw Error(response.statusText)
         return response.json()
       })
       .then(data => {
-        console.log(data)
+        dispatch(setUserToken(data))
         browserHistory.push('/')
       })
       .catch(error => {

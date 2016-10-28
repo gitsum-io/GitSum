@@ -7,6 +7,29 @@ function GitHubController() {
         querystring = require('querystring'),
         github = this;
 
+    github.auth = function() {
+      var clientId = req.params.client_id;
+      var clientSecret = secrets.github.client_secret;
+      var requestURL = 'https://github.com/login/oauth/authorize'
+          + '?client_id=' + clientId
+          + '&client_secret=' + clientSecret
+          + '&scopes=' + 'user repo'
+          + '&state=' + bcrypt.genSaltSync(10);
+      request({
+          url: requestURL,
+          auth: {
+              'bearer': accessToken
+          },
+          headers: {
+              'User-Agent': 'GitSum API V1'
+          }
+      }, function(err, requestedRepo) {
+          if (requestedRepo.statusCode == 200) {
+              res.send(200, requestedRepo.body);
+          }
+      });
+    };
+
     // Return a list of all repositories
     github.authinfo = function(req, res, next) {
         if (!req.params.userid) {
