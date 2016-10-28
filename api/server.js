@@ -4,7 +4,7 @@ var restify = require('restify'),
     github = require('./controllers/github'),
     auth = require('./controllers/auth'),
     appName = 'GitSum API V1',
-    port = process.env.PORT || 3000;
+    port = process.env.PORT || 4000;
 
 var server = restify.createServer({
     name: appName
