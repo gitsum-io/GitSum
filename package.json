@@ -51,6 +51,7 @@
     "jscs": "^2.1.1",
     "jsdom": "^6.5.1",
     "json-loader": "^0.5.3",
+    "jsonwebtoken": "^7.1.9",
     "mocha": "^2.3.3",
     "mocha-jsdom": "^1.0.0",
     "moment": "^2.15.1",

@@ -177,8 +177,6 @@ function GitHubController() {
                     + '/' + repoName + '/'
                     + 'commits';
 
-                console.log(requestURL);
-
                 request({
                     url: requestURL,
                     auth: {
@@ -189,7 +187,16 @@ function GitHubController() {
                     }
                 }, function(err, requestedRepo) {
                     if (requestedRepo.statusCode == 200) {
-                        res.send(200, requestedRepo.body);
+                        var dataObject = JSON.parse(requestedRepo.body);
+
+                        var outputJSON = {};
+                        for (var i = 0; i < dataObject.length; i++) {
+                            var d = dataObject[i].commit.committer.date.split(' ')[0];
+                            if (!outputJSON[d]) outputJSON[d] = [];
+                            outputJSON[d].push(dataObject[i]);
+                        }
+
+                        res.send(200, outputJSON);
                     }
                 });
             });
