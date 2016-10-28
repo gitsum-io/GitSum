@@ -144,31 +144,49 @@ export function fetchRepository(name, url, key) {
 }
 
 // Authenticate user
-export function authenticateUser(username, password) {
+// export function authenticateUser(username, password) {
+//   return dispatch => {
+//     // TODO This url needs to be updated
+//     const payload = {
+//       method: 'POST',
+//       body: {
+//         username,
+//         password
+//       }
+//     }
+//     if (username === 'nick') { // TODO Remove this debugging line
+//       dispatch(setUserToken('68879UITCXD3465RTFCR455YUT34Y'))
+//       browserHistory.push('/')
+//     }
+//     return fetch(`http://nickspiel.me`, payload)
+//       .then(response => {
+//         if (!response.ok) throw Error(response.statusText)
+//         return response.json()
+//       })
+//       .then(data => {
+//         dispatch(setUserToken(data))
+//         browserHistory.push('/')
+//       })
+//       .catch(error => {
+//         dispatch(addMessage('error', `There was an error logging you in: ${error.message}`))
+//       })
+//   }
+// }
+
+// Authenticate user
+export function getStateToken() {
   return dispatch => {
-    // TODO This url needs to be updated
-    const payload = {
-      method: 'POST',
-      body: {
-        username,
-        password
-      }
-    }
-    if (username === 'nick') { // TODO Remove this debugging line
-      dispatch(setUserToken('68879UITCXD3465RTFCR455YUT34Y'))
-      browserHistory.push('/')
-    }
-    return fetch(`http://nickspiel.me`, payload)
+    return fetch(`http://0.0.0.0:4000/`)
       .then(response => {
         if (!response.ok) throw Error(response.statusText)
         return response.json()
       })
       .then(data => {
         dispatch(setUserToken(data))
-        browserHistory.push('/')
+        console.log(data)
       })
       .catch(error => {
-        dispatch(addMessage('error', `There was an error logging you in: ${error.message}`))
+        dispatch(addMessage('error', `There was an error connecting the the Gitsum api: ${error.message}`))
       })
   }
 }
