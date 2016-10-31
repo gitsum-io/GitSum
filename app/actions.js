@@ -1,5 +1,3 @@
-import { browserHistory } from 'react-router'
-
 // Action types
 export const SET_NAME = 'SET_NAME'
 export const ADD_REPOSITORY = 'ADD_REPOSITORY'
@@ -13,6 +11,7 @@ export const REMOVE_MESSAGE = 'REMOVE_MESSAGE'
 export const SET_USER_TOKEN = 'SET_USER_TOKEN'
 export const TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU'
 export const TOGGLE_REPOSITORY_LOADING = 'TOGGLE_REPOSITORY_LOADING'
+export const SET_STATE_TOKEN = 'SET_STATE_TOKEN'
 
 // Set the name of the application
 export function setName(name) {
@@ -109,6 +108,14 @@ export function setUserToken(token) {
   }
 }
 
+// Set state token
+export function setStateToken(token)  {
+  return {
+    type: SET_STATE_TOKEN,
+    token
+  }
+}
+
 // Fetch repository from github
 export function fetchRepository(name, url, key) {
   let cleanUrl = url
@@ -182,8 +189,35 @@ export function getStateToken() {
         return response.json()
       })
       .then(data => {
-        dispatch(setUserToken(data))
         console.log(data)
+        dispatch(setStateToken('jkladsfkljadsfjkladsjklfdsajklf'))
+      })
+      .catch(error => {
+        dispatch(addMessage('error', `There was an error connecting the the Gitsum api: ${error.message}`))
+        dispatch(setStateToken('jkladsfkljadsfjkladsjklfdsajklf')) // TODO Need to remove this once the CORS issue is sorted
+      })
+  }
+}
+
+// Authenticate user
+export function sendAuthResponse(code, state) {
+  return dispatch => {
+    console.log('sending auth response')
+    const payload = {
+      method: 'POST',
+      body: {
+        code,
+        state
+      }
+    }
+    return fetch(`http://0.0.0.0:4000/`, payload)
+      .then(response => {
+        if (!response.ok) throw Error(response.statusText)
+        return response.json()
+      })
+      .then(data => {
+        // TODO Nothing yet, need to know what Rob needs
+        console.log('RESPONSE', data)
       })
       .catch(error => {
         dispatch(addMessage('error', `There was an error connecting the the Gitsum api: ${error.message}`))

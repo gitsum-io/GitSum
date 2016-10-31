@@ -9,3 +9,15 @@
 .input {
   composes: input from "../input/styles.css";
 }
+.githubButton {
+  composes: button from "../button/styles.css";
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.githubIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.5rem;
+  fill: white;
+}

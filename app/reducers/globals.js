@@ -1,10 +1,14 @@
-import { SET_NAME, ACTIVATE_ADD_FORM, DEACTIVATE_ADD_FORM, ADD_MESSAGE, REMOVE_MESSAGE, TOGGLE_PROFILE_MENU, TOGGLE_REPOSITORY_LOADING } from '../actions'
+import { SET_NAME, ACTIVATE_ADD_FORM, DEACTIVATE_ADD_FORM, ADD_MESSAGE, REMOVE_MESSAGE, TOGGLE_PROFILE_MENU, TOGGLE_REPOSITORY_LOADING, SET_STATE_TOKEN } from '../actions'
 
 export default function global(state = {}, action) {
   switch (action.type) {
   case SET_NAME:
     return Object.assign({}, state, {
       name: action.names
+    })
+  case SET_STATE_TOKEN:
+    return Object.assign({}, state, {
+      stateToken: action.token
     })
   case TOGGLE_PROFILE_MENU:
     return Object.assign({}, state, {

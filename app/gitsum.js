@@ -8,6 +8,7 @@ import Login from 'views/login'
 import Admin from 'views/admin'
 import Profile from 'views/admin/profile/index.js'
 import Repositories from 'views/admin/repositories/index.js'
+import GithubAuth from 'views/github/auth'
 import store, { history } from './store'
 
 const router = (
@@ -21,7 +22,7 @@ const router = (
             <Route path="/profile" component={Profile} />
             <Route path="/repositories" component={Repositories} />
           </Route>
-          <Route path="/github/auth" component={Profile} />
+          <Route path="/github/auth" component={GithubAuth} />
         </Route>
       </Router>
   </Provider>
