@@ -7,10 +7,10 @@
   margin: 0 0 2rem;
 }
 .input {
-  composes: input from "../input/styles.css";
+  composes: input from "components/input/styles.css";
 }
 .githubButton {
-  composes: button from "../button/styles.css";
+  composes: button from "components/button/styles.css";
   text-decoration: none;
   display: flex;
   align-items: center;
