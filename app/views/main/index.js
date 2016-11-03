@@ -1,26 +1,24 @@
 import React from 'react'
 import styles from './styles.css'
 import Banner from 'components/banner'
-import RepositoryList from 'components/repository-list'
-import { browserHistory } from 'react-router'
+import { connect } from 'react-redux'
 
-const MainComponent = React.createClass({
+let MainComponent = React.createClass({
   propTypes: {
     user: React.PropTypes.shape({
       token: React.PropTypes.string
-    })
-  },
-  componentWillMount() {
-    if (!this.props.user.token) browserHistory.push('/login')
+    }),
+    children: React.PropTypes.object
   },
   render() {
     return (
       <div className={styles.main}>
-        <Banner {...this.props} />
-        <RepositoryList {...this.props} />
+        <Banner />
+        {this.props.children}
       </div>
     )
   }
 })
 
+MainComponent = connect()(MainComponent)
 export default MainComponent
