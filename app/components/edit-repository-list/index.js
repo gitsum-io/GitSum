@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './styles.css'
 import EditRepositoryItem from 'components/edit-repository-item'
 import Spinner from 'components/spinner'
+import { connect } from 'react-redux'
 
 const EditRepositoryList = React.createClass({
   propTypes: {
@@ -21,7 +22,7 @@ const EditRepositoryList = React.createClass({
         <p className={styles.amountText}>{this.props.repositories.length} {repositoryText}</p>
         <div className={styles.repositoryListWrapper}>
           <ul className={styles.repositoryList}>
-            {this.props.repositories.map((repository, index) => <EditRepositoryItem key={index} index={index} repository={repository} {...this.props} />)}
+            {this.props.repositories.map((repository, index) => <EditRepositoryItem key={index} index={index} repository={repository} />)}
           </ul>
           {spinner}
         </div>
@@ -30,4 +31,11 @@ const EditRepositoryList = React.createClass({
   }
 })
 
-export default EditRepositoryList
+function mapStateToProps(state) {
+  return {
+    repositories: state.repositories,
+    globals: state.globals
+  }
+}
+
+export default connect(mapStateToProps)(EditRepositoryList)
