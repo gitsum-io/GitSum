@@ -7,24 +7,22 @@ import Main from 'views/main'
 import Login from 'views/login'
 import Admin from 'views/admin'
 import Profile from 'views/admin/profile/index.js'
-import Repositories from 'views/admin/repositories/index.js'
+import RepositoryList from 'components/repository-list'
 import GithubAuth from 'views/github/auth'
 import store, { history } from './store'
 
 const router = (
   <Provider store={store}>
-      <Router history={history}>
-        <Route path="/" component={App}>
-          <IndexRoute component={Main} />
-          <Route path="/login" component={Login} />
-          <Route path="/admin" component={Admin}>
-            <IndexRoute component={Profile} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/repositories" component={Repositories} />
-          </Route>
-          <Route path="/github/auth" component={GithubAuth} />
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <Route component={Main}>
+          <IndexRoute component={RepositoryList} />
+          <Route path="profile" component={Profile} />
         </Route>
-      </Router>
+        <Route path="login" component={Login} />
+        <Route path="admin" component={Admin} />
+      </Route>
+    </Router>
   </Provider>
 )
 
