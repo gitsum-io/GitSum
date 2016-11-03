@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './styles.css'
 import GlobalMessage from 'components/global-message'
+import { connect } from 'react-redux'
 
 const ViewWrapper = React.createClass({
   propTypes: {
@@ -15,15 +16,19 @@ const ViewWrapper = React.createClass({
   render() {
     let globalMessage
     if (this.props.globals.message) {
-      globalMessage = <GlobalMessage {...this.props} />
+      globalMessage = <GlobalMessage />
     }
     return (
       <div className={styles.viewWrapper}>
         {globalMessage}
-        {React.cloneElement(this.props.children, this.props)}
+        {this.props.children}
       </div>
     )
   }
 })
 
-export default ViewWrapper
+function mapStateToProps(state) {
+  return { globals: state.globals }
+}
+
+export default connect(mapStateToProps)(ViewWrapper)
