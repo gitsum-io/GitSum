@@ -20,7 +20,8 @@ module.exports = {
     alias: {
       'views': path.resolve(__dirname, './app/views'),
       'components': path.resolve(__dirname, './app/components'),
-      'assets': path.resolve(__dirname, './app/assets')
+      'assets': path.resolve(__dirname, './app/assets'),
+      'actions': path.resolve(__dirname, './app/actions')
     }
   },
   plugins: [
