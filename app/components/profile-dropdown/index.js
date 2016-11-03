@@ -4,6 +4,9 @@ import ChevronIcon from 'assets/images/chevron.svg'
 import CoverImage from 'components/cover-image'
 import ClickMask from 'components/click-mask'
 import { Link } from 'react-router'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { toggleProfileMenu } from 'actions'
 
 const ProfileDropdown = React.createClass({
   propTypes: {
@@ -45,4 +48,15 @@ const ProfileDropdown = React.createClass({
   }
 })
 
-export default ProfileDropdown
+function mapStateToProps(state) {
+  return {
+    globals: state.globals,
+    user: state.user
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ toggleProfileMenu }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileDropdown)
