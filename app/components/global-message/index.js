@@ -1,5 +1,9 @@
 import React from 'react'
 import styles from './styles.css'
+import { connect } from 'react-redux'
+import { removeMessage } from 'actions'
+import { fetchRepository, activateAddForm } from 'actions'
+import { bindActionCreators } from 'redux'
 
 const GlobalMessage = React.createClass({
   propTypes: {
@@ -21,5 +25,14 @@ const GlobalMessage = React.createClass({
     )
   }
 })
+function mapStateToProps(state) {
+  return {
+    globals: state.globals
+  }
+}
 
-export default GlobalMessage
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ removeMessage, activateAddForm }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalMessage)
