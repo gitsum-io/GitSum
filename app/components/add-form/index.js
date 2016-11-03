@@ -5,6 +5,9 @@ import ClickMask from 'components/click-mask'
 import Button from 'components/button'
 import EditRepositoryList from 'components/edit-repository-list'
 import CrossIcon from 'assets/images/cross.svg'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { deactivateAddForm, fetchRepository } from 'actions'
 
 const AddForm = React.createClass({
   propTypes: {
@@ -45,7 +48,7 @@ const AddForm = React.createClass({
               <input name="url" className={styles.input} type="text" placeholder="Url" required onChange={this.setUrl}/>
             </div>
             <div className={styles.formBottom}>
-              <EditRepositoryList {...this.props} />
+              <EditRepositoryList />
               <div className={styles.actions}>
                 <Button className={styles.addButton}>Add</Button>
                 <Button className={styles.closeButton} type="button" handleClick={() => this.props.deactivateAddForm()}>Close</Button>
@@ -58,4 +61,12 @@ const AddForm = React.createClass({
   }
 })
 
-export default AddForm
+function mapStateToProps(state) {
+  return { globals: state.globals }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ deactivateAddForm, fetchRepository }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddForm)
