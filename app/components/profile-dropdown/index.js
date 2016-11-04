@@ -38,8 +38,8 @@ const ProfileDropdown = React.createClass({
             </div>
           </div>
           <div className={styles.dropdownPanelLinks}>
-            <Link className={styles.dropdownPanelLink} to="/profile">Profile</Link>
-            <Link className={styles.dropdownPanelLink} to="/repositories">Repositories</Link>
+            <Link className={styles.dropdownPanelLink} to="/admin/profile">Profile</Link>
+            <Link className={styles.dropdownPanelLink} to="/admin/repositories">Repositories</Link>
             <Link className={styles.dropdownPanelLink} to="/sign-out">Sign Out</Link>
           </div>
         </div>

@@ -1,9 +1,7 @@
 import React from 'react'
 import styles from './styles.css'
-import Banner from 'components/banner'
-import { connect } from 'react-redux'
 
-const MainComponent = React.createClass({
+const NotFound = React.createClass({
   propTypes: {
     user: React.PropTypes.shape({
       token: React.PropTypes.string
@@ -13,11 +11,10 @@ const MainComponent = React.createClass({
   render() {
     return (
       <div className={styles.main}>
-        <Banner />
-        {this.props.children}
+        NOT FOUND
       </div>
     )
   }
 })
 
-export default connect()(MainComponent)
+export default NotFound

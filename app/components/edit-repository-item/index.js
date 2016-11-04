@@ -2,6 +2,9 @@ import React from 'react'
 import styles from './styles.css'
 import OcotoCatIcon from 'assets/images/octocat.svg'
 import RemoveIcon from 'assets/images/remove.svg'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { removeRepository } from 'actions'
 
 const EditRepositoryItem = React.createClass({
   propTypes: {
@@ -16,4 +19,8 @@ const EditRepositoryItem = React.createClass({
   }
 })
 
-export default EditRepositoryItem
+function bindDispatchToProps(dispatch) {
+  return bindActionCreators({ removeRepository }, dispatch)
+}
+
+export default connect(null, bindDispatchToProps)(EditRepositoryItem)

@@ -20,14 +20,14 @@ const RepositoryList = React.createClass({
   },
   componentDidMount() {
     // Fetch any existing repositories from local storage
-    const existingRepositories = localStorage.getItem('managedRepositories')
-    if (existingRepositories) {
-      JSON.parse(existingRepositories).forEach((repository) => {
-        if (repository.url && repository.name) {
-          this.props.fetchRepository(repository.name, repository.url)
-        }
-      })
-    }
+    // const existingRepositories = localStorage.getItem('managedRepositories')
+    // if (existingRepositories) {
+    //   JSON.parse(existingRepositories).forEach((repository) => {
+    //     if (repository.url && repository.name) {
+    //       this.props.fetchRepository(repository.name, repository.url)
+    //     }
+    //   })
+    // }
   },
   render() {
     const addIcon = <AddIcon className={styles.addIcon} />

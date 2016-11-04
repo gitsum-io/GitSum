@@ -4,6 +4,9 @@ import Commit from 'components/commit'
 import ClickMask from 'components/click-mask'
 import OcotoCatIcon from 'assets/images/octocat.svg'
 import HorizontalDotsIcon from 'assets/images/horizontal-dots.svg'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { toggleRepositoryMenu, fetchRepository, removeRepository } from 'actions'
 
 const Repository = React.createClass({
   propTypes: {
@@ -16,13 +19,14 @@ const Repository = React.createClass({
     globals: React.PropTypes.object,
     fetchRepository: React.PropTypes.func
   },
-  componentDidMount() {
-    // Add repo to localstorage
-    localStorage.setItem('managedRepositories', JSON.stringify(this.props.repositories, ['url', 'name']))
-
+  componentWillMount() {
     // Refresh every minute
     const refresh = setInterval(() => {this.props.fetchRepository(this.props.repository.name, this.props.repository.url, this.props.index)}, 60000)
     this.setState({refresh: refresh})
+  },
+  componentDidMount() {
+    // Add repo to localstorage
+    localStorage.setItem('managedRepositories', JSON.stringify(this.props.repositories, ['url', 'name']))
   },
   componentWillUnmount() {
     const storedRepositories = localStorage.getItem('managedRepositories')
@@ -63,4 +67,16 @@ const Repository = React.createClass({
   }
 })
 
-export default Repository
+function mapStateToProps(state) {
+  return {
+    globals: state.globals,
+    user: state.user,
+    repositories: state.repositories
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ toggleRepositoryMenu, fetchRepository, removeRepository }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Repository)

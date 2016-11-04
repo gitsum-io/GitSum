@@ -6,11 +6,10 @@ import App from 'components/app'
 import Main from 'views/main'
 import Login from 'views/login'
 import Admin from 'views/admin'
-import Auth from 'views/auth'
 import Profile from 'views/admin/profile'
 import RepositoriesAdmin from 'views/admin/repositories'
 import RepositoryList from 'components/repository-list'
-import GithubAuth from 'views/auth/github'
+import NotFound from 'views/not-found'
 import store, { history } from './store'
 
 const router = (
@@ -23,11 +22,9 @@ const router = (
             <Route path="profile" component={Profile} />
             <Route path="repositories" component={RepositoriesAdmin} />
           </Route>
-          <Route path="auth" component={Auth}>
-            <Route path="github" component={GithubAuth} />
-          </Route>
         </Route>
         <Route path="login" component={Login} />
+        <Route path="*" component={NotFound}/>
       </Route>
     </Router>
   </Provider>
