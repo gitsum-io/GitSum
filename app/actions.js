@@ -188,6 +188,28 @@ export function fetchRepository(name, url, key) {
 //   }
 // }
 
+// Get auth url
+export function getAuthInfo() {
+  return dispatch => {
+    console.log('requesting auth url')
+    const payload = {
+      method: 'GET'
+    }
+    return fetch(`http://0.0.0.0:4000/api/v1/github/auth/info`, payload)
+      .then(response => {
+        if (!response.ok) throw Error(response.statusText)
+        return response.json()
+      })
+      .then(data => {
+        console.log('got data ', data)
+        return data
+      })
+      .catch(error => {
+        dispatch(addMessage('error', `There was an error connecting the the Gitsum api: ${error.message}`))
+      })
+  }
+}
+
 // Authenticate user
 export function getStateToken() {
   return dispatch => {
