@@ -57,6 +57,7 @@ function GitHubController() {
     }
 
     // Grab access token from GitHub via code provided
+    // TODO: Refresh Token
     github.authorize = function(req, res, next) {
         if (!req.params.code || !req.params.client_id || !req.params.scopes || !req.params.state) {
             res.send(400);
@@ -66,7 +67,7 @@ function GitHubController() {
         // URL params
         // Check if a user has been passed
         var userId;
-        if (!req.params.userid) userId = req.params.userid
+        if (!req.params.email) userId = req.params.email
 
         // Json body params
         var code = req.params.code;
@@ -75,10 +76,10 @@ function GitHubController() {
         var state = req.params.state;
 
         var clientSecret = secrets.github.client_secret;
-        var accessToken = '';
+        var accessToken;
 
         // Get current access token from user
-        var query = user.data.findOne({_id: userId });
+        var query = user.data.findOne({email: userId });
 
         query.exec(function(err, user) {
             if (err) {
@@ -86,20 +87,19 @@ function GitHubController() {
             }
 
             // Get the access token from the user's DB
-            accessToken = user.github_access_token;
+            // if user is found
+            if (user != null) accessToken = user.github_access_token;
 
-            // Build the request URL for github access token
-            var requestURL = 'https://github.com/login/oauth/access_token'
-                + '?client_id=' + clientId
-                + '&client_secret=' + clientSecret
-                + '&code=' + code
-                + '&scopes=' + scopes
-                + '&state=' + state;
+            // If an access token exists, use that otherwise fetch another
+            if (accessToken == null) {
+                // Build the request URL for github access token
+                var requestURL = 'https://github.com/login/oauth/access_token'
+                    + '?client_id=' + clientId
+                    + '&client_secret=' + clientSecret
+                    + '&code=' + code
+                    + '&scopes=' + scopes
+                    + '&state=' + state;
 
-            // If an access token exists, use that otherwise
-            // fetch another
-            // TODO: Refresh Token
-            if (accessToken == '') {
                 request({
                     url: requestURL
                 }, function(err, response, body) {
@@ -110,22 +110,51 @@ function GitHubController() {
 
                         accessToken = jsonBody.access_token;
 
-                        user.data.findOneAndUpdate({_id: userId },
-                            {
-                                $set: {
-                                    "github_access_token": accessToken
-                                }
-                            },
-                            {
-                                new: true
-                            },
-                            function(err, data) {
-                                if (err) {
-                                    res.send(500, JSON.stringify(err));
-                                }
-                                res.send(200, data);
+                        if (accessToken !== null) {
+                            // Create a new user if one doesn't already exist
+                            if (user == null) {
+                                // Fetch the users details from github
+                                // /user
+
+                                // Build the request URL for github access token
+                                var userURL = 'https://api.github.com/user'
+
+                                request({
+                                    url: userURL,
+                                    auth: {
+                                        'bearer': accessToken
+                                    },
+                                    headers: {
+                                        'User-Agent': 'GitSum API V1'
+                                    }
+                                }, function(err, response, body) {
+                                    if (response.statusCode == 200) {
+                                        jsonBody = querystring.parse(body)
+
+                                        res.send(200, body)
+                                    }
+                                });
+                            } else {
+                                user.data.findOneAndUpdate({email: email },
+                                    {
+                                        $set: {
+                                            "github_access_token": accessToken
+                                        }
+                                    },
+                                    {
+                                        new: true
+                                    },
+                                    function(err, data) {
+                                        if (err) {
+                                            res.send(500, JSON.stringify(err));
+                                        }
+                                        res.send(200, data);
+                                    }
+                                );
                             }
-                        );
+                        } else {
+                            res.send(400, "Access Token not fetched from GitHub")
+                        }
                     }
                 });
             } else {
