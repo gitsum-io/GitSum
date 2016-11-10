@@ -116,8 +116,6 @@ function GitHubController() {
                             // Create a new user if one doesn't already exist
                             if (user == null) {
                                 // Fetch the users details from github
-                                // /user
-
                                 // Build the request URL for github access token
                                 var userURL = 'https://api.github.com/user'
 
@@ -159,7 +157,7 @@ function GitHubController() {
                                             }
 
                                             // TODO move app secret into config
-                                            var token = jwt.sign(profile, uuid.v4(), {
+                                            var token = jwt.sign(record, uuid.v4(), {
                                                 expiresIn: 1440
                                             })
 
