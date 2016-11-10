@@ -13,6 +13,7 @@ export const TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU'
 export const TOGGLE_REPOSITORY_LOADING = 'TOGGLE_REPOSITORY_LOADING'
 export const SET_STATE_TOKEN = 'SET_STATE_TOKEN'
 export const SET_USER_DETAILS = 'SET_USER_DETAILS'
+export const SET_AUTH_INFO = 'SET_AUTH_INFO'
 
 // Set the name of the application
 export function setName(name) {
@@ -124,6 +125,13 @@ export function setStateToken(token)  {
   }
 }
 
+export function setAuthInfo(data) {
+  return {
+    type: SET_AUTH_INFO,
+    data
+  }
+}
+
 // Fetch repository from github
 export function fetchRepository(name, url, key) {
   let cleanUrl = url
@@ -192,17 +200,15 @@ export function fetchRepository(name, url, key) {
 export function getAuthInfo() {
   return dispatch => {
     console.log('requesting auth url')
-    const payload = {
-      method: 'GET'
-    }
-    return fetch(`http://0.0.0.0:4000/api/v1/github/auth/info`, payload)
+    return fetch('http://0.0.0.0:4000/api/v1/github/auth/info')
       .then(response => {
         if (!response.ok) throw Error(response.statusText)
         return response.json()
       })
       .then(data => {
         console.log('got data ', data)
-        return data
+        // return data
+        dispatch(setAuthInfo('jkladsfkljadsfjkladsjklfdsajklf'))
       })
       .catch(error => {
         dispatch(addMessage('error', `There was an error connecting the the Gitsum api: ${error.message}`))

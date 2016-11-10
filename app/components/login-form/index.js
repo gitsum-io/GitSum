@@ -3,7 +3,7 @@ import styles from './styles.css'
 import GitHubIcon from 'assets/images/octocat-inverted.svg'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getAuthUrl } from 'actions'
+import { getAuthInfo } from 'actions'
 
 // TODO Get repo settings from backend for posting to Github
 // TODO Style github button
@@ -16,7 +16,11 @@ const LoginForm = React.createClass({
       stateToken: React.PropTypes.string
     }),
     getStateToken: React.PropTypes.func,
-    getAuthUrl: React.PropTypes.func
+    getAuthInfo: React.PropTypes.func
+  },
+  componentWillMount() {
+    console.log('getting')
+    this.props.getAuthInfo()
   },
   render() {
     const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=183eb9754ab178e57b49&scope=repo%20user&state=${this.props.globals.stateToken}`
@@ -36,7 +40,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getAuthUrl }, dispatch)
+  return bindActionCreators({ getAuthInfo }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
