@@ -5,6 +5,7 @@ function GitHubController() {
         bcrypt = require('bcrypt'),
         request = require('request'),
         querystring = require('querystring'),
+        uuid = require('uuid'),
         github = this;
 
     github.auth = function() {
@@ -72,7 +73,7 @@ function GitHubController() {
         // Json body params
         var code = req.params.code;
         var clientId = req.params.client_id;
-        var scopes = req.params.scopes;
+        var scopes = req.params.scopes.toString();
         var state = req.params.state;
 
         var clientSecret = secrets.github.client_secret;
@@ -90,7 +91,7 @@ function GitHubController() {
             // if user is found
             if (user != null) accessToken = user.github_access_token;
 
-            // If an access token exists, use that otherwise fetch another
+            // If an access token exists, use that otherwise fetch a new one
             if (accessToken == null) {
                 // Build the request URL for github access token
                 var requestURL = 'https://github.com/login/oauth/access_token'
@@ -132,6 +133,39 @@ function GitHubController() {
                                         jsonBody = querystring.parse(body)
 
                                         res.send(200, body)
+
+                                        // Split up the full name
+                                        var name = body.name.split(' ')
+
+                                        var record = new userModel.data();
+
+                                        // Capture information from request and try to save it
+                                        record.first_name = name[0];
+                                        record.last_name = name[1];
+                                        record.email = body.login;
+                                        record.avatar = body.avatar_url;
+
+                                        record.save(function(err) {
+                                            if (err) {
+                                                res.send(400, JSON.stringify(err));
+                                            }
+                                            
+                                            var profile = {
+                                                // username: body.login,
+                                                // avatar: body.avatar_url,
+                                                // first_name: 
+                                                // id: user._id
+                                            };
+
+                                            // TODO move app secret into config
+                                            var token = jwt.sign(profile, uuid.v4(), {
+                                                expiresIn: 1440
+                                            });
+
+                                            res.send(200, token)
+                                        });
+
+                                        return next();
                                     }
                                 });
                             } else {
