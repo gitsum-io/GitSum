@@ -15,6 +15,7 @@ function GitHubController() {
           + '&client_secret=' + clientSecret
           + '&scopes=' + 'user repo'
           + '&state=' + bcrypt.genSaltSync(10);
+
       request({
           url: requestURL,
           auth: {
@@ -32,11 +33,6 @@ function GitHubController() {
 
     // Return a list of all repositories
     github.authinfo = function(req, res, next) {
-        if (!req.params.userid) {
-            res.send(400);
-            return next();
-        }
-
         var json = {
             "client_id": secrets.github.client_id,
             "scope": ["repo", "user"],
@@ -62,13 +58,15 @@ function GitHubController() {
 
     // Grab access token from GitHub via code provided
     github.authorize = function(req, res, next) {
-        if (!req.params.userid || !req.params.code || !req.params.client_id || !req.params.scopes || !req.params.state) {
+        if (!req.params.code || !req.params.client_id || !req.params.scopes || !req.params.state) {
             res.send(400);
             return next();
         }
 
         // URL params
-        var userId = req.params.userid;
+        // Check if a user has been passed
+        var userId;
+        if (!req.params.userid) userId = req.params.userid
 
         // Json body params
         var code = req.params.code;
