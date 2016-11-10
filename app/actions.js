@@ -238,6 +238,7 @@ export function getStateToken() {
 export function sendAuthResponse(data, state) {
   return dispatch => {
     console.log('sending auth response')
+    console.log(data)
     const payload = {
       method: 'POST',
       body: data
