@@ -2,24 +2,29 @@ import React from 'react'
 import styles from './styles.css'
 import GitHubIcon from 'assets/images/octocat-inverted.svg'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { getAuthUrl } from 'actions'
 
 // TODO Get repo settings from backend for posting to Github
 // TODO Style github button
 // TODO Add a loading animation
+// TODO Remove state token actions
 
 const LoginForm = React.createClass({
   propTypes: {
     heading: React.PropTypes.string,
     globals: React.PropTypes.shape({
-      stateToken: React.PropTypes.string
+      stateToken: React.PropTypes.string,
+      authInfo: React.PropTypes.shape({
+        client_id: React.PropTypes.string,
+        scope: React.PropTypes.array,
+        state: React.PropTypes.string
+      }).isRequired
     }),
     getStateToken: React.PropTypes.func,
-    getAuthUrl: React.PropTypes.func
+    getAuthInfo: React.PropTypes.func
   },
   render() {
-    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=183eb9754ab178e57b49&scope=repo%20user&state=${this.props.globals.stateToken}`
+    const authInfo = this.props.globals.authInfo
+    const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${authInfo.client_id}&scope=repo%20user&state=${authInfo.client_id}`
     return (
       <div className={styles.loginForm}>
         <h1 className={styles.heading}>{this.props.heading}</h1>
@@ -35,8 +40,4 @@ function mapStateToProps(state) {
   return { globals: state.globals }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getAuthUrl }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
+export default connect(mapStateToProps)(LoginForm)

@@ -14,7 +14,12 @@ const loggerMiddleware = createLogger()
 const defaultState = {
   globals: {
     addFormActive: false,
-    name: 'GitSum'
+    name: 'GitSum',
+    authInfo: {
+      client_id: '',
+      scope: [],
+      state: ''
+    }
   },
   repositories: [],
   user: {
