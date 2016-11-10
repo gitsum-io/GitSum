@@ -24,12 +24,11 @@ const ViewWrapper = React.createClass({
     location: React.PropTypes.object
   },
   componentWillMount() {
-    const auth = new Promise((resolve) => {
-      resolve(this.props.getAuthInfo())
-    })
-    // TODO pass this to robbo
     const query = this.props.location.query
     if (query.code && query.state) {
+      const auth = new Promise((resolve) => {
+        resolve(this.props.getAuthInfo())
+      })
       auth.then((res) => {
         this.props.sendAuthResponse({
           client_id: res.client_id,
