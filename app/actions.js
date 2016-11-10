@@ -208,6 +208,7 @@ export function getAuthInfo() {
       .then(data => {
         // return data
         dispatch(setAuthInfo(data))
+        return data
       })
       .catch(error => {
         dispatch(addMessage('error', `There was an error connecting the the Gitsum api: ${error.message}`))
@@ -238,11 +239,9 @@ export function getStateToken() {
 export function sendAuthResponse(data, state) {
   return dispatch => {
     console.log('sending auth response')
-    console.log(data)
     const payload = {
       method: 'POST',
-      // body: data
-      body: 'asdasd'
+      body: JSON.stringify(data)
     }
     return fetch(`${API_ENDPOINT}/github/auth/authorize`, payload)
       .then(response => {
