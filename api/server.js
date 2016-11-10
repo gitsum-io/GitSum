@@ -50,7 +50,7 @@ server.get('/api/v1/:userid/user', user.getById);
 server.del('/api/v1/:userid/user', user.del);
 
 // GitHub
-server.get('/api/v1/:userid/github/auth/info', github.authinfo);
+server.get('/api/v1/github/auth/info', github.authinfo);
 server.post('/api/v1/:userid/github/auth/authorize', github.authorize);
 server.get('/api/v1/:userid/github/repository/:repoid/branches', github.getBranches);
 server.get('/api/v1/:userid/github/repository/:repoid/branch/:branchName', github.getRepository);

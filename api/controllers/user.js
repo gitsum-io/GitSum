@@ -30,6 +30,20 @@ function UserController() {
         return next();
     };
 
+    // Method for getting the repo by Email
+    user.getByEmail = function(email) {
+        var query = userModel.data.find({email: email });
+
+        query.exec(function(err, users) {
+            if (err) {
+                res.send(400, JSON.stringify(err));
+            }
+            res.send(200, users);
+        });
+
+        return next();
+    };
+
     // Add method
     user.post = function(req, res, next) {
         var record = new userModel.data();
