@@ -241,7 +241,8 @@ export function sendAuthResponse(data, state) {
     console.log(data)
     const payload = {
       method: 'POST',
-      body: data
+      // body: data
+      body: 'asdasd'
     }
     return fetch(`${API_ENDPOINT}/github/auth/authorize`, payload)
       .then(response => {
