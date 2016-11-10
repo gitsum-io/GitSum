@@ -251,7 +251,7 @@ function GitHubController() {
                         var dataObject = JSON.parse(requestedRepo.body)
 
                         var outputJSON = {}
-                        for (var i = 0 i < dataObject.length i++) {
+                        for (var i = 0; i < dataObject.length; i++) {
                             var d = dataObject[i].commit.committer.date.split(' ')[0]
                             if (!outputJSON[d]) outputJSON[d] = []
                             outputJSON[d].push(dataObject[i])
