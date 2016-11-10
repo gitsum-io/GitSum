@@ -12,6 +12,7 @@ export const SET_USER_TOKEN = 'SET_USER_TOKEN'
 export const TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU'
 export const TOGGLE_REPOSITORY_LOADING = 'TOGGLE_REPOSITORY_LOADING'
 export const SET_STATE_TOKEN = 'SET_STATE_TOKEN'
+export const SET_USER_DETAILS = 'SET_USER_DETAILS'
 
 // Set the name of the application
 export function setName(name) {
@@ -105,6 +106,13 @@ export function setUserToken(token) {
   return {
     type: SET_USER_TOKEN,
     token
+  }
+}
+
+export function updateUserDetails(name) {
+  return {
+    type: SET_USER_DETAILS,
+    name
   }
 }
 

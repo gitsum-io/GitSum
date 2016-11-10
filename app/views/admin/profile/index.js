@@ -2,12 +2,15 @@ import React from 'react'
 import styles from './styles.css'
 import { connect } from 'react-redux'
 import CoverImage from 'components/cover-image'
+import ProfileForm from 'components/profile-form'
 
 const Profile = React.createClass({
   propTypes: {
     user: React.PropTypes.shape({
       name: React.PropTypes.string,
-      avatar: React.PropTypes.string
+      avatar: React.PropTypes.string,
+      email: React.PropTypes.string,
+      username: React.PropTypes.string
     })
   },
   render() {
@@ -20,17 +23,7 @@ const Profile = React.createClass({
             <button>Update</button>
           </div>
         </div>
-        <form className={styles.form}>
-          <label htmlFor="first-name">First Name</label>
-          <input name="first-name" id="first-name" className={styles.input} />
-          <label htmlFor="last-name">Last Name</label>
-          <input name="last-name" id="last-name" className={styles.input} />
-          <label htmlFor="username">Username</label>
-          <input name="username" id="username" className={styles.input} />
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" className={styles.input} />
-          <button>Update Settings</button>
-        </form>
+        <ProfileForm />
       </div>
     )
   }

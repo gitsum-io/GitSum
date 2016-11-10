@@ -9,13 +9,6 @@
 .avatarActions {
   margin-left: 1rem;
 }
-.form {
-  flex-grow: 1;
-}
-.input {
-  composes: input from 'components/input/styles.css';
-  width: 100%;
-}
 .avatar {
   width: 6rem;
   height: 6rem;

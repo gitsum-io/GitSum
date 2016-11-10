@@ -1,0 +1,12 @@
+.form {
+  flex-grow: 1;
+}
+.input {
+  composes: input from 'components/input/styles.css';
+  width: 100%;
+}
+.updateButton {
+  composes: button from 'components/button/styles.css';
+  width: auto;
+  margin-top: 2rem;
+}

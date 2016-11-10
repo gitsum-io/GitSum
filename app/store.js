@@ -21,6 +21,7 @@ const defaultState = {
     name: 'Ash Brock',
     email: 'hello@ashbrock.com',
     avatar: 'http://digital360.com.au/assets/Uploads/team/ash-brock.jpg',
+    username: 'ashbrock'
   }
 }
 

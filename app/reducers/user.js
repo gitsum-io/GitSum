@@ -4,6 +4,10 @@ export default function global(state = {}, action) {
     return Object.assign({}, state, {
       token: action.token
     })
+  case 'SET_USER_DETAILS':
+    return Object.assign({}, state, {
+      name: action.name
+    })
   default:
     return state
   }
