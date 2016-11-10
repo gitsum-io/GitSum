@@ -59,7 +59,8 @@ function GitHubController() {
     // Grab access token from GitHub via code provided
     // TODO: Refresh Token
     github.authorize = function(req, res, next) {
-        if (!req.params.code || !req.params.client_id || !req.params.scopes || !req.params.state) {
+      var parsedBody = JSON.parse(req.body)
+        if (!parsedBody.code || !parsedBody.client_id || !parsedBody.scope || !parsedBody.state) {
             res.send(400);
             return next();
         }
@@ -70,10 +71,10 @@ function GitHubController() {
         if (!req.params.email) userId = req.params.email
 
         // Json body params
-        var code = req.params.code;
-        var clientId = req.params.client_id;
-        var scopes = req.params.scopes;
-        var state = req.params.state;
+        var code = req.body.code;
+        var clientId = req.body.client_id;
+        var scopes = req.body.scopes;
+        var state = req.body.state;
 
         var clientSecret = secrets.github.client_secret;
         var accessToken;
