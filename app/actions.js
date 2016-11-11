@@ -15,6 +15,7 @@ export const TOGGLE_REPOSITORY_LOADING = 'TOGGLE_REPOSITORY_LOADING'
 export const SET_STATE_TOKEN = 'SET_STATE_TOKEN'
 export const SET_USER_DETAILS = 'SET_USER_DETAILS'
 export const SET_AUTH_INFO = 'SET_AUTH_INFO'
+export const CLOSE_OVERLAYS = 'CLOSE_OVERLAYS'
 
 // Set the name of the application
 export function setName(name) {
@@ -84,6 +85,12 @@ export function activateAddForm() {
 export function deactivateAddForm() {
   return {
     type: DEACTIVATE_ADD_FORM
+  }
+}
+
+export function closeOverlays() {
+  return {
+    type: CLOSE_OVERLAYS
   }
 }
 
