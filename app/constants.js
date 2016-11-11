@@ -1,0 +1,22 @@
+// Global
+export const API_ENDPOINT = 'http://0.0.0.0:4000/api/v1'
+export const GITHUB_ENDPOINT = 'https://api.github.com'
+
+// Actions
+export const asdfasdfasd = 'dasfadsf'
+export const SET_NAME = 'SET_NAME'
+export const ADD_REPOSITORY = 'ADD_REPOSITORY'
+export const REFRESH_REPOSITORY = 'REFRESH_REPOSITORY'
+export const REMOVE_REPOSITORY = 'REMOVE_REPOSITORY'
+export const TOGGLE_REPOSITORY_MENU = 'TOGGLE_REPOSITORY_MENU'
+export const ACTIVATE_ADD_FORM = 'ACTIVATE_ADD_FORM'
+export const DEACTIVATE_ADD_FORM = 'DEACTIVATE_ADD_FORM'
+export const ADD_MESSAGE = 'ADD_MESSAGE'
+export const REMOVE_MESSAGE = 'REMOVE_MESSAGE'
+export const SET_USER_TOKEN = 'SET_USER_TOKEN'
+export const TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU'
+export const TOGGLE_REPOSITORY_LOADING = 'TOGGLE_REPOSITORY_LOADING'
+export const SET_STATE_TOKEN = 'SET_STATE_TOKEN'
+export const SET_USER_DETAILS = 'SET_USER_DETAILS'
+export const SET_AUTH_INFO = 'SET_AUTH_INFO'
+export const CLOSE_OVERLAYS = 'CLOSE_OVERLAYS'
