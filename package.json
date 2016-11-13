@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/christianalfoni/webpack-express-boilerplate",
   "scripts": {
-    "start": "mongod | node server | nodemon api/server",
+    "start": "mongod | nodemon api/server | node server",
     "test": "mocha -w app/test/helpers/browser.js app/test/*.spec.js --compilers js:app/test/helpers/css-modules-compiler.js,js:app/test/helpers/noop-compiler.js",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
     "eslint": "eslint .",

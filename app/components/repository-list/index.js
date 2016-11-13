@@ -6,7 +6,7 @@ import AddIcon from 'assets/images/add-icon.svg'
 import Button from 'components/button'
 import Instructions from 'components/instructions'
 import { connect } from 'react-redux'
-import { activateAddForm } from 'actions/gobals'
+import { activateAddForm } from 'actions/globals'
 import { fetchRepository } from 'actions/repositories'
 import { bindActionCreators } from 'redux'
 

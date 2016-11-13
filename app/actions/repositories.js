@@ -6,8 +6,8 @@ import {
   GITHUB_ENDPOINT
 } from 'constants'
 
-import addMessage from 'action/globals'
-import toggleRepositoryLoading from 'action/repositories'
+import addMessage from 'actions/globals'
+import toggleRepositoryLoading from 'actions/repositories'
 
 // Add a repository to the list
 export function addRepository(name, commits, url) {
