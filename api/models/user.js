@@ -10,7 +10,7 @@ function UserModel() {
     var schema = new db.schema({
         type: {
             type: String,
-            required: true
+            required: false
         },
         first_name: {
             type: String,
@@ -19,7 +19,7 @@ function UserModel() {
         last_name: {
             type: String
         },
-        user: {
+        username: {
             type: String,
             unique: true,
             required: 'Username is required!'
