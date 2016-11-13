@@ -1,20 +1,23 @@
-// Action types
-export const API_ENDPOINT = 'http://0.0.0.0:4000/api/v1'
-export const SET_NAME = 'SET_NAME'
-export const ADD_REPOSITORY = 'ADD_REPOSITORY'
-export const REFRESH_REPOSITORY = 'REFRESH_REPOSITORY'
-export const REMOVE_REPOSITORY = 'REMOVE_REPOSITORY'
-export const TOGGLE_REPOSITORY_MENU = 'TOGGLE_REPOSITORY_MENU'
-export const ACTIVATE_ADD_FORM = 'ACTIVATE_ADD_FORM'
-export const DEACTIVATE_ADD_FORM = 'DEACTIVATE_ADD_FORM'
-export const ADD_MESSAGE = 'ADD_MESSAGE'
-export const REMOVE_MESSAGE = 'REMOVE_MESSAGE'
-export const SET_USER_TOKEN = 'SET_USER_TOKEN'
-export const TOGGLE_PROFILE_MENU = 'TOGGLE_PROFILE_MENU'
-export const TOGGLE_REPOSITORY_LOADING = 'TOGGLE_REPOSITORY_LOADING'
-export const SET_STATE_TOKEN = 'SET_STATE_TOKEN'
-export const SET_USER_DETAILS = 'SET_USER_DETAILS'
-export const SET_AUTH_INFO = 'SET_AUTH_INFO'
+import {
+  API_ENDPOINT,
+  GITHUB_ENDPOINT,
+  SET_NAME,
+  ADD_REPOSITORY,
+  REFRESH_REPOSITORY,
+  REMOVE_REPOSITORY,
+  TOGGLE_REPOSITORY_MENU,
+  ACTIVATE_ADD_FORM,
+  DEACTIVATE_ADD_FORM,
+  ADD_MESSAGE,
+  REMOVE_MESSAGE,
+  SET_USER_TOKEN,
+  TOGGLE_PROFILE_MENU,
+  TOGGLE_REPOSITORY_LOADING,
+  SET_STATE_TOKEN,
+  SET_USER_DETAILS,
+  SET_AUTH_INFO,
+  CLOSE_OVERLAYS
+} from 'constants'
 
 // Set the name of the application
 export function setName(name) {
@@ -87,6 +90,12 @@ export function deactivateAddForm() {
   }
 }
 
+export function closeOverlays() {
+  return {
+    type: CLOSE_OVERLAYS
+  }
+}
+
 // Add message
 export function addMessage(status, message) {
   return {
@@ -143,7 +152,7 @@ export function fetchRepository(name, url, key) {
   }
   return dispatch => {
     dispatch(toggleRepositoryLoading())
-    return fetch(`https://api.github.com/repos/${cleanUrl}/commits?client_secret=ddf82d89d9fd6e16704fa39100671da23a045045&client_id=183eb9754ab178e57b49`)
+    return fetch(`${GITHUB_ENDPOINT}/repos/${cleanUrl}/commits?client_secret=ddf82d89d9fd6e16704fa39100671da23a045045&client_id=183eb9754ab178e57b49`)
       .then(response => {
         dispatch(toggleRepositoryLoading())
         if (!response.ok) throw Error(response.statusText)
@@ -166,36 +175,6 @@ export function fetchRepository(name, url, key) {
       })
   }
 }
-
-// Authenticate user
-// export function authenticateUser(username, password) {
-//   return dispatch => {
-//     // TODO This url needs to be updated
-//     const payload = {
-//       method: 'POST',
-//       body: {
-//         username,
-//         password
-//       }
-//     }
-//     if (username === 'nick') { // TODO Remove this debugging line
-//       dispatch(setUserToken('68879UITCXD3465RTFCR455YUT34Y'))
-//       browserHistory.push('/')
-//     }
-//     return fetch(`http://nickspiel.me`, payload)
-//       .then(response => {
-//         if (!response.ok) throw Error(response.statusText)
-//         return response.json()
-//       })
-//       .then(data => {
-//         dispatch(setUserToken(data))
-//         browserHistory.push('/')
-//       })
-//       .catch(error => {
-//         dispatch(addMessage('error', `There was an error logging you in: ${error.message}`))
-//       })
-//   }
-// }
 
 // Get auth url
 export function getAuthInfo() {

@@ -14,3 +14,8 @@
 .addNew {
   margin-bottom: 2rem;
 }
+.addFormButton {
+  composes: button from 'components/button/styles.css';
+  width: auto;
+  margin-top: 1rem;
+}

@@ -4,6 +4,7 @@ import GlobalMessage from 'components/global-message'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getAuthInfo, sendAuthResponse } from 'actions'
+import { browserHistory } from 'react-router'
 
 const ViewWrapper = React.createClass({
   propTypes: {
@@ -21,6 +22,7 @@ const ViewWrapper = React.createClass({
     }),
     getAuthInfo: React.PropTypes.func,
     sendAuthResponse: React.PropTypes.func,
+    closeOverlays: React.PropTypes.func,
     location: React.PropTypes.object
   },
   componentWillMount() {
@@ -38,6 +40,11 @@ const ViewWrapper = React.createClass({
         })
       })
     }
+
+    // Close overlays when route changes
+    browserHistory.listen(() =>  {
+      this.props.closeOverlays()
+    })
   },
   render() {
     let globalMessage

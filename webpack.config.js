@@ -21,7 +21,8 @@ module.exports = {
       'views': path.resolve(__dirname, './app/views'),
       'components': path.resolve(__dirname, './app/components'),
       'assets': path.resolve(__dirname, './app/assets'),
-      'actions': path.resolve(__dirname, './app/actions')
+      'actions': path.resolve(__dirname, './app/actions'),
+      'constants': path.resolve(__dirname, './app/constants')
     }
   },
   plugins: [

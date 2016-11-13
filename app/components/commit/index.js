@@ -3,6 +3,9 @@ import styles from './styles.css'
 import moment from 'moment'
 
 const Commit = React.createClass({
+  propTypes: {
+    commit: React.PropTypes.object
+  },
   render() {
     const { commit } = this.props
     return (
