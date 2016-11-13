@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './styles.css'
+import ManageRepositoryList from 'components/manage-repository-list'
 
 const Repositories = React.createClass({
   propTypes: {
@@ -10,7 +11,7 @@ const Repositories = React.createClass({
   render() {
     return (
       <div className={styles.main}>
-        Repositories
+        <ManageRepositoryList />
       </div>
     )
   }
