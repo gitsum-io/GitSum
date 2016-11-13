@@ -10,7 +10,7 @@ function UserModel() {
     var schema = new db.schema({
         type: {
             type: String,
-            required: true
+            required: false
         },
         first_name: {
             type: String,
@@ -19,15 +19,10 @@ function UserModel() {
         last_name: {
             type: String
         },
-        email: {
+        username: {
             type: String,
             unique: true,
-            required: 'Email address is required!',
-            validate: [ validator.isEmail, 'Invalid email supplied!' ]
-        },
-        password: {
-            type: String,
-            required: 'Password is required!'
+            required: 'Username is required!'
         },
         avatar: {
             type: String
