@@ -7,7 +7,7 @@ import Button from 'components/button'
 import AddIcon from 'assets/images/add-icon.svg'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { activateAddForm } from 'actions'
+import { activateAddForm } from 'actions/globals'
 
 const BannerComponent = React.createClass({
   propTypes: {

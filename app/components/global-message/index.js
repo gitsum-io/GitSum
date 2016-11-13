@@ -1,8 +1,7 @@
 import React from 'react'
 import styles from './styles.css'
 import { connect } from 'react-redux'
-import { removeMessage } from 'actions'
-import { fetchRepository, activateAddForm } from 'actions'
+import { activateAddForm, removeMessage } from 'actions/globals'
 import { bindActionCreators } from 'redux'
 
 const GlobalMessage = React.createClass({

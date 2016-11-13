@@ -3,7 +3,7 @@ import styles from './styles.css'
 import GlobalMessage from 'components/global-message'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getAuthInfo, sendAuthResponse } from 'actions'
+import { getAuthInfo, sendAuthResponse } from 'actions/globals'
 import { browserHistory } from 'react-router'
 
 const ViewWrapper = React.createClass({

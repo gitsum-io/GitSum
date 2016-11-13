@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Button from 'components/button'
 import Label from 'components/label'
 import { bindActionCreators } from 'redux'
-import { updateUserDetails } from 'actions'
+import { setUserDetails } from 'actions/user'
 
 const ProfileForm = React.createClass({
   propTypes: {
@@ -13,14 +13,14 @@ const ProfileForm = React.createClass({
       email: React.PropTypes.string,
       username: React.PropTypes.string
     }),
-    updateUserDetails: React.PropTypes.func
+    setUserDetails: React.PropTypes.func
   },
   getInitialState() {
     return this.props.user
   },
   handleSubmit(state) {
     if (this.validateForm()) {
-      this.props.updateUserDetails(state)
+      this.props.setUserDetails(state)
       console.log('valid')
     } else {
       console.log('not valid')
@@ -56,7 +56,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateUserDetails }, dispatch)
+  return bindActionCreators({ setUserDetails }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm)

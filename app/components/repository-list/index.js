@@ -6,11 +6,11 @@ import AddIcon from 'assets/images/add-icon.svg'
 import Button from 'components/button'
 import Instructions from 'components/instructions'
 import { connect } from 'react-redux'
-import { fetchRepository, activateAddForm } from 'actions'
+import { activateAddForm } from 'actions/gobals'
+import { fetchRepository } from 'actions/repositories'
 import { bindActionCreators } from 'redux'
 
 // TODO Rearrange repos with most recently update on the left
-// TODO Deal with rate limits
 
 const RepositoryList = React.createClass({
   propTypes: {

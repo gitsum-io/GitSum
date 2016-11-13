@@ -6,7 +6,7 @@ import OcotoCatIcon from 'assets/images/octocat.svg'
 import HorizontalDotsIcon from 'assets/images/horizontal-dots.svg'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { toggleRepositoryMenu, fetchRepository, removeRepository } from 'actions'
+import { toggleRepositoryMenu, fetchRepository, removeRepository } from 'actions/repositories'
 
 const Repository = React.createClass({
   propTypes: {

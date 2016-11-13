@@ -12,7 +12,7 @@ export function setUserToken(token) {
 }
 
 // Set user details
-export function updateUserDetails(name) {
+export function setUserDetails(name) {
   return {
     type: SET_USER_DETAILS,
     name

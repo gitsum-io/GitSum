@@ -6,7 +6,7 @@ import ClickMask from 'components/click-mask'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { toggleProfileMenu } from 'actions'
+import { toggleProfileMenu } from 'actions/globals'
 
 const ProfileDropdown = React.createClass({
   propTypes: {

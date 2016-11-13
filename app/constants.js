@@ -3,7 +3,6 @@ export const API_ENDPOINT = 'http://0.0.0.0:4000/api/v1'
 export const GITHUB_ENDPOINT = 'https://api.github.com'
 
 // Actions
-export const asdfasdfasd = 'dasfadsf'
 export const SET_NAME = 'SET_NAME'
 export const ADD_REPOSITORY = 'ADD_REPOSITORY'
 export const REFRESH_REPOSITORY = 'REFRESH_REPOSITORY'
