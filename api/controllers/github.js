@@ -1,11 +1,12 @@
 function GitHubController() {
-    var user = require('../models/user'),
+    var userModel = require('../models/user'),
         repositories = require('../models/repository'),
         secrets = require('../secrets.json'),
         bcrypt = require('bcrypt'),
         request = require('request'),
         querystring = require('querystring'),
         uuid = require('uuid'),
+        jwt = require('jsonwebtoken'),
         github = this
 
     github.auth = function() {
@@ -65,31 +66,27 @@ function GitHubController() {
             return next()
         }
 
-        // URL params
-        // Check if a user has been passed
-        var userId
-        if (!req.params.email) userId = req.params.email
-
         // Json body params
         var code = req.params.code
         var clientId = req.params.client_id
         var scopes = req.params.scopes.toString()
         var state = req.params.state
+        var username = req.params.username
 
         var clientSecret = secrets.github.client_secret
         var accessToken
 
         // Get current access token from user
-        var query = user.data.findOne({email: userId })
+        var query = userModel.data.findOne({username: username})
 
-        query.exec(function(err, user) {
+        query.exec(function(err, userData) {
             if (err) {
                 res.send(400, JSON.stringify(err))
             }
 
             // Get the access token from the user's DB
             // if user is found
-            if (user != null) accessToken = user.github_access_token
+            if (userData != null) accessToken = userData.github_access_token
 
             // If an access token exists, use that otherwise fetch a new one
             if (accessToken == null) {
@@ -103,17 +100,21 @@ function GitHubController() {
 
                 request({
                     url: requestURL
-                }, function(err, response, body) {
-                    if (response.statusCode == 200) {
-                        var jsonBody = ''
+                }, function(err, authResponse, authBody) {
+                    if (err) {
+                        res.send(400, JSON.stringify(err))
+                    }
 
-                        jsonBody = querystring.parse(body)
+                    if (authResponse.statusCode == 200) {
+                        var jsonBody = querystring.parse(authBody)
 
                         accessToken = jsonBody.access_token
 
-                        if (accessToken !== null) {
+                        if (!accessToken) {
+                            res.send(400, "Access Token not fetched from GitHub")
+                        } else {
                             // Create a new user if one doesn't already exist
-                            if (user == null) {
+                            if (userData == null) {
                                 // Fetch the users details from github
                                 // Build the request URL for github access token
                                 var userURL = 'https://api.github.com/user'
@@ -126,41 +127,48 @@ function GitHubController() {
                                     headers: {
                                         'User-Agent': 'GitSum API V1'
                                     }
-                                }, function(err, response, body) {
-                                    if (response.statusCode == 200) {
-                                        jsonBody = querystring.parse(body)
+                                }, function(err, userResponse, userBody) {
+                                    if (err) {
+                                        res.send(400, err)
+                                    }
 
-                                        res.send(200, body)
+                                    if (userResponse.statusCode == 200) {
+                                        userBody = JSON.parse(userBody)
 
                                         // Split up the full name
-                                        var name = body.name.split(' ')
+                                        var name = userBody.name.split(' ')
 
                                         var record = new userModel.data()
 
                                         // Capture information from request and try to save it
                                         record.first_name = name[0]
                                         record.last_name = name[1]
-                                        record.email = body.login
-                                        record.avatar = body.avatar_url
+                                        record.username = userBody.login
+                                        record.avatar = userBody.avatar_url
+                                        record.github_access_token = accessToken
 
                                         record.save(function(err) {
                                             if (err) {
                                                 res.send(400, JSON.stringify(err))
                                             }
 
-                                            // TODO move app secret into config
-                                            var token = jwt.sign(record, uuid.v4(), {
+                                            var payload = {
+                                                "first_name": name[0],
+                                                "last_name": name[1],
+                                                "username": userBody.login,
+                                                "avatar": userBody.avatar_url
+                                            }
+
+                                            var token = jwt.sign(payload, secrets.gitsum.jwt_secret, {
                                                 expiresIn: 1440
                                             })
 
-                                            res.send(200, token)
+                                            res.send(201, token)
                                         })
-
-                                        return next()
                                     }
                                 })
                             } else {
-                                user.data.findOneAndUpdate({email: email },
+                                userData.data.findOneAndUpdate({ username: username },
                                     {
                                         $set: {
                                             "github_access_token": accessToken
@@ -177,13 +185,25 @@ function GitHubController() {
                                     }
                                 )
                             }
-                        } else {
-                            res.send(400, "Access Token not fetched from GitHub")
                         }
+                    } else {
+                        res.send(response.statusCode, 'Error from GitHub')
                     }
                 })
             } else {
-                res.send(200, user)
+                var payload = {
+                    "first_name": userData.first_name,
+                    "last_name": userData.last_name,
+                    "username": userData.username,
+                    "avatar": userData.avatar
+                }
+
+                // TODO move app secret into config
+                var token = jwt.sign(payload, secrets.gitsum.jwt_secret, {
+                    expiresIn: 1440
+                })
+
+                res.send(200, token)
             }
         })
 
