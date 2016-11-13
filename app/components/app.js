@@ -1,6 +1,8 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actionCreators from '../actions'
+import * as globalActions from 'actions/globals'
+import * as userActions from 'actions/user'
+import * as repositoriesActions from 'actions/repositories'
 import ViewWrapper from 'components/view-wrapper'
 
 // Map state to props
@@ -15,7 +17,9 @@ function mapStateToProps(state) {
 // Map actions to props
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    ...actionCreators
+    ...userActions,
+    ...globalActions,
+    ...repositoriesActions
   }, dispatch)
 }
 

@@ -7,7 +7,8 @@ import EditRepositoryList from 'components/edit-repository-list'
 import CrossIcon from 'assets/images/cross.svg'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { deactivateAddForm, fetchRepository } from 'actions'
+import { deactivateAddForm } from 'actions/globals'
+import { fetchRepository } from 'actions/repositories'
 
 const AddForm = React.createClass({
   propTypes: {
